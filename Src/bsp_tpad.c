@@ -115,7 +115,7 @@ uint8_t TPAD_Init(void)
 	temp=0;
 	for(i=2;i<8;i++)temp+=buf[i];
 	g_default_value=temp/6;
-	printf("tpad_default_val:%d\r\n",(int)g_default_value);	
+	//printf("tpad_default_val:%d\r\n",(int)g_default_value);	
 	if(g_default_value > 0xFFFFFFFF/2)
 			return 1;
 	return 0;				
@@ -139,8 +139,8 @@ uint8_t TPAD_Scan(uint8_t mode)
 	{							 
 		if(keyen==0)
 				res=1;	
-		printf("r:%d\r\n",rval);		     	    					   
-				keyen=3;				
+		//printf("r:%d\r\n",rval);		     	    					   
+		keyen=3;				
 	} 
 	if(keyen)
 			keyen--;		   							   		     	    					   

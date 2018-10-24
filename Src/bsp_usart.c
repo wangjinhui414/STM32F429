@@ -1,4 +1,5 @@
 #include "bsp_usart.h"
+#include "stdarg.h"
 
 
 UART_HandleTypeDef uart2_hand_typedef;
@@ -19,7 +20,6 @@ void ResetUartrRx(TYPEDEF_UART_RX *puartrx)
 
 void USART2_Init(void)
 {
-		//UART ��ʼ������
 		uart2_hand_typedef.Instance=USART2;					    //USART2
 		uart2_hand_typedef.Init.BaudRate=115200;				    
 		uart2_hand_typedef.Init.WordLength=UART_WORDLENGTH_8B;   
@@ -30,7 +30,6 @@ void USART2_Init(void)
 		HAL_UART_Init(&uart2_hand_typedef);					    
 
 		HAL_UART_Receive_IT(&uart2_hand_typedef, (uint8_t *)aRxbuf, 1);
-
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef *huart)
@@ -46,7 +45,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 		GPIO_Initure.Mode=GPIO_MODE_AF_PP;		
 		GPIO_Initure.Pull=GPIO_PULLUP;			
 		GPIO_Initure.Speed=GPIO_SPEED_FAST;		
-		GPIO_Initure.Alternate=GPIO_AF7_USART1;	
+		GPIO_Initure.Alternate=GPIO_AF7_USART2;	
 		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	
 
 		GPIO_Initure.Pin=GPIO_PIN_3;			
@@ -99,12 +98,28 @@ void HAL_SYSTICK_Callback(void)
 		}
 }
 
-int fputc(int ch, FILE *f)
-{ 	
-	while((USART2->SR&0X40)==0);   
-	USART2->DR = (uint8_t) ch;
-	
-	return ch;
-}
-
+/*************************************************
+Functions that printf must implement
+arm-none-eabi-gcc    _write
+mdk                  fputc
+**************************************************/
+#define ARM_NONE_EABI
+#ifdef ARM_NONE_EABI
+	int _write (int fd, char *pBuffer, int size)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			while((USART2->SR&0X40)==0);   
+			USART2->DR = pBuffer[i];
+		}
+		return size;
+	}
+#else
+	int fputc(int ch, FILE *f)
+	{ 	
+		while((USART2->SR&0X40)==0);   
+		USART2->DR = (uint8_t) ch;
+		return ch;
+	}
+#endif
 

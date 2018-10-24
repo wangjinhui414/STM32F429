@@ -18,4 +18,16 @@ extern UART_HandleTypeDef uart2_hand_typedef;
 void USART2_Init(void);
 void ResetUartrRx(TYPEDEF_UART_RX *puartrx);
 
+
+#define __DEBUG__
+
+#ifdef __DEBUG__
+    #define DEBUG(format,...) printf("%s:"format"",__func__, ##__VA_ARGS__)
+#else
+    #define DEBUG(format,...)
+#endif
+
+#define LOG(format,...) printf(""format"", ##__VA_ARGS__)
+
+#define ERROR(format,...) printf("ERROR:%s %s %d: "format"",__FILE__, __func__,__LINE__, ##__VA_ARGS__)
 #endif

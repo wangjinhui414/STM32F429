@@ -100,18 +100,34 @@ int main(void)
 	/* USER CODE BEGIN 3 */
 			if(pcUsart2RX.rflag == 1)
 			{
-					printf("%s (OK)\n",pcUsart2RX.pcRxbuf);
+				  printf("%s (OK)\n",pcUsart2RX.pcRxbuf);
+          if( strncmp((char*)pcUsart2RX.pcRxbuf,"LED_CHANGE",strlen("LED_CHANGE"))==0)
+          {
+              if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
+              {
+                  HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
+                  printf("LED_ON\n");
+              }
+              else
+              {
+                  HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+                  printf("LED_OFF\n");
+              }			
+          }
 					ResetUartrRx(&pcUsart2RX);
 			}
+
 			if(TPAD_Scan(0))
 			{
 				if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
 				{
 						HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
+            printf("LED_ON\n");
 				}
 				else
 				{
 						HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+            printf("LED_OFF\n");
 				}				
 			}
 			HAL_Delay(10);
