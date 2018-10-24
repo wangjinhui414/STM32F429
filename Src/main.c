@@ -79,17 +79,17 @@ int main(void)
   /* Initialize all configured peripherals */
 
   /* USER CODE BEGIN 2 */
-	LED_Init();
-	KEY_Init();
-	//LED_Lignt1();
-	USART2_Init();
-	TPAD_Init();
-	
-	//TIM3_Init_Timer();
-	//TIM3_Init_Pwm_CH4();
-	//IWDG_Init();
-	printf("***********SYSCLK***********\n");
-	
+  LED_Init();
+  KEY_Init();
+  //LED_Lignt1();
+  USART2_Init();
+  TPAD_Init();
+
+  //TIM3_Init_Timer();
+  //TIM3_Init_Pwm_CH4();
+  //IWDG_Init();
+  printf("***********SYSCLK***********\n");
+
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -98,39 +98,39 @@ int main(void)
 	/* USER CODE END WHILE */
 			
 	/* USER CODE BEGIN 3 */
-			if(pcUsart2RX.rflag == 1)
-			{
-				  printf("%s (OK)\n",pcUsart2RX.pcRxbuf);
-          if( strncmp((char*)pcUsart2RX.pcRxbuf,"LED_CHANGE",strlen("LED_CHANGE"))==0)
-          {
-              if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
-              {
-                  HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
-                  printf("LED_ON\n");
-              }
-              else
-              {
-                  HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
-                  printf("LED_OFF\n");
-              }			
-          }
-					ResetUartrRx(&pcUsart2RX);
-			}
-
-			if(TPAD_Scan(0))
-			{
-				if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
-				{
-						HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
-            printf("LED_ON\n");
-				}
-				else
-				{
-						HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+    if(pcUsart2RX.rflag == 1)
+    {
+      printf("%s (OK)\n",pcUsart2RX.pcRxbuf);
+      if( strncmp((char*)pcUsart2RX.pcRxbuf,"LED_CHANGE",strlen("LED_CHANGE"))==0)
+      {
+        if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
+        {
+          HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
+          printf("LED_ON\n");
+        }
+        else
+        {
+            HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
             printf("LED_OFF\n");
-				}				
-			}
-			HAL_Delay(10);
+        }			
+      }
+      ResetUartrRx(&pcUsart2RX);
+    }
+
+    if(TPAD_Scan(0))
+    {
+      if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
+      {
+        HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
+        printf("LED_ON\n");
+      }
+      else
+      {
+        HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+        printf("LED_OFF\n");
+      }				
+    }
+    HAL_Delay(10);
 //			if(!dir)	cout--;
 //			else cout++;
 //			if(cout == 0)	dir =1;
