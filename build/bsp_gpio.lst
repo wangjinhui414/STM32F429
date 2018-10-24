@@ -1,0 +1,1046 @@
+ARM GAS  /tmp/ccvz6GfR.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"bsp_gpio.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Delay,"ax",%progbits
+  18              		.align	1
+  19              		.global	Delay
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	Delay:
+  26              	.LFB124:
+  27              		.file 1 "Src/bsp_gpio.c"
+   1:Src/bsp_gpio.c **** #include "bsp_gpio.h"
+   2:Src/bsp_gpio.c **** 
+   3:Src/bsp_gpio.c **** IWDG_HandleTypeDef hiwdg;
+   4:Src/bsp_gpio.c **** 
+   5:Src/bsp_gpio.c **** 
+   6:Src/bsp_gpio.c **** void Delay(__IO uint32_t nCount);
+   7:Src/bsp_gpio.c **** 
+   8:Src/bsp_gpio.c **** void Delay(__IO uint32_t nCount)
+   9:Src/bsp_gpio.c **** {
+  28              		.loc 1 9 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 82B0     		sub	sp, sp, #8
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37 0002 0190     		str	r0, [sp, #4]
+  38              	.L2:
+  10:Src/bsp_gpio.c ****   while(nCount--){}
+  39              		.loc 1 10 0 discriminator 1
+  40 0004 019B     		ldr	r3, [sp, #4]
+  41 0006 5A1E     		subs	r2, r3, #1
+  42 0008 0192     		str	r2, [sp, #4]
+  43 000a 002B     		cmp	r3, #0
+  44 000c FAD1     		bne	.L2
+  11:Src/bsp_gpio.c **** }
+  45              		.loc 1 11 0
+  46 000e 02B0     		add	sp, sp, #8
+  47              	.LCFI1:
+ARM GAS  /tmp/ccvz6GfR.s 			page 2
+
+
+  48              		.cfi_def_cfa_offset 0
+  49              		@ sp needed
+  50 0010 7047     		bx	lr
+  51              		.cfi_endproc
+  52              	.LFE124:
+  54              		.section	.text.LED_Init,"ax",%progbits
+  55              		.align	1
+  56              		.global	LED_Init
+  57              		.syntax unified
+  58              		.thumb
+  59              		.thumb_func
+  60              		.fpu fpv4-sp-d16
+  62              	LED_Init:
+  63              	.LFB125:
+  12:Src/bsp_gpio.c **** 
+  13:Src/bsp_gpio.c **** void LED_Init(void)
+  14:Src/bsp_gpio.c **** {
+  64              		.loc 1 14 0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 24
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 70B5     		push	{r4, r5, r6, lr}
+  69              	.LCFI2:
+  70              		.cfi_def_cfa_offset 16
+  71              		.cfi_offset 4, -16
+  72              		.cfi_offset 5, -12
+  73              		.cfi_offset 6, -8
+  74              		.cfi_offset 14, -4
+  75 0002 86B0     		sub	sp, sp, #24
+  76              	.LCFI3:
+  77              		.cfi_def_cfa_offset 40
+  78              	.LBB2:
+  15:Src/bsp_gpio.c **** 		GPIO_InitTypeDef gpio_init_struct;
+  16:Src/bsp_gpio.c **** 	
+  17:Src/bsp_gpio.c **** 		__HAL_RCC_GPIOB_CLK_ENABLE();
+  79              		.loc 1 17 0
+  80 0004 0023     		movs	r3, #0
+  81 0006 0093     		str	r3, [sp]
+  82 0008 0E4B     		ldr	r3, .L6
+  83 000a 1A6B     		ldr	r2, [r3, #48]
+  84 000c 42F00202 		orr	r2, r2, #2
+  85 0010 1A63     		str	r2, [r3, #48]
+  86 0012 1B6B     		ldr	r3, [r3, #48]
+  87 0014 03F00203 		and	r3, r3, #2
+  88 0018 0093     		str	r3, [sp]
+  89 001a 009B     		ldr	r3, [sp]
+  90              	.LBE2:
+  18:Src/bsp_gpio.c **** 	
+  19:Src/bsp_gpio.c **** 		gpio_init_struct.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+  91              		.loc 1 19 0
+  92 001c 0326     		movs	r6, #3
+  93 001e 0196     		str	r6, [sp, #4]
+  20:Src/bsp_gpio.c **** 		gpio_init_struct.Mode = GPIO_MODE_OUTPUT_PP;
+  94              		.loc 1 20 0
+  95 0020 0124     		movs	r4, #1
+  96 0022 0294     		str	r4, [sp, #8]
+  21:Src/bsp_gpio.c **** 		gpio_init_struct.Pull = GPIO_PULLUP;
+ARM GAS  /tmp/ccvz6GfR.s 			page 3
+
+
+  97              		.loc 1 21 0
+  98 0024 0394     		str	r4, [sp, #12]
+  22:Src/bsp_gpio.c **** 		gpio_init_struct.Speed = GPIO_SPEED_FREQ_HIGH;
+  99              		.loc 1 22 0
+ 100 0026 0223     		movs	r3, #2
+ 101 0028 0493     		str	r3, [sp, #16]
+  23:Src/bsp_gpio.c **** 		HAL_GPIO_Init(GPIOB, &gpio_init_struct);
+ 102              		.loc 1 23 0
+ 103 002a 074D     		ldr	r5, .L6+4
+ 104 002c 01A9     		add	r1, sp, #4
+ 105 002e 2846     		mov	r0, r5
+ 106 0030 FFF7FEFF 		bl	HAL_GPIO_Init
+ 107              	.LVL1:
+  24:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 | GPIO_PIN_1, GPIO_PIN_SET);
+ 108              		.loc 1 24 0
+ 109 0034 2246     		mov	r2, r4
+ 110 0036 3146     		mov	r1, r6
+ 111 0038 2846     		mov	r0, r5
+ 112 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 113              	.LVL2:
+  25:Src/bsp_gpio.c **** }
+ 114              		.loc 1 25 0
+ 115 003e 06B0     		add	sp, sp, #24
+ 116              	.LCFI4:
+ 117              		.cfi_def_cfa_offset 16
+ 118              		@ sp needed
+ 119 0040 70BD     		pop	{r4, r5, r6, pc}
+ 120              	.L7:
+ 121 0042 00BF     		.align	2
+ 122              	.L6:
+ 123 0044 00380240 		.word	1073887232
+ 124 0048 00040240 		.word	1073873920
+ 125              		.cfi_endproc
+ 126              	.LFE125:
+ 128              		.section	.text.LED_Lignt1,"ax",%progbits
+ 129              		.align	1
+ 130              		.global	LED_Lignt1
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.fpu fpv4-sp-d16
+ 136              	LED_Lignt1:
+ 137              	.LFB126:
+  26:Src/bsp_gpio.c **** void LED_Lignt1(void)
+  27:Src/bsp_gpio.c **** {
+ 138              		.loc 1 27 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142 0000 10B5     		push	{r4, lr}
+ 143              	.LCFI5:
+ 144              		.cfi_def_cfa_offset 8
+ 145              		.cfi_offset 4, -8
+ 146              		.cfi_offset 14, -4
+  28:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
+ 147              		.loc 1 28 0
+ 148 0002 064C     		ldr	r4, .L10
+ARM GAS  /tmp/ccvz6GfR.s 			page 4
+
+
+ 149 0004 0022     		movs	r2, #0
+ 150 0006 0121     		movs	r1, #1
+ 151 0008 2046     		mov	r0, r4
+ 152 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 153              	.LVL3:
+  29:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_1 , GPIO_PIN_RESET);
+ 154              		.loc 1 29 0
+ 155 000e 0022     		movs	r2, #0
+ 156 0010 0221     		movs	r1, #2
+ 157 0012 2046     		mov	r0, r4
+ 158 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 159              	.LVL4:
+ 160 0018 10BD     		pop	{r4, pc}
+ 161              	.L11:
+ 162 001a 00BF     		.align	2
+ 163              	.L10:
+ 164 001c 00040240 		.word	1073873920
+ 165              		.cfi_endproc
+ 166              	.LFE126:
+ 168              		.section	.text.LED_Lignt2,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	LED_Lignt2
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 174              		.fpu fpv4-sp-d16
+ 176              	LED_Lignt2:
+ 177              	.LFB127:
+  30:Src/bsp_gpio.c **** }
+  31:Src/bsp_gpio.c **** void LED_Lignt2(void)
+  32:Src/bsp_gpio.c **** {
+ 178              		.loc 1 32 0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182 0000 10B5     		push	{r4, lr}
+ 183              	.LCFI6:
+ 184              		.cfi_def_cfa_offset 8
+ 185              		.cfi_offset 4, -8
+ 186              		.cfi_offset 14, -4
+  33:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+ 187              		.loc 1 33 0
+ 188 0002 064C     		ldr	r4, .L14
+ 189 0004 0122     		movs	r2, #1
+ 190 0006 1146     		mov	r1, r2
+ 191 0008 2046     		mov	r0, r4
+ 192 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 193              	.LVL5:
+  34:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_1 , GPIO_PIN_RESET);
+ 194              		.loc 1 34 0
+ 195 000e 0022     		movs	r2, #0
+ 196 0010 0221     		movs	r1, #2
+ 197 0012 2046     		mov	r0, r4
+ 198 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 199              	.LVL6:
+ 200 0018 10BD     		pop	{r4, pc}
+ 201              	.L15:
+ARM GAS  /tmp/ccvz6GfR.s 			page 5
+
+
+ 202 001a 00BF     		.align	2
+ 203              	.L14:
+ 204 001c 00040240 		.word	1073873920
+ 205              		.cfi_endproc
+ 206              	.LFE127:
+ 208              		.section	.text.LED_Lignt3,"ax",%progbits
+ 209              		.align	1
+ 210              		.global	LED_Lignt3
+ 211              		.syntax unified
+ 212              		.thumb
+ 213              		.thumb_func
+ 214              		.fpu fpv4-sp-d16
+ 216              	LED_Lignt3:
+ 217              	.LFB128:
+  35:Src/bsp_gpio.c **** }
+  36:Src/bsp_gpio.c **** void LED_Lignt3(void)
+  37:Src/bsp_gpio.c **** {
+ 218              		.loc 1 37 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 0
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222 0000 10B5     		push	{r4, lr}
+ 223              	.LCFI7:
+ 224              		.cfi_def_cfa_offset 8
+ 225              		.cfi_offset 4, -8
+ 226              		.cfi_offset 14, -4
+  38:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0, GPIO_PIN_RESET);
+ 227              		.loc 1 38 0
+ 228 0002 064C     		ldr	r4, .L18
+ 229 0004 0022     		movs	r2, #0
+ 230 0006 0121     		movs	r1, #1
+ 231 0008 2046     		mov	r0, r4
+ 232 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 233              	.LVL7:
+  39:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_1, GPIO_PIN_SET);
+ 234              		.loc 1 39 0
+ 235 000e 0122     		movs	r2, #1
+ 236 0010 0221     		movs	r1, #2
+ 237 0012 2046     		mov	r0, r4
+ 238 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 239              	.LVL8:
+ 240 0018 10BD     		pop	{r4, pc}
+ 241              	.L19:
+ 242 001a 00BF     		.align	2
+ 243              	.L18:
+ 244 001c 00040240 		.word	1073873920
+ 245              		.cfi_endproc
+ 246              	.LFE128:
+ 248              		.section	.text.LED_Lignt4,"ax",%progbits
+ 249              		.align	1
+ 250              		.global	LED_Lignt4
+ 251              		.syntax unified
+ 252              		.thumb
+ 253              		.thumb_func
+ 254              		.fpu fpv4-sp-d16
+ 256              	LED_Lignt4:
+ 257              	.LFB129:
+ARM GAS  /tmp/ccvz6GfR.s 			page 6
+
+
+  40:Src/bsp_gpio.c **** }
+  41:Src/bsp_gpio.c **** void LED_Lignt4(void)
+  42:Src/bsp_gpio.c **** {
+ 258              		.loc 1 42 0
+ 259              		.cfi_startproc
+ 260              		@ args = 0, pretend = 0, frame = 0
+ 261              		@ frame_needed = 0, uses_anonymous_args = 0
+ 262 0000 10B5     		push	{r4, lr}
+ 263              	.LCFI8:
+ 264              		.cfi_def_cfa_offset 8
+ 265              		.cfi_offset 4, -8
+ 266              		.cfi_offset 14, -4
+  43:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0, GPIO_PIN_SET);
+ 267              		.loc 1 43 0
+ 268 0002 064C     		ldr	r4, .L22
+ 269 0004 0122     		movs	r2, #1
+ 270 0006 1146     		mov	r1, r2
+ 271 0008 2046     		mov	r0, r4
+ 272 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 273              	.LVL9:
+  44:Src/bsp_gpio.c **** 		HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_1, GPIO_PIN_SET);
+ 274              		.loc 1 44 0
+ 275 000e 0122     		movs	r2, #1
+ 276 0010 0221     		movs	r1, #2
+ 277 0012 2046     		mov	r0, r4
+ 278 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 279              	.LVL10:
+ 280 0018 10BD     		pop	{r4, pc}
+ 281              	.L23:
+ 282 001a 00BF     		.align	2
+ 283              	.L22:
+ 284 001c 00040240 		.word	1073873920
+ 285              		.cfi_endproc
+ 286              	.LFE129:
+ 288              		.section	.text.KEY_Init,"ax",%progbits
+ 289              		.align	1
+ 290              		.global	KEY_Init
+ 291              		.syntax unified
+ 292              		.thumb
+ 293              		.thumb_func
+ 294              		.fpu fpv4-sp-d16
+ 296              	KEY_Init:
+ 297              	.LFB130:
+  45:Src/bsp_gpio.c **** }
+  46:Src/bsp_gpio.c **** 
+  47:Src/bsp_gpio.c **** 
+  48:Src/bsp_gpio.c **** void KEY_Init(void)
+  49:Src/bsp_gpio.c **** {
+ 298              		.loc 1 49 0
+ 299              		.cfi_startproc
+ 300              		@ args = 0, pretend = 0, frame = 32
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 303              	.LCFI9:
+ 304              		.cfi_def_cfa_offset 20
+ 305              		.cfi_offset 4, -20
+ 306              		.cfi_offset 5, -16
+ARM GAS  /tmp/ccvz6GfR.s 			page 7
+
+
+ 307              		.cfi_offset 6, -12
+ 308              		.cfi_offset 7, -8
+ 309              		.cfi_offset 14, -4
+ 310 0002 89B0     		sub	sp, sp, #36
+ 311              	.LCFI10:
+ 312              		.cfi_def_cfa_offset 56
+ 313              	.LBB3:
+  50:Src/bsp_gpio.c **** 		GPIO_InitTypeDef gpio_init_struct;
+  51:Src/bsp_gpio.c **** 	
+  52:Src/bsp_gpio.c **** 		__HAL_RCC_GPIOA_CLK_ENABLE();
+ 314              		.loc 1 52 0
+ 315 0004 0026     		movs	r6, #0
+ 316 0006 0096     		str	r6, [sp]
+ 317 0008 2F4B     		ldr	r3, .L26
+ 318 000a 1A6B     		ldr	r2, [r3, #48]
+ 319 000c 42F00102 		orr	r2, r2, #1
+ 320 0010 1A63     		str	r2, [r3, #48]
+ 321 0012 1A6B     		ldr	r2, [r3, #48]
+ 322 0014 02F00102 		and	r2, r2, #1
+ 323 0018 0092     		str	r2, [sp]
+ 324 001a 009A     		ldr	r2, [sp]
+ 325              	.LBE3:
+ 326              	.LBB4:
+  53:Src/bsp_gpio.c **** 		__HAL_RCC_GPIOC_CLK_ENABLE();
+ 327              		.loc 1 53 0
+ 328 001c 0196     		str	r6, [sp, #4]
+ 329 001e 1A6B     		ldr	r2, [r3, #48]
+ 330 0020 42F00402 		orr	r2, r2, #4
+ 331 0024 1A63     		str	r2, [r3, #48]
+ 332 0026 1A6B     		ldr	r2, [r3, #48]
+ 333 0028 02F00402 		and	r2, r2, #4
+ 334 002c 0192     		str	r2, [sp, #4]
+ 335 002e 019A     		ldr	r2, [sp, #4]
+ 336              	.LBE4:
+ 337              	.LBB5:
+  54:Src/bsp_gpio.c **** 		__HAL_RCC_GPIOH_CLK_ENABLE();
+ 338              		.loc 1 54 0
+ 339 0030 0296     		str	r6, [sp, #8]
+ 340 0032 1A6B     		ldr	r2, [r3, #48]
+ 341 0034 42F08002 		orr	r2, r2, #128
+ 342 0038 1A63     		str	r2, [r3, #48]
+ 343 003a 1B6B     		ldr	r3, [r3, #48]
+ 344 003c 03F08003 		and	r3, r3, #128
+ 345 0040 0293     		str	r3, [sp, #8]
+ 346 0042 029B     		ldr	r3, [sp, #8]
+ 347              	.LBE5:
+  55:Src/bsp_gpio.c **** 
+  56:Src/bsp_gpio.c **** 		gpio_init_struct.Pin = GPIO_PIN_0;
+ 348              		.loc 1 56 0
+ 349 0044 0127     		movs	r7, #1
+ 350 0046 0397     		str	r7, [sp, #12]
+  57:Src/bsp_gpio.c **** 		gpio_init_struct.Mode = GPIO_MODE_IT_RISING;
+ 351              		.loc 1 57 0
+ 352 0048 204B     		ldr	r3, .L26+4
+ 353 004a 0493     		str	r3, [sp, #16]
+  58:Src/bsp_gpio.c **** 		gpio_init_struct.Pull = GPIO_PULLDOWN;
+ 354              		.loc 1 58 0
+ARM GAS  /tmp/ccvz6GfR.s 			page 8
+
+
+ 355 004c 0224     		movs	r4, #2
+ 356 004e 0594     		str	r4, [sp, #20]
+  59:Src/bsp_gpio.c **** 		gpio_init_struct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 357              		.loc 1 59 0
+ 358 0050 0325     		movs	r5, #3
+ 359 0052 0695     		str	r5, [sp, #24]
+  60:Src/bsp_gpio.c **** 		HAL_GPIO_Init(GPIOA, &gpio_init_struct);
+ 360              		.loc 1 60 0
+ 361 0054 03A9     		add	r1, sp, #12
+ 362 0056 1E48     		ldr	r0, .L26+8
+ 363 0058 FFF7FEFF 		bl	HAL_GPIO_Init
+ 364              	.LVL11:
+  61:Src/bsp_gpio.c **** 		
+  62:Src/bsp_gpio.c **** 		gpio_init_struct.Pin = GPIO_PIN_13;
+ 365              		.loc 1 62 0
+ 366 005c 4FF40053 		mov	r3, #8192
+ 367 0060 0393     		str	r3, [sp, #12]
+  63:Src/bsp_gpio.c **** 		gpio_init_struct.Mode = GPIO_MODE_IT_FALLING;
+ 368              		.loc 1 63 0
+ 369 0062 1C4B     		ldr	r3, .L26+12
+ 370 0064 0493     		str	r3, [sp, #16]
+  64:Src/bsp_gpio.c **** 		gpio_init_struct.Pull = GPIO_PULLUP;
+ 371              		.loc 1 64 0
+ 372 0066 0597     		str	r7, [sp, #20]
+  65:Src/bsp_gpio.c **** 		gpio_init_struct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 373              		.loc 1 65 0
+ 374 0068 0695     		str	r5, [sp, #24]
+  66:Src/bsp_gpio.c **** 		HAL_GPIO_Init(GPIOC, &gpio_init_struct);
+ 375              		.loc 1 66 0
+ 376 006a 03A9     		add	r1, sp, #12
+ 377 006c 1A48     		ldr	r0, .L26+16
+ 378 006e FFF7FEFF 		bl	HAL_GPIO_Init
+ 379              	.LVL12:
+  67:Src/bsp_gpio.c **** 	
+  68:Src/bsp_gpio.c **** 		gpio_init_struct.Pin = GPIO_PIN_2 | GPIO_PIN_3;
+ 380              		.loc 1 68 0
+ 381 0072 0C23     		movs	r3, #12
+ 382 0074 0393     		str	r3, [sp, #12]
+  69:Src/bsp_gpio.c **** 		gpio_init_struct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 383              		.loc 1 69 0
+ 384 0076 0695     		str	r5, [sp, #24]
+  70:Src/bsp_gpio.c **** 		HAL_GPIO_Init(GPIOH, &gpio_init_struct);
+ 385              		.loc 1 70 0
+ 386 0078 0DEB0301 		add	r1, sp, r3
+ 387 007c 1748     		ldr	r0, .L26+20
+ 388 007e FFF7FEFF 		bl	HAL_GPIO_Init
+ 389              	.LVL13:
+  71:Src/bsp_gpio.c **** 	
+  72:Src/bsp_gpio.c **** 		HAL_NVIC_SetPriority(EXTI0_IRQn,2,0);
+ 390              		.loc 1 72 0
+ 391 0082 3246     		mov	r2, r6
+ 392 0084 2146     		mov	r1, r4
+ 393 0086 0620     		movs	r0, #6
+ 394 0088 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 395              	.LVL14:
+  73:Src/bsp_gpio.c **** 		HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+ 396              		.loc 1 73 0
+ARM GAS  /tmp/ccvz6GfR.s 			page 9
+
+
+ 397 008c 0620     		movs	r0, #6
+ 398 008e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 399              	.LVL15:
+  74:Src/bsp_gpio.c **** 
+  75:Src/bsp_gpio.c **** 		HAL_NVIC_SetPriority(EXTI2_IRQn,2,1);
+ 400              		.loc 1 75 0
+ 401 0092 3A46     		mov	r2, r7
+ 402 0094 2146     		mov	r1, r4
+ 403 0096 0820     		movs	r0, #8
+ 404 0098 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 405              	.LVL16:
+  76:Src/bsp_gpio.c **** 		HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+ 406              		.loc 1 76 0
+ 407 009c 0820     		movs	r0, #8
+ 408 009e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 409              	.LVL17:
+  77:Src/bsp_gpio.c **** 		
+  78:Src/bsp_gpio.c **** 		HAL_NVIC_SetPriority(EXTI3_IRQn,2,2);
+ 410              		.loc 1 78 0
+ 411 00a2 2246     		mov	r2, r4
+ 412 00a4 2146     		mov	r1, r4
+ 413 00a6 0920     		movs	r0, #9
+ 414 00a8 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 415              	.LVL18:
+  79:Src/bsp_gpio.c **** 		HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+ 416              		.loc 1 79 0
+ 417 00ac 0920     		movs	r0, #9
+ 418 00ae FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 419              	.LVL19:
+  80:Src/bsp_gpio.c **** 		
+  81:Src/bsp_gpio.c **** 		HAL_NVIC_SetPriority(EXTI15_10_IRQn,2,3);
+ 420              		.loc 1 81 0
+ 421 00b2 2A46     		mov	r2, r5
+ 422 00b4 2146     		mov	r1, r4
+ 423 00b6 2820     		movs	r0, #40
+ 424 00b8 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 425              	.LVL20:
+  82:Src/bsp_gpio.c **** 		HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+ 426              		.loc 1 82 0
+ 427 00bc 2820     		movs	r0, #40
+ 428 00be FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 429              	.LVL21:
+  83:Src/bsp_gpio.c **** }
+ 430              		.loc 1 83 0
+ 431 00c2 09B0     		add	sp, sp, #36
+ 432              	.LCFI11:
+ 433              		.cfi_def_cfa_offset 20
+ 434              		@ sp needed
+ 435 00c4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 436              	.L27:
+ 437 00c6 00BF     		.align	2
+ 438              	.L26:
+ 439 00c8 00380240 		.word	1073887232
+ 440 00cc 00001110 		.word	269549568
+ 441 00d0 00000240 		.word	1073872896
+ 442 00d4 00002110 		.word	270598144
+ 443 00d8 00080240 		.word	1073874944
+ARM GAS  /tmp/ccvz6GfR.s 			page 10
+
+
+ 444 00dc 001C0240 		.word	1073880064
+ 445              		.cfi_endproc
+ 446              	.LFE130:
+ 448              		.section	.text.KEY_Scan,"ax",%progbits
+ 449              		.align	1
+ 450              		.global	KEY_Scan
+ 451              		.syntax unified
+ 452              		.thumb
+ 453              		.thumb_func
+ 454              		.fpu fpv4-sp-d16
+ 456              	KEY_Scan:
+ 457              	.LFB131:
+  84:Src/bsp_gpio.c **** 
+  85:Src/bsp_gpio.c **** uint8_t KEY_Scan(void)
+  86:Src/bsp_gpio.c **** {
+ 458              		.loc 1 86 0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 0
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462 0000 10B5     		push	{r4, lr}
+ 463              	.LCFI12:
+ 464              		.cfi_def_cfa_offset 8
+ 465              		.cfi_offset 4, -8
+ 466              		.cfi_offset 14, -4
+ 467              	.LVL22:
+  87:Src/bsp_gpio.c **** 		uint8_t ret = 0;
+  88:Src/bsp_gpio.c **** 		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0))
+ 468              		.loc 1 88 0
+ 469 0002 0121     		movs	r1, #1
+ 470 0004 0F48     		ldr	r0, .L35
+ 471 0006 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 472              	.LVL23:
+ 473 000a C0B9     		cbnz	r0, .L33
+  87:Src/bsp_gpio.c **** 		uint8_t ret = 0;
+ 474              		.loc 1 87 0
+ 475 000c 0024     		movs	r4, #0
+ 476              	.L29:
+ 477              	.LVL24:
+  89:Src/bsp_gpio.c **** 		{
+  90:Src/bsp_gpio.c **** 				ret |= KEY_UP_ON;
+  91:Src/bsp_gpio.c **** 		}
+  92:Src/bsp_gpio.c **** 		if(!HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13))
+ 478              		.loc 1 92 0
+ 479 000e 4FF40051 		mov	r1, #8192
+ 480 0012 0D48     		ldr	r0, .L35+4
+ 481 0014 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 482              	.LVL25:
+ 483 0018 08B9     		cbnz	r0, .L30
+  93:Src/bsp_gpio.c **** 		{	
+  94:Src/bsp_gpio.c **** 				ret |= KEY_2_ON;
+ 484              		.loc 1 94 0
+ 485 001a 44F00404 		orr	r4, r4, #4
+ 486              	.LVL26:
+ 487              	.L30:
+  95:Src/bsp_gpio.c **** 		}
+  96:Src/bsp_gpio.c **** 		if(!HAL_GPIO_ReadPin(GPIOH,GPIO_PIN_2))
+ 488              		.loc 1 96 0
+ARM GAS  /tmp/ccvz6GfR.s 			page 11
+
+
+ 489 001e 0421     		movs	r1, #4
+ 490 0020 0A48     		ldr	r0, .L35+8
+ 491 0022 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 492              	.LVL27:
+ 493 0026 08B9     		cbnz	r0, .L31
+  97:Src/bsp_gpio.c **** 		{
+  98:Src/bsp_gpio.c **** 				ret |= KEY_1_ON;
+ 494              		.loc 1 98 0
+ 495 0028 44F00204 		orr	r4, r4, #2
+ 496              	.LVL28:
+ 497              	.L31:
+  99:Src/bsp_gpio.c **** 		}
+ 100:Src/bsp_gpio.c **** 		if(!HAL_GPIO_ReadPin(GPIOH,GPIO_PIN_3))
+ 498              		.loc 1 100 0
+ 499 002c 0821     		movs	r1, #8
+ 500 002e 0748     		ldr	r0, .L35+8
+ 501 0030 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 502              	.LVL29:
+ 503 0034 08B9     		cbnz	r0, .L32
+ 101:Src/bsp_gpio.c **** 		{
+ 102:Src/bsp_gpio.c **** 				ret |= KEY_0_ON;
+ 504              		.loc 1 102 0
+ 505 0036 44F00104 		orr	r4, r4, #1
+ 506              	.LVL30:
+ 507              	.L32:
+ 103:Src/bsp_gpio.c **** 		}
+ 104:Src/bsp_gpio.c **** 		return ret;
+ 105:Src/bsp_gpio.c **** }
+ 508              		.loc 1 105 0
+ 509 003a 2046     		mov	r0, r4
+ 510 003c 10BD     		pop	{r4, pc}
+ 511              	.LVL31:
+ 512              	.L33:
+  90:Src/bsp_gpio.c **** 		}
+ 513              		.loc 1 90 0
+ 514 003e 0824     		movs	r4, #8
+ 515 0040 E5E7     		b	.L29
+ 516              	.L36:
+ 517 0042 00BF     		.align	2
+ 518              	.L35:
+ 519 0044 00000240 		.word	1073872896
+ 520 0048 00080240 		.word	1073874944
+ 521 004c 001C0240 		.word	1073880064
+ 522              		.cfi_endproc
+ 523              	.LFE131:
+ 525              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
+ 526              		.align	1
+ 527              		.global	EXTI0_IRQHandler
+ 528              		.syntax unified
+ 529              		.thumb
+ 530              		.thumb_func
+ 531              		.fpu fpv4-sp-d16
+ 533              	EXTI0_IRQHandler:
+ 534              	.LFB132:
+ 106:Src/bsp_gpio.c **** 
+ 107:Src/bsp_gpio.c **** //中断服务函数
+ 108:Src/bsp_gpio.c **** void EXTI0_IRQHandler(void)
+ARM GAS  /tmp/ccvz6GfR.s 			page 12
+
+
+ 109:Src/bsp_gpio.c **** {
+ 535              		.loc 1 109 0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 0
+ 538              		@ frame_needed = 0, uses_anonymous_args = 0
+ 539 0000 08B5     		push	{r3, lr}
+ 540              	.LCFI13:
+ 541              		.cfi_def_cfa_offset 8
+ 542              		.cfi_offset 3, -8
+ 543              		.cfi_offset 14, -4
+ 110:Src/bsp_gpio.c ****     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);//调用中断处理公用函数
+ 544              		.loc 1 110 0
+ 545 0002 0120     		movs	r0, #1
+ 546 0004 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 547              	.LVL32:
+ 548 0008 08BD     		pop	{r3, pc}
+ 549              		.cfi_endproc
+ 550              	.LFE132:
+ 552              		.section	.text.EXTI2_IRQHandler,"ax",%progbits
+ 553              		.align	1
+ 554              		.global	EXTI2_IRQHandler
+ 555              		.syntax unified
+ 556              		.thumb
+ 557              		.thumb_func
+ 558              		.fpu fpv4-sp-d16
+ 560              	EXTI2_IRQHandler:
+ 561              	.LFB133:
+ 111:Src/bsp_gpio.c **** }
+ 112:Src/bsp_gpio.c **** 
+ 113:Src/bsp_gpio.c **** void EXTI2_IRQHandler(void)
+ 114:Src/bsp_gpio.c **** {
+ 562              		.loc 1 114 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 0
+ 565              		@ frame_needed = 0, uses_anonymous_args = 0
+ 566 0000 08B5     		push	{r3, lr}
+ 567              	.LCFI14:
+ 568              		.cfi_def_cfa_offset 8
+ 569              		.cfi_offset 3, -8
+ 570              		.cfi_offset 14, -4
+ 115:Src/bsp_gpio.c ****     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);//调用中断处理公用函数
+ 571              		.loc 1 115 0
+ 572 0002 0420     		movs	r0, #4
+ 573 0004 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 574              	.LVL33:
+ 575 0008 08BD     		pop	{r3, pc}
+ 576              		.cfi_endproc
+ 577              	.LFE133:
+ 579              		.section	.text.EXTI3_IRQHandler,"ax",%progbits
+ 580              		.align	1
+ 581              		.global	EXTI3_IRQHandler
+ 582              		.syntax unified
+ 583              		.thumb
+ 584              		.thumb_func
+ 585              		.fpu fpv4-sp-d16
+ 587              	EXTI3_IRQHandler:
+ 588              	.LFB134:
+ARM GAS  /tmp/ccvz6GfR.s 			page 13
+
+
+ 116:Src/bsp_gpio.c **** }
+ 117:Src/bsp_gpio.c **** 
+ 118:Src/bsp_gpio.c **** void EXTI3_IRQHandler(void)
+ 119:Src/bsp_gpio.c **** {
+ 589              		.loc 1 119 0
+ 590              		.cfi_startproc
+ 591              		@ args = 0, pretend = 0, frame = 0
+ 592              		@ frame_needed = 0, uses_anonymous_args = 0
+ 593 0000 08B5     		push	{r3, lr}
+ 594              	.LCFI15:
+ 595              		.cfi_def_cfa_offset 8
+ 596              		.cfi_offset 3, -8
+ 597              		.cfi_offset 14, -4
+ 120:Src/bsp_gpio.c ****     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);//调用中断处理公用函数
+ 598              		.loc 1 120 0
+ 599 0002 0820     		movs	r0, #8
+ 600 0004 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 601              	.LVL34:
+ 602 0008 08BD     		pop	{r3, pc}
+ 603              		.cfi_endproc
+ 604              	.LFE134:
+ 606              		.section	.text.EXTI15_10_IRQHandler,"ax",%progbits
+ 607              		.align	1
+ 608              		.global	EXTI15_10_IRQHandler
+ 609              		.syntax unified
+ 610              		.thumb
+ 611              		.thumb_func
+ 612              		.fpu fpv4-sp-d16
+ 614              	EXTI15_10_IRQHandler:
+ 615              	.LFB135:
+ 121:Src/bsp_gpio.c **** }
+ 122:Src/bsp_gpio.c **** 
+ 123:Src/bsp_gpio.c **** void EXTI15_10_IRQHandler(void)
+ 124:Src/bsp_gpio.c **** {
+ 616              		.loc 1 124 0
+ 617              		.cfi_startproc
+ 618              		@ args = 0, pretend = 0, frame = 0
+ 619              		@ frame_needed = 0, uses_anonymous_args = 0
+ 620 0000 08B5     		push	{r3, lr}
+ 621              	.LCFI16:
+ 622              		.cfi_def_cfa_offset 8
+ 623              		.cfi_offset 3, -8
+ 624              		.cfi_offset 14, -4
+ 125:Src/bsp_gpio.c ****     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);//调用中断处理公用函数
+ 625              		.loc 1 125 0
+ 626 0002 4FF40050 		mov	r0, #8192
+ 627 0006 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 628              	.LVL35:
+ 629 000a 08BD     		pop	{r3, pc}
+ 630              		.cfi_endproc
+ 631              	.LFE135:
+ 633              		.section	.text.HAL_GPIO_EXTI_Callback,"ax",%progbits
+ 634              		.align	1
+ 635              		.global	HAL_GPIO_EXTI_Callback
+ 636              		.syntax unified
+ 637              		.thumb
+ 638              		.thumb_func
+ARM GAS  /tmp/ccvz6GfR.s 			page 14
+
+
+ 639              		.fpu fpv4-sp-d16
+ 641              	HAL_GPIO_EXTI_Callback:
+ 642              	.LFB136:
+ 126:Src/bsp_gpio.c **** }
+ 127:Src/bsp_gpio.c **** 
+ 128:Src/bsp_gpio.c **** void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+ 129:Src/bsp_gpio.c **** {
+ 643              		.loc 1 129 0
+ 644              		.cfi_startproc
+ 645              		@ args = 0, pretend = 0, frame = 0
+ 646              		@ frame_needed = 0, uses_anonymous_args = 0
+ 647              	.LVL36:
+ 648 0000 10B5     		push	{r4, lr}
+ 649              	.LCFI17:
+ 650              		.cfi_def_cfa_offset 8
+ 651              		.cfi_offset 4, -8
+ 652              		.cfi_offset 14, -4
+ 653 0002 0446     		mov	r4, r0
+ 130:Src/bsp_gpio.c **** 		HAL_Delay(100);
+ 654              		.loc 1 130 0
+ 655 0004 6420     		movs	r0, #100
+ 656              	.LVL37:
+ 657 0006 FFF7FEFF 		bl	HAL_Delay
+ 658              	.LVL38:
+ 131:Src/bsp_gpio.c **** 		if(GPIO_Pin == GPIO_PIN_0  && KEY_Scan() == KEY_UP_ON)
+ 659              		.loc 1 131 0
+ 660 000a 012C     		cmp	r4, #1
+ 661 000c 07D0     		beq	.L51
+ 662              	.L46:
+ 132:Src/bsp_gpio.c **** 		{
+ 133:Src/bsp_gpio.c **** 				LED_Lignt4();
+ 134:Src/bsp_gpio.c **** 				//HAL_IWDG_Refresh(&hiwdg);
+ 135:Src/bsp_gpio.c **** 		}
+ 136:Src/bsp_gpio.c **** 		if(GPIO_Pin == GPIO_PIN_3  && KEY_Scan() == KEY_0_ON)
+ 663              		.loc 1 136 0
+ 664 000e 082C     		cmp	r4, #8
+ 665 0010 0CD0     		beq	.L52
+ 666              	.L47:
+ 137:Src/bsp_gpio.c **** 		{
+ 138:Src/bsp_gpio.c **** 				LED_Lignt1();
+ 139:Src/bsp_gpio.c **** 		}
+ 140:Src/bsp_gpio.c **** 		if(GPIO_Pin == GPIO_PIN_2  && KEY_Scan() == KEY_1_ON)
+ 667              		.loc 1 140 0
+ 668 0012 042C     		cmp	r4, #4
+ 669 0014 11D0     		beq	.L53
+ 670              	.L48:
+ 141:Src/bsp_gpio.c **** 		{
+ 142:Src/bsp_gpio.c **** 				LED_Lignt2();
+ 143:Src/bsp_gpio.c **** 		}
+ 144:Src/bsp_gpio.c **** 		if(GPIO_Pin == GPIO_PIN_13  && KEY_Scan() == KEY_2_ON)
+ 671              		.loc 1 144 0
+ 672 0016 B4F5005F 		cmp	r4, #8192
+ 673 001a 15D0     		beq	.L54
+ 674              	.L45:
+ 675 001c 10BD     		pop	{r4, pc}
+ 676              	.L51:
+ 131:Src/bsp_gpio.c **** 		{
+ARM GAS  /tmp/ccvz6GfR.s 			page 15
+
+
+ 677              		.loc 1 131 0 discriminator 1
+ 678 001e FFF7FEFF 		bl	KEY_Scan
+ 679              	.LVL39:
+ 680 0022 0828     		cmp	r0, #8
+ 681 0024 F3D1     		bne	.L46
+ 133:Src/bsp_gpio.c **** 				//HAL_IWDG_Refresh(&hiwdg);
+ 682              		.loc 1 133 0
+ 683 0026 FFF7FEFF 		bl	LED_Lignt4
+ 684              	.LVL40:
+ 685 002a F0E7     		b	.L46
+ 686              	.L52:
+ 136:Src/bsp_gpio.c **** 		{
+ 687              		.loc 1 136 0 discriminator 1
+ 688 002c FFF7FEFF 		bl	KEY_Scan
+ 689              	.LVL41:
+ 690 0030 0128     		cmp	r0, #1
+ 691 0032 EED1     		bne	.L47
+ 138:Src/bsp_gpio.c **** 		}
+ 692              		.loc 1 138 0
+ 693 0034 FFF7FEFF 		bl	LED_Lignt1
+ 694              	.LVL42:
+ 695 0038 EBE7     		b	.L47
+ 696              	.L53:
+ 140:Src/bsp_gpio.c **** 		{
+ 697              		.loc 1 140 0 discriminator 1
+ 698 003a FFF7FEFF 		bl	KEY_Scan
+ 699              	.LVL43:
+ 700 003e 0228     		cmp	r0, #2
+ 701 0040 E9D1     		bne	.L48
+ 142:Src/bsp_gpio.c **** 		}
+ 702              		.loc 1 142 0
+ 703 0042 FFF7FEFF 		bl	LED_Lignt2
+ 704              	.LVL44:
+ 705 0046 E6E7     		b	.L48
+ 706              	.L54:
+ 707              		.loc 1 144 0 discriminator 1
+ 708 0048 FFF7FEFF 		bl	KEY_Scan
+ 709              	.LVL45:
+ 710 004c 0428     		cmp	r0, #4
+ 711 004e E5D1     		bne	.L45
+ 145:Src/bsp_gpio.c **** 		{
+ 146:Src/bsp_gpio.c **** 				LED_Lignt3();
+ 712              		.loc 1 146 0
+ 713 0050 FFF7FEFF 		bl	LED_Lignt3
+ 714              	.LVL46:
+ 147:Src/bsp_gpio.c **** 		}
+ 148:Src/bsp_gpio.c **** }
+ 715              		.loc 1 148 0
+ 716 0054 E2E7     		b	.L45
+ 717              		.cfi_endproc
+ 718              	.LFE136:
+ 720              		.section	.text.IWDG_Init,"ax",%progbits
+ 721              		.align	1
+ 722              		.global	IWDG_Init
+ 723              		.syntax unified
+ 724              		.thumb
+ 725              		.thumb_func
+ARM GAS  /tmp/ccvz6GfR.s 			page 16
+
+
+ 726              		.fpu fpv4-sp-d16
+ 728              	IWDG_Init:
+ 729              	.LFB137:
+ 149:Src/bsp_gpio.c **** 
+ 150:Src/bsp_gpio.c **** 
+ 151:Src/bsp_gpio.c **** 
+ 152:Src/bsp_gpio.c **** void IWDG_Init(void)
+ 153:Src/bsp_gpio.c **** {
+ 730              		.loc 1 153 0
+ 731              		.cfi_startproc
+ 732              		@ args = 0, pretend = 0, frame = 0
+ 733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 734 0000 08B5     		push	{r3, lr}
+ 735              	.LCFI18:
+ 736              		.cfi_def_cfa_offset 8
+ 737              		.cfi_offset 3, -8
+ 738              		.cfi_offset 14, -4
+ 154:Src/bsp_gpio.c **** 
+ 155:Src/bsp_gpio.c ****   hiwdg.Instance = IWDG;
+ 739              		.loc 1 155 0
+ 740 0002 0848     		ldr	r0, .L59
+ 741 0004 084B     		ldr	r3, .L59+4
+ 742 0006 0360     		str	r3, [r0]
+ 156:Src/bsp_gpio.c ****   hiwdg.Init.Prescaler = IWDG_PRESCALER_64;
+ 743              		.loc 1 156 0
+ 744 0008 0423     		movs	r3, #4
+ 745 000a 4360     		str	r3, [r0, #4]
+ 157:Src/bsp_gpio.c ****   hiwdg.Init.Reload = 500;
+ 746              		.loc 1 157 0
+ 747 000c 4FF4FA73 		mov	r3, #500
+ 748 0010 8360     		str	r3, [r0, #8]
+ 158:Src/bsp_gpio.c ****   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
+ 749              		.loc 1 158 0
+ 750 0012 FFF7FEFF 		bl	HAL_IWDG_Init
+ 751              	.LVL47:
+ 752 0016 00B9     		cbnz	r0, .L58
+ 753              	.L55:
+ 754 0018 08BD     		pop	{r3, pc}
+ 755              	.L58:
+ 159:Src/bsp_gpio.c ****   {
+ 160:Src/bsp_gpio.c ****     _Error_Handler(__FILE__, __LINE__);
+ 756              		.loc 1 160 0
+ 757 001a A021     		movs	r1, #160
+ 758 001c 0348     		ldr	r0, .L59+8
+ 759 001e FFF7FEFF 		bl	_Error_Handler
+ 760              	.LVL48:
+ 161:Src/bsp_gpio.c ****   }
+ 162:Src/bsp_gpio.c **** 
+ 163:Src/bsp_gpio.c **** }
+ 761              		.loc 1 163 0
+ 762 0022 F9E7     		b	.L55
+ 763              	.L60:
+ 764              		.align	2
+ 765              	.L59:
+ 766 0024 00000000 		.word	hiwdg
+ 767 0028 00300040 		.word	1073754112
+ 768 002c 00000000 		.word	.LC0
+ARM GAS  /tmp/ccvz6GfR.s 			page 17
+
+
+ 769              		.cfi_endproc
+ 770              	.LFE137:
+ 772              		.comm	hiwdg,12,4
+ 773              		.section	.rodata.IWDG_Init.str1.4,"aMS",%progbits,1
+ 774              		.align	2
+ 775              	.LC0:
+ 776 0000 5372632F 		.ascii	"Src/bsp_gpio.c\000"
+ 776      6273705F 
+ 776      6770696F 
+ 776      2E6300
+ 777              		.text
+ 778              	.Letext0:
+ 779              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 780              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 781              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 782              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 783              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ 784              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 785              		.file 8 "/usr/include/newlib/sys/_types.h"
+ 786              		.file 9 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 787              		.file 10 "/usr/include/newlib/sys/reent.h"
+ 788              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 789              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 790              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h"
+ 791              		.file 14 "Src/bsp_gpio.h"
+ 792              		.file 15 "Inc/main.h"
+ 793              		.file 16 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 794              		.file 17 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
+ARM GAS  /tmp/ccvz6GfR.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bsp_gpio.c
+     /tmp/ccvz6GfR.s:18     .text.Delay:0000000000000000 $t
+     /tmp/ccvz6GfR.s:25     .text.Delay:0000000000000000 Delay
+     /tmp/ccvz6GfR.s:55     .text.LED_Init:0000000000000000 $t
+     /tmp/ccvz6GfR.s:62     .text.LED_Init:0000000000000000 LED_Init
+     /tmp/ccvz6GfR.s:123    .text.LED_Init:0000000000000044 $d
+     /tmp/ccvz6GfR.s:129    .text.LED_Lignt1:0000000000000000 $t
+     /tmp/ccvz6GfR.s:136    .text.LED_Lignt1:0000000000000000 LED_Lignt1
+     /tmp/ccvz6GfR.s:164    .text.LED_Lignt1:000000000000001c $d
+     /tmp/ccvz6GfR.s:169    .text.LED_Lignt2:0000000000000000 $t
+     /tmp/ccvz6GfR.s:176    .text.LED_Lignt2:0000000000000000 LED_Lignt2
+     /tmp/ccvz6GfR.s:204    .text.LED_Lignt2:000000000000001c $d
+     /tmp/ccvz6GfR.s:209    .text.LED_Lignt3:0000000000000000 $t
+     /tmp/ccvz6GfR.s:216    .text.LED_Lignt3:0000000000000000 LED_Lignt3
+     /tmp/ccvz6GfR.s:244    .text.LED_Lignt3:000000000000001c $d
+     /tmp/ccvz6GfR.s:249    .text.LED_Lignt4:0000000000000000 $t
+     /tmp/ccvz6GfR.s:256    .text.LED_Lignt4:0000000000000000 LED_Lignt4
+     /tmp/ccvz6GfR.s:284    .text.LED_Lignt4:000000000000001c $d
+     /tmp/ccvz6GfR.s:289    .text.KEY_Init:0000000000000000 $t
+     /tmp/ccvz6GfR.s:296    .text.KEY_Init:0000000000000000 KEY_Init
+     /tmp/ccvz6GfR.s:439    .text.KEY_Init:00000000000000c8 $d
+     /tmp/ccvz6GfR.s:449    .text.KEY_Scan:0000000000000000 $t
+     /tmp/ccvz6GfR.s:456    .text.KEY_Scan:0000000000000000 KEY_Scan
+     /tmp/ccvz6GfR.s:519    .text.KEY_Scan:0000000000000044 $d
+     /tmp/ccvz6GfR.s:526    .text.EXTI0_IRQHandler:0000000000000000 $t
+     /tmp/ccvz6GfR.s:533    .text.EXTI0_IRQHandler:0000000000000000 EXTI0_IRQHandler
+     /tmp/ccvz6GfR.s:553    .text.EXTI2_IRQHandler:0000000000000000 $t
+     /tmp/ccvz6GfR.s:560    .text.EXTI2_IRQHandler:0000000000000000 EXTI2_IRQHandler
+     /tmp/ccvz6GfR.s:580    .text.EXTI3_IRQHandler:0000000000000000 $t
+     /tmp/ccvz6GfR.s:587    .text.EXTI3_IRQHandler:0000000000000000 EXTI3_IRQHandler
+     /tmp/ccvz6GfR.s:607    .text.EXTI15_10_IRQHandler:0000000000000000 $t
+     /tmp/ccvz6GfR.s:614    .text.EXTI15_10_IRQHandler:0000000000000000 EXTI15_10_IRQHandler
+     /tmp/ccvz6GfR.s:634    .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
+     /tmp/ccvz6GfR.s:641    .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
+     /tmp/ccvz6GfR.s:721    .text.IWDG_Init:0000000000000000 $t
+     /tmp/ccvz6GfR.s:728    .text.IWDG_Init:0000000000000000 IWDG_Init
+     /tmp/ccvz6GfR.s:766    .text.IWDG_Init:0000000000000024 $d
+                            *COM*:000000000000000c hiwdg
+     /tmp/ccvz6GfR.s:774    .rodata.IWDG_Init.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_GPIO_ReadPin
+HAL_GPIO_EXTI_IRQHandler
+HAL_Delay
+HAL_IWDG_Init
+_Error_Handler

@@ -1,0 +1,954 @@
+ARM GAS  /tmp/ccd4Y3ha.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"bsp_tpad.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.TIM2_Capture_CH1_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	TIM2_Capture_CH1_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	TIM2_Capture_CH1_Init:
+  26              	.LFB124:
+  27              		.file 1 "Src/bsp_tpad.c"
+   1:Src/bsp_tpad.c **** #include "bsp_tpad.h"
+   2:Src/bsp_tpad.c **** 
+   3:Src/bsp_tpad.c **** uint32_t  g_default_value;
+   4:Src/bsp_tpad.c **** 
+   5:Src/bsp_tpad.c **** TIM_HandleTypeDef tim2_handle_typedef;
+   6:Src/bsp_tpad.c **** 
+   7:Src/bsp_tpad.c **** void TIM2_Capture_CH1_Init(void)
+   8:Src/bsp_tpad.c **** {
+  28              		.loc 1 8 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 70B5     		push	{r4, r5, r6, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 4, -16
+  36              		.cfi_offset 5, -12
+  37              		.cfi_offset 6, -8
+  38              		.cfi_offset 14, -4
+  39 0002 84B0     		sub	sp, sp, #16
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 32
+   9:Src/bsp_tpad.c **** 		TIM_IC_InitTypeDef tim2_ch1_config;  
+  10:Src/bsp_tpad.c **** 	
+  11:Src/bsp_tpad.c **** 		tim2_handle_typedef.Instance = TIM2;
+  42              		.loc 1 11 0
+  43 0004 0E4C     		ldr	r4, .L3
+  44 0006 4FF08043 		mov	r3, #1073741824
+  45 000a 2360     		str	r3, [r4]
+  12:Src/bsp_tpad.c **** 		tim2_handle_typedef.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  46              		.loc 1 12 0
+ARM GAS  /tmp/ccd4Y3ha.s 			page 2
+
+
+  47 000c 0025     		movs	r5, #0
+  48 000e 2561     		str	r5, [r4, #16]
+  13:Src/bsp_tpad.c **** 		tim2_handle_typedef.Init.CounterMode = TIM_COUNTERMODE_UP;
+  49              		.loc 1 13 0
+  50 0010 A560     		str	r5, [r4, #8]
+  14:Src/bsp_tpad.c **** 		tim2_handle_typedef.Init.Prescaler = 1;
+  51              		.loc 1 14 0
+  52 0012 0126     		movs	r6, #1
+  53 0014 6660     		str	r6, [r4, #4]
+  15:Src/bsp_tpad.c **** 		tim2_handle_typedef.Init.Period = 0xFFFFFFFF;
+  54              		.loc 1 15 0
+  55 0016 4FF0FF33 		mov	r3, #-1
+  56 001a E360     		str	r3, [r4, #12]
+  16:Src/bsp_tpad.c **** 		HAL_TIM_IC_Init(&tim2_handle_typedef);
+  57              		.loc 1 16 0
+  58 001c 2046     		mov	r0, r4
+  59 001e FFF7FEFF 		bl	HAL_TIM_IC_Init
+  60              	.LVL0:
+  17:Src/bsp_tpad.c **** 		
+  18:Src/bsp_tpad.c **** 		tim2_ch1_config.ICPolarity=TIM_ICPOLARITY_RISING;    //ÉÏÉýÑØ²¶»ñ
+  61              		.loc 1 18 0
+  62 0022 0095     		str	r5, [sp]
+  19:Src/bsp_tpad.c ****     tim2_ch1_config.ICSelection=TIM_ICSELECTION_DIRECTTI;//Ó³Éäµ½TI1ÉÏ
+  63              		.loc 1 19 0
+  64 0024 0196     		str	r6, [sp, #4]
+  20:Src/bsp_tpad.c ****     tim2_ch1_config.ICPrescaler=TIM_ICPSC_DIV1;          //ÅäÖÃÊäÈë·ÖÆµ£¬²»·ÖÆµ
+  65              		.loc 1 20 0
+  66 0026 0295     		str	r5, [sp, #8]
+  21:Src/bsp_tpad.c ****     tim2_ch1_config.ICFilter=0;                          //ÅäÖÃÊäÈëÂË²¨Æ÷£¬²»ÂË²¨
+  67              		.loc 1 21 0
+  68 0028 0395     		str	r5, [sp, #12]
+  22:Src/bsp_tpad.c **** 	
+  23:Src/bsp_tpad.c ****     HAL_TIM_IC_ConfigChannel(&tim2_handle_typedef , &tim2_ch1_config , TIM_CHANNEL_1);//ÅäÖÃTIM2Í¨µ
+  69              		.loc 1 23 0
+  70 002a 2A46     		mov	r2, r5
+  71 002c 6946     		mov	r1, sp
+  72 002e 2046     		mov	r0, r4
+  73 0030 FFF7FEFF 		bl	HAL_TIM_IC_ConfigChannel
+  74              	.LVL1:
+  24:Src/bsp_tpad.c ****     HAL_TIM_IC_Start(&tim2_handle_typedef,TIM_CHANNEL_1);      //¿ªÊ¼²¶»ñTIM2µÄÍ¨µÀ1
+  75              		.loc 1 24 0
+  76 0034 2946     		mov	r1, r5
+  77 0036 2046     		mov	r0, r4
+  78 0038 FFF7FEFF 		bl	HAL_TIM_IC_Start
+  79              	.LVL2:
+  25:Src/bsp_tpad.c **** }
+  80              		.loc 1 25 0
+  81 003c 04B0     		add	sp, sp, #16
+  82              	.LCFI2:
+  83              		.cfi_def_cfa_offset 16
+  84              		@ sp needed
+  85 003e 70BD     		pop	{r4, r5, r6, pc}
+  86              	.L4:
+  87              		.align	2
+  88              	.L3:
+  89 0040 00000000 		.word	tim2_handle_typedef
+  90              		.cfi_endproc
+ARM GAS  /tmp/ccd4Y3ha.s 			page 3
+
+
+  91              	.LFE124:
+  93              		.section	.text.HAL_TIM_IC_MspInit,"ax",%progbits
+  94              		.align	1
+  95              		.global	HAL_TIM_IC_MspInit
+  96              		.syntax unified
+  97              		.thumb
+  98              		.thumb_func
+  99              		.fpu fpv4-sp-d16
+ 101              	HAL_TIM_IC_MspInit:
+ 102              	.LFB125:
+  26:Src/bsp_tpad.c **** 
+  27:Src/bsp_tpad.c **** void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
+  28:Src/bsp_tpad.c **** {
+ 103              		.loc 1 28 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 32
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107              	.LVL3:
+ 108 0000 00B5     		push	{lr}
+ 109              	.LCFI3:
+ 110              		.cfi_def_cfa_offset 4
+ 111              		.cfi_offset 14, -4
+ 112 0002 89B0     		sub	sp, sp, #36
+ 113              	.LCFI4:
+ 114              		.cfi_def_cfa_offset 40
+ 115              	.LBB2:
+  29:Src/bsp_tpad.c ****     GPIO_InitTypeDef GPIO_Initure;
+  30:Src/bsp_tpad.c ****     __HAL_RCC_TIM2_CLK_ENABLE();            //Ê¹ÄÜTIM2Ê±ÖÓ
+ 116              		.loc 1 30 0
+ 117 0004 0022     		movs	r2, #0
+ 118 0006 0192     		str	r2, [sp, #4]
+ 119 0008 114B     		ldr	r3, .L7
+ 120 000a 196C     		ldr	r1, [r3, #64]
+ 121 000c 41F00101 		orr	r1, r1, #1
+ 122 0010 1964     		str	r1, [r3, #64]
+ 123 0012 196C     		ldr	r1, [r3, #64]
+ 124 0014 01F00101 		and	r1, r1, #1
+ 125 0018 0191     		str	r1, [sp, #4]
+ 126 001a 0199     		ldr	r1, [sp, #4]
+ 127              	.LBE2:
+ 128              	.LBB3:
+  31:Src/bsp_tpad.c ****     __HAL_RCC_GPIOA_CLK_ENABLE();			//¿ªÆôGPIOAÊ±ÖÓ
+ 129              		.loc 1 31 0
+ 130 001c 0292     		str	r2, [sp, #8]
+ 131 001e 196B     		ldr	r1, [r3, #48]
+ 132 0020 41F00101 		orr	r1, r1, #1
+ 133 0024 1963     		str	r1, [r3, #48]
+ 134 0026 1B6B     		ldr	r3, [r3, #48]
+ 135 0028 03F00103 		and	r3, r3, #1
+ 136 002c 0293     		str	r3, [sp, #8]
+ 137 002e 029B     		ldr	r3, [sp, #8]
+ 138              	.LBE3:
+  32:Src/bsp_tpad.c **** 	
+  33:Src/bsp_tpad.c ****     GPIO_Initure.Pin=GPIO_PIN_5;            //PA5
+ 139              		.loc 1 33 0
+ 140 0030 2023     		movs	r3, #32
+ 141 0032 0393     		str	r3, [sp, #12]
+ARM GAS  /tmp/ccd4Y3ha.s 			page 4
+
+
+  34:Src/bsp_tpad.c ****     GPIO_Initure.Mode=GPIO_MODE_AF_PP;      //ÍÆÍì¸´ÓÃ
+ 142              		.loc 1 34 0
+ 143 0034 0223     		movs	r3, #2
+ 144 0036 0493     		str	r3, [sp, #16]
+  35:Src/bsp_tpad.c ****     GPIO_Initure.Pull=GPIO_NOPULL;          //²»´øÉÏÏÂÀ­
+ 145              		.loc 1 35 0
+ 146 0038 0592     		str	r2, [sp, #20]
+  36:Src/bsp_tpad.c ****     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     //¸ßËÙ
+ 147              		.loc 1 36 0
+ 148 003a 0323     		movs	r3, #3
+ 149 003c 0693     		str	r3, [sp, #24]
+  37:Src/bsp_tpad.c ****     GPIO_Initure.Alternate=GPIO_AF1_TIM2;   //PA5¸´ÓÃÎªTIM2Í¨µÀ1
+ 150              		.loc 1 37 0
+ 151 003e 0123     		movs	r3, #1
+ 152 0040 0793     		str	r3, [sp, #28]
+  38:Src/bsp_tpad.c ****     HAL_GPIO_Init(GPIOA,&GPIO_Initure);
+ 153              		.loc 1 38 0
+ 154 0042 03A9     		add	r1, sp, #12
+ 155 0044 0348     		ldr	r0, .L7+4
+ 156              	.LVL4:
+ 157 0046 FFF7FEFF 		bl	HAL_GPIO_Init
+ 158              	.LVL5:
+  39:Src/bsp_tpad.c **** }
+ 159              		.loc 1 39 0
+ 160 004a 09B0     		add	sp, sp, #36
+ 161              	.LCFI5:
+ 162              		.cfi_def_cfa_offset 4
+ 163              		@ sp needed
+ 164 004c 5DF804FB 		ldr	pc, [sp], #4
+ 165              	.L8:
+ 166              		.align	2
+ 167              	.L7:
+ 168 0050 00380240 		.word	1073887232
+ 169 0054 00000240 		.word	1073872896
+ 170              		.cfi_endproc
+ 171              	.LFE125:
+ 173              		.section	.text.TPAD_Reset,"ax",%progbits
+ 174              		.align	1
+ 175              		.global	TPAD_Reset
+ 176              		.syntax unified
+ 177              		.thumb
+ 178              		.thumb_func
+ 179              		.fpu fpv4-sp-d16
+ 181              	TPAD_Reset:
+ 182              	.LFB126:
+  40:Src/bsp_tpad.c **** 
+  41:Src/bsp_tpad.c **** void TPAD_Reset(void)
+  42:Src/bsp_tpad.c **** {
+ 183              		.loc 1 42 0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 24
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 188              	.LCFI6:
+ 189              		.cfi_def_cfa_offset 20
+ 190              		.cfi_offset 4, -20
+ 191              		.cfi_offset 5, -16
+ARM GAS  /tmp/ccd4Y3ha.s 			page 5
+
+
+ 192              		.cfi_offset 6, -12
+ 193              		.cfi_offset 7, -8
+ 194              		.cfi_offset 14, -4
+ 195 0002 87B0     		sub	sp, sp, #28
+ 196              	.LCFI7:
+ 197              		.cfi_def_cfa_offset 48
+  43:Src/bsp_tpad.c ****     GPIO_InitTypeDef GPIO_Initure;
+  44:Src/bsp_tpad.c **** 	
+  45:Src/bsp_tpad.c ****     GPIO_Initure.Pin=GPIO_PIN_5;            //PA5
+ 198              		.loc 1 45 0
+ 199 0004 2027     		movs	r7, #32
+ 200 0006 0197     		str	r7, [sp, #4]
+  46:Src/bsp_tpad.c ****     GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;  //ÍÆÍìÊä³ö
+ 201              		.loc 1 46 0
+ 202 0008 0125     		movs	r5, #1
+ 203 000a 0295     		str	r5, [sp, #8]
+  47:Src/bsp_tpad.c ****     GPIO_Initure.Pull=GPIO_PULLDOWN;        //ÏÂÀ­
+ 204              		.loc 1 47 0
+ 205 000c 0226     		movs	r6, #2
+ 206 000e 0396     		str	r6, [sp, #12]
+  48:Src/bsp_tpad.c ****     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     //¸ßËÙ
+ 207              		.loc 1 48 0
+ 208 0010 0323     		movs	r3, #3
+ 209 0012 0493     		str	r3, [sp, #16]
+  49:Src/bsp_tpad.c ****     HAL_GPIO_Init(GPIOA,&GPIO_Initure);
+ 210              		.loc 1 49 0
+ 211 0014 0E4C     		ldr	r4, .L11
+ 212 0016 01A9     		add	r1, sp, #4
+ 213 0018 2046     		mov	r0, r4
+ 214 001a FFF7FEFF 		bl	HAL_GPIO_Init
+ 215              	.LVL6:
+  50:Src/bsp_tpad.c ****     
+  51:Src/bsp_tpad.c ****     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);	//PA5Êä³ö0£¬·Åµç
+ 216              		.loc 1 51 0
+ 217 001e 0022     		movs	r2, #0
+ 218 0020 3946     		mov	r1, r7
+ 219 0022 2046     		mov	r0, r4
+ 220 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 221              	.LVL7:
+  52:Src/bsp_tpad.c ****     HAL_Delay(5);
+ 222              		.loc 1 52 0
+ 223 0028 0520     		movs	r0, #5
+ 224 002a FFF7FEFF 		bl	HAL_Delay
+ 225              	.LVL8:
+  53:Src/bsp_tpad.c ****     __HAL_TIM_CLEAR_FLAG(&tim2_handle_typedef, TIM_FLAG_CC1 | TIM_FLAG_UPDATE);   //Çå³ý±êÖ¾Î»
+ 226              		.loc 1 53 0
+ 227 002e 094B     		ldr	r3, .L11+4
+ 228 0030 1A68     		ldr	r2, [r3]
+ 229 0032 6FF00303 		mvn	r3, #3
+ 230 0036 1361     		str	r3, [r2, #16]
+  54:Src/bsp_tpad.c ****     __HAL_TIM_SET_COUNTER(&tim2_handle_typedef,0); //¼ÆÊýÆ÷Öµ¹é0
+ 231              		.loc 1 54 0
+ 232 0038 0023     		movs	r3, #0
+ 233 003a 5362     		str	r3, [r2, #36]
+  55:Src/bsp_tpad.c ****     
+  56:Src/bsp_tpad.c ****     GPIO_Initure.Mode=GPIO_MODE_AF_PP;      //ÍÆÍì¸´ÓÃ
+ 234              		.loc 1 56 0
+ARM GAS  /tmp/ccd4Y3ha.s 			page 6
+
+
+ 235 003c 0296     		str	r6, [sp, #8]
+  57:Src/bsp_tpad.c ****     GPIO_Initure.Pull=GPIO_NOPULL;          //²»´øÉÏÏÂÀ­
+ 236              		.loc 1 57 0
+ 237 003e 0393     		str	r3, [sp, #12]
+  58:Src/bsp_tpad.c ****     GPIO_Initure.Alternate=GPIO_AF1_TIM2;   //PA5¸´ÓÃÎªTIM2Í¨µÀ1
+ 238              		.loc 1 58 0
+ 239 0040 0595     		str	r5, [sp, #20]
+  59:Src/bsp_tpad.c ****     HAL_GPIO_Init(GPIOA,&GPIO_Initure);         
+ 240              		.loc 1 59 0
+ 241 0042 01A9     		add	r1, sp, #4
+ 242 0044 2046     		mov	r0, r4
+ 243 0046 FFF7FEFF 		bl	HAL_GPIO_Init
+ 244              	.LVL9:
+  60:Src/bsp_tpad.c **** }
+ 245              		.loc 1 60 0
+ 246 004a 07B0     		add	sp, sp, #28
+ 247              	.LCFI8:
+ 248              		.cfi_def_cfa_offset 20
+ 249              		@ sp needed
+ 250 004c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 251              	.L12:
+ 252 004e 00BF     		.align	2
+ 253              	.L11:
+ 254 0050 00000240 		.word	1073872896
+ 255 0054 00000000 		.word	tim2_handle_typedef
+ 256              		.cfi_endproc
+ 257              	.LFE126:
+ 259              		.section	.text.TPAD_GetValue,"ax",%progbits
+ 260              		.align	1
+ 261              		.global	TPAD_GetValue
+ 262              		.syntax unified
+ 263              		.thumb
+ 264              		.thumb_func
+ 265              		.fpu fpv4-sp-d16
+ 267              	TPAD_GetValue:
+ 268              	.LFB127:
+  61:Src/bsp_tpad.c **** 
+  62:Src/bsp_tpad.c **** uint16_t TPAD_GetValue(void)
+  63:Src/bsp_tpad.c **** {
+ 269              		.loc 1 63 0
+ 270              		.cfi_startproc
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273 0000 08B5     		push	{r3, lr}
+ 274              	.LCFI9:
+ 275              		.cfi_def_cfa_offset 8
+ 276              		.cfi_offset 3, -8
+ 277              		.cfi_offset 14, -4
+  64:Src/bsp_tpad.c **** 		TPAD_Reset();
+ 278              		.loc 1 64 0
+ 279 0002 FFF7FEFF 		bl	TPAD_Reset
+ 280              	.LVL10:
+ 281              	.L14:
+  65:Src/bsp_tpad.c ****     while(__HAL_TIM_GET_FLAG(&tim2_handle_typedef , TIM_FLAG_CC1)==RESET) //µÈ´ý²¶»ñÉÏÉýÑØ
+ 282              		.loc 1 65 0
+ 283 0006 094B     		ldr	r3, .L19
+ 284 0008 1B68     		ldr	r3, [r3]
+ARM GAS  /tmp/ccd4Y3ha.s 			page 7
+
+
+ 285 000a 1A69     		ldr	r2, [r3, #16]
+ 286 000c 12F0020F 		tst	r2, #2
+ 287 0010 06D1     		bne	.L18
+  66:Src/bsp_tpad.c ****     {
+  67:Src/bsp_tpad.c ****         if(__HAL_TIM_GET_COUNTER(&tim2_handle_typedef)>0XFFFFFFFF-500) 
+ 288              		.loc 1 67 0
+ 289 0012 5A6A     		ldr	r2, [r3, #36]
+ 290 0014 12F5FA7F 		cmn	r2, #500
+ 291 0018 F5D3     		bcc	.L14
+  68:Src/bsp_tpad.c **** 					return __HAL_TIM_GET_COUNTER(&tim2_handle_typedef);//³¬Ê±ÁË£¬Ö±½Ó·µ»ØCNTµÄÖµ
+ 292              		.loc 1 68 0
+ 293 001a 586A     		ldr	r0, [r3, #36]
+ 294 001c 80B2     		uxth	r0, r0
+ 295 001e 08BD     		pop	{r3, pc}
+ 296              	.L18:
+  69:Src/bsp_tpad.c ****     }
+  70:Src/bsp_tpad.c ****     return HAL_TIM_ReadCapturedValue(&tim2_handle_typedef, TIM_CHANNEL_1);
+ 297              		.loc 1 70 0
+ 298 0020 0021     		movs	r1, #0
+ 299 0022 0248     		ldr	r0, .L19
+ 300 0024 FFF7FEFF 		bl	HAL_TIM_ReadCapturedValue
+ 301              	.LVL11:
+ 302 0028 80B2     		uxth	r0, r0
+  71:Src/bsp_tpad.c **** 
+  72:Src/bsp_tpad.c **** }
+ 303              		.loc 1 72 0
+ 304 002a 08BD     		pop	{r3, pc}
+ 305              	.L20:
+ 306              		.align	2
+ 307              	.L19:
+ 308 002c 00000000 		.word	tim2_handle_typedef
+ 309              		.cfi_endproc
+ 310              	.LFE127:
+ 312              		.section	.text.TPAD_Get_MaxVal,"ax",%progbits
+ 313              		.align	1
+ 314              		.global	TPAD_Get_MaxVal
+ 315              		.syntax unified
+ 316              		.thumb
+ 317              		.thumb_func
+ 318              		.fpu fpv4-sp-d16
+ 320              	TPAD_Get_MaxVal:
+ 321              	.LFB128:
+  73:Src/bsp_tpad.c **** 
+  74:Src/bsp_tpad.c **** uint16_t TPAD_Get_MaxVal(uint8_t n)
+  75:Src/bsp_tpad.c **** { 
+ 322              		.loc 1 75 0
+ 323              		.cfi_startproc
+ 324              		@ args = 0, pretend = 0, frame = 0
+ 325              		@ frame_needed = 0, uses_anonymous_args = 0
+ 326              	.LVL12:
+ 327 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 328              	.LCFI10:
+ 329              		.cfi_def_cfa_offset 24
+ 330              		.cfi_offset 3, -24
+ 331              		.cfi_offset 4, -20
+ 332              		.cfi_offset 5, -16
+ 333              		.cfi_offset 6, -12
+ARM GAS  /tmp/ccd4Y3ha.s 			page 8
+
+
+ 334              		.cfi_offset 7, -8
+ 335              		.cfi_offset 14, -4
+ 336              	.LVL13:
+  76:Src/bsp_tpad.c **** 	uint16_t temp=0; 
+  77:Src/bsp_tpad.c **** 	uint16_t res=0; 
+  78:Src/bsp_tpad.c **** 	uint8_t lcntnum=n*2/3;//ÖÁÉÙ2/3*nµÄÓÐÐ§¸ö´¥Ãþ,²ÅËãÓÐÐ§
+ 337              		.loc 1 78 0
+ 338 0002 4600     		lsls	r6, r0, #1
+ 339 0004 0F4B     		ldr	r3, .L31
+ 340 0006 83FB0636 		smull	r3, r6, r3, r6
+ 341 000a F6B2     		uxtb	r6, r6
+ 342              	.LVL14:
+  79:Src/bsp_tpad.c **** 	uint8_t okcnt=0;
+ 343              		.loc 1 79 0
+ 344 000c 0024     		movs	r4, #0
+  77:Src/bsp_tpad.c **** 	uint8_t lcntnum=n*2/3;//ÖÁÉÙ2/3*nµÄÓÐÐ§¸ö´¥Ãþ,²ÅËãÓÐÐ§
+ 345              		.loc 1 77 0
+ 346 000e 2546     		mov	r5, r4
+  80:Src/bsp_tpad.c **** 	while(n--)
+ 347              		.loc 1 80 0
+ 348 0010 00E0     		b	.L22
+ 349              	.LVL15:
+ 350              	.L24:
+  81:Src/bsp_tpad.c **** 	{
+  82:Src/bsp_tpad.c **** 		temp = TPAD_GetValue();//µÃµ½Ò»´ÎÖµ
+  83:Src/bsp_tpad.c **** 		if(temp >(g_default_value*5/4))
+  84:Src/bsp_tpad.c **** 				okcnt++;//ÖÁÉÙ´óÓÚÄ¬ÈÏÖµµÄ5/4²ÅËãÓÐÐ§
+  85:Src/bsp_tpad.c **** 		if(temp>res)res=temp;
+ 351              		.loc 1 85 0
+ 352 0012 3846     		mov	r0, r7
+ 353              	.LVL16:
+ 354              	.L22:
+  80:Src/bsp_tpad.c **** 	while(n--)
+ 355              		.loc 1 80 0
+ 356 0014 431E     		subs	r3, r0, #1
+ 357 0016 DFB2     		uxtb	r7, r3
+ 358              	.LVL17:
+ 359 0018 70B1     		cbz	r0, .L30
+  82:Src/bsp_tpad.c **** 		if(temp >(g_default_value*5/4))
+ 360              		.loc 1 82 0
+ 361 001a FFF7FEFF 		bl	TPAD_GetValue
+ 362              	.LVL18:
+  83:Src/bsp_tpad.c **** 				okcnt++;//ÖÁÉÙ´óÓÚÄ¬ÈÏÖµµÄ5/4²ÅËãÓÐÐ§
+ 363              		.loc 1 83 0
+ 364 001e 0A4B     		ldr	r3, .L31+4
+ 365 0020 1B68     		ldr	r3, [r3]
+ 366 0022 03EB8303 		add	r3, r3, r3, lsl #2
+ 367 0026 B0EB930F 		cmp	r0, r3, lsr #2
+ 368 002a 01D9     		bls	.L23
+  84:Src/bsp_tpad.c **** 		if(temp>res)res=temp;
+ 369              		.loc 1 84 0
+ 370 002c 0134     		adds	r4, r4, #1
+ 371              	.LVL19:
+ 372 002e E4B2     		uxtb	r4, r4
+ 373              	.LVL20:
+ 374              	.L23:
+ 375              		.loc 1 85 0
+ARM GAS  /tmp/ccd4Y3ha.s 			page 9
+
+
+ 376 0030 8542     		cmp	r5, r0
+ 377 0032 EED2     		bcs	.L24
+ 378 0034 0546     		mov	r5, r0
+ 379              	.LVL21:
+ 380 0036 ECE7     		b	.L24
+ 381              	.LVL22:
+ 382              	.L30:
+  86:Src/bsp_tpad.c **** 	}
+  87:Src/bsp_tpad.c **** 	if(okcnt>=lcntnum)
+ 383              		.loc 1 87 0
+ 384 0038 B442     		cmp	r4, r6
+ 385 003a 00D2     		bcs	.L26
+  88:Src/bsp_tpad.c **** 			return res;//ÖÁÉÙ2/3µÄ¸ÅÂÊ,Òª´óÓÚÄ¬ÈÏÖµµÄ5/4²ÅËãÓÐÐ§
+  89:Src/bsp_tpad.c **** 	else return 0;
+ 386              		.loc 1 89 0
+ 387 003c 0025     		movs	r5, #0
+ 388              	.LVL23:
+ 389              	.L26:
+  90:Src/bsp_tpad.c **** }  
+ 390              		.loc 1 90 0
+ 391 003e 2846     		mov	r0, r5
+ 392 0040 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 393              	.LVL24:
+ 394              	.L32:
+ 395 0042 00BF     		.align	2
+ 396              	.L31:
+ 397 0044 56555555 		.word	1431655766
+ 398 0048 00000000 		.word	g_default_value
+ 399              		.cfi_endproc
+ 400              	.LFE128:
+ 402              		.section	.text.TPAD_Init,"ax",%progbits
+ 403              		.align	1
+ 404              		.global	TPAD_Init
+ 405              		.syntax unified
+ 406              		.thumb
+ 407              		.thumb_func
+ 408              		.fpu fpv4-sp-d16
+ 410              	TPAD_Init:
+ 411              	.LFB129:
+  91:Src/bsp_tpad.c **** 
+  92:Src/bsp_tpad.c **** uint8_t TPAD_Init(void)
+  93:Src/bsp_tpad.c **** {
+ 412              		.loc 1 93 0
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 24
+ 415              		@ frame_needed = 0, uses_anonymous_args = 0
+ 416 0000 30B5     		push	{r4, r5, lr}
+ 417              	.LCFI11:
+ 418              		.cfi_def_cfa_offset 12
+ 419              		.cfi_offset 4, -12
+ 420              		.cfi_offset 5, -8
+ 421              		.cfi_offset 14, -4
+ 422 0002 87B0     		sub	sp, sp, #28
+ 423              	.LCFI12:
+ 424              		.cfi_def_cfa_offset 40
+  94:Src/bsp_tpad.c **** 	uint16_t buf[10];
+  95:Src/bsp_tpad.c **** 	uint16_t temp;
+ARM GAS  /tmp/ccd4Y3ha.s 			page 10
+
+
+  96:Src/bsp_tpad.c **** 	uint8_t j,i;
+  97:Src/bsp_tpad.c **** 	TIM2_Capture_CH1_Init();//ÉèÖÃ·ÖÆµÏµÊý
+ 425              		.loc 1 97 0
+ 426 0004 FFF7FEFF 		bl	TIM2_Capture_CH1_Init
+ 427              	.LVL25:
+  98:Src/bsp_tpad.c **** 	for(i=0;i<10;i++)//Á¬Ðø¶ÁÈ¡10´Î
+ 428              		.loc 1 98 0
+ 429 0008 0024     		movs	r4, #0
+ 430 000a 0BE0     		b	.L34
+ 431              	.LVL26:
+ 432              	.L35:
+  99:Src/bsp_tpad.c **** 	{				 
+ 100:Src/bsp_tpad.c **** 		buf[i]=TPAD_GetValue();
+ 433              		.loc 1 100 0 discriminator 3
+ 434 000c FFF7FEFF 		bl	TPAD_GetValue
+ 435              	.LVL27:
+ 436 0010 06AB     		add	r3, sp, #24
+ 437 0012 03EB4403 		add	r3, r3, r4, lsl #1
+ 438 0016 23F8140C 		strh	r0, [r3, #-20]	@ movhi
+ 101:Src/bsp_tpad.c **** 		HAL_Delay(10);	    
+ 439              		.loc 1 101 0 discriminator 3
+ 440 001a 0A20     		movs	r0, #10
+ 441 001c FFF7FEFF 		bl	HAL_Delay
+ 442              	.LVL28:
+  98:Src/bsp_tpad.c **** 	for(i=0;i<10;i++)//Á¬Ðø¶ÁÈ¡10´Î
+ 443              		.loc 1 98 0 discriminator 3
+ 444 0020 0134     		adds	r4, r4, #1
+ 445              	.LVL29:
+ 446 0022 E4B2     		uxtb	r4, r4
+ 447              	.LVL30:
+ 448              	.L34:
+  98:Src/bsp_tpad.c **** 	for(i=0;i<10;i++)//Á¬Ðø¶ÁÈ¡10´Î
+ 449              		.loc 1 98 0 is_stmt 0 discriminator 1
+ 450 0024 092C     		cmp	r4, #9
+ 451 0026 F1D9     		bls	.L35
+ 452 0028 0020     		movs	r0, #0
+ 453 002a 1BE0     		b	.L36
+ 454              	.LVL31:
+ 455              	.L38:
+ 102:Src/bsp_tpad.c **** 	}				    
+ 103:Src/bsp_tpad.c **** 	for(i=0;i<9;i++)//ÅÅÐò
+ 104:Src/bsp_tpad.c **** 	{
+ 105:Src/bsp_tpad.c **** 		for(j=i+1;j<10;j++)
+ 456              		.loc 1 105 0 is_stmt 1 discriminator 2
+ 457 002c 0133     		adds	r3, r3, #1
+ 458              	.LVL32:
+ 459 002e DBB2     		uxtb	r3, r3
+ 460              	.LVL33:
+ 461              	.L37:
+ 462              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 463 0030 092B     		cmp	r3, #9
+ 464 0032 16D8     		bhi	.L46
+ 106:Src/bsp_tpad.c **** 		{
+ 107:Src/bsp_tpad.c **** 			if(buf[i]>buf[j])//ÉýÐòÅÅÁÐ
+ 465              		.loc 1 107 0 is_stmt 1
+ 466 0034 06AA     		add	r2, sp, #24
+ 467 0036 02EB4002 		add	r2, r2, r0, lsl #1
+ARM GAS  /tmp/ccd4Y3ha.s 			page 11
+
+
+ 468 003a 32F8142C 		ldrh	r2, [r2, #-20]
+ 469 003e 06A9     		add	r1, sp, #24
+ 470 0040 01EB4301 		add	r1, r1, r3, lsl #1
+ 471 0044 31F8141C 		ldrh	r1, [r1, #-20]
+ 472 0048 8A42     		cmp	r2, r1
+ 473 004a EFD9     		bls	.L38
+ 474              	.LVL34:
+ 108:Src/bsp_tpad.c **** 			{
+ 109:Src/bsp_tpad.c **** 				temp=buf[i];
+ 110:Src/bsp_tpad.c **** 				buf[i]=buf[j];
+ 475              		.loc 1 110 0
+ 476 004c 06AC     		add	r4, sp, #24
+ 477 004e 04EB4004 		add	r4, r4, r0, lsl #1
+ 478 0052 24F8141C 		strh	r1, [r4, #-20]	@ movhi
+ 111:Src/bsp_tpad.c **** 				buf[j]=temp;
+ 479              		.loc 1 111 0
+ 480 0056 06A9     		add	r1, sp, #24
+ 481 0058 01EB4301 		add	r1, r1, r3, lsl #1
+ 482 005c 21F8142C 		strh	r2, [r1, #-20]	@ movhi
+ 483 0060 E4E7     		b	.L38
+ 484              	.LVL35:
+ 485              	.L46:
+ 103:Src/bsp_tpad.c **** 	{
+ 486              		.loc 1 103 0
+ 487 0062 2846     		mov	r0, r5
+ 488              	.LVL36:
+ 489              	.L36:
+ 103:Src/bsp_tpad.c **** 	{
+ 490              		.loc 1 103 0 is_stmt 0 discriminator 1
+ 491 0064 0828     		cmp	r0, #8
+ 492 0066 03D8     		bhi	.L47
+ 105:Src/bsp_tpad.c **** 		{
+ 493              		.loc 1 105 0 is_stmt 1
+ 494 0068 451C     		adds	r5, r0, #1
+ 495 006a EDB2     		uxtb	r5, r5
+ 496              	.LVL37:
+ 497 006c 2B46     		mov	r3, r5
+ 498 006e DFE7     		b	.L37
+ 499              	.LVL38:
+ 500              	.L47:
+ 501 0070 0223     		movs	r3, #2
+ 502 0072 0022     		movs	r2, #0
+ 503 0074 08E0     		b	.L41
+ 504              	.LVL39:
+ 505              	.L42:
+ 112:Src/bsp_tpad.c **** 			}
+ 113:Src/bsp_tpad.c **** 		}
+ 114:Src/bsp_tpad.c **** 	}
+ 115:Src/bsp_tpad.c **** 	temp=0;
+ 116:Src/bsp_tpad.c **** 	for(i=2;i<8;i++)temp+=buf[i];//È¡ÖÐ¼äµÄ8¸öÊý¾Ý½øÐÐÆ½¾ù
+ 506              		.loc 1 116 0 discriminator 3
+ 507 0076 06A9     		add	r1, sp, #24
+ 508 0078 01EB4301 		add	r1, r1, r3, lsl #1
+ 509 007c 31F8141C 		ldrh	r1, [r1, #-20]
+ 510 0080 0A44     		add	r2, r2, r1
+ 511              	.LVL40:
+ 512 0082 92B2     		uxth	r2, r2
+ARM GAS  /tmp/ccd4Y3ha.s 			page 12
+
+
+ 513              	.LVL41:
+ 514 0084 0133     		adds	r3, r3, #1
+ 515              	.LVL42:
+ 516 0086 DBB2     		uxtb	r3, r3
+ 517              	.LVL43:
+ 518              	.L41:
+ 519              		.loc 1 116 0 is_stmt 0 discriminator 1
+ 520 0088 072B     		cmp	r3, #7
+ 521 008a F4D9     		bls	.L42
+ 117:Src/bsp_tpad.c **** 	g_default_value=temp/6;
+ 522              		.loc 1 117 0 is_stmt 1
+ 523 008c 0849     		ldr	r1, .L49
+ 524 008e A1FB0232 		umull	r3, r2, r1, r2
+ 525              	.LVL44:
+ 526 0092 C2F38F01 		ubfx	r1, r2, #2, #16
+ 527 0096 074C     		ldr	r4, .L49+4
+ 528 0098 2160     		str	r1, [r4]
+ 118:Src/bsp_tpad.c **** 	printf("tpad_default_val:%d\r\n",(int)g_default_value);	
+ 529              		.loc 1 118 0
+ 530 009a 0748     		ldr	r0, .L49+8
+ 531 009c FFF7FEFF 		bl	printf
+ 532              	.LVL45:
+ 119:Src/bsp_tpad.c **** 	if(g_default_value > 0xFFFFFFFF/2)
+ 533              		.loc 1 119 0
+ 534 00a0 2368     		ldr	r3, [r4]
+ 535 00a2 002B     		cmp	r3, #0
+ 536 00a4 02DB     		blt	.L48
+ 120:Src/bsp_tpad.c **** 			return 1;//³õÊ¼»¯Óöµ½³¬¹ýTPAD_ARR_MAX_VAL/2µÄÊýÖµ,²»Õý³£!
+ 121:Src/bsp_tpad.c **** 	return 0;				
+ 537              		.loc 1 121 0
+ 538 00a6 0020     		movs	r0, #0
+ 539              	.L43:
+ 122:Src/bsp_tpad.c **** }
+ 540              		.loc 1 122 0
+ 541 00a8 07B0     		add	sp, sp, #28
+ 542              	.LCFI13:
+ 543              		.cfi_remember_state
+ 544              		.cfi_def_cfa_offset 12
+ 545              		@ sp needed
+ 546 00aa 30BD     		pop	{r4, r5, pc}
+ 547              	.L48:
+ 548              	.LCFI14:
+ 549              		.cfi_restore_state
+ 120:Src/bsp_tpad.c **** 			return 1;//³õÊ¼»¯Óöµ½³¬¹ýTPAD_ARR_MAX_VAL/2µÄÊýÖµ,²»Õý³£!
+ 550              		.loc 1 120 0
+ 551 00ac 0120     		movs	r0, #1
+ 552 00ae FBE7     		b	.L43
+ 553              	.L50:
+ 554              		.align	2
+ 555              	.L49:
+ 556 00b0 ABAAAAAA 		.word	-1431655765
+ 557 00b4 00000000 		.word	g_default_value
+ 558 00b8 00000000 		.word	.LC0
+ 559              		.cfi_endproc
+ 560              	.LFE129:
+ 562              		.section	.text.TPAD_Scan,"ax",%progbits
+ 563              		.align	1
+ARM GAS  /tmp/ccd4Y3ha.s 			page 13
+
+
+ 564              		.global	TPAD_Scan
+ 565              		.syntax unified
+ 566              		.thumb
+ 567              		.thumb_func
+ 568              		.fpu fpv4-sp-d16
+ 570              	TPAD_Scan:
+ 571              	.LFB130:
+ 123:Src/bsp_tpad.c **** //É¨Ãè´¥Ãþ°´¼ü
+ 124:Src/bsp_tpad.c **** //mode:0,²»Ö§³ÖÁ¬Ðø´¥·¢(°´ÏÂÒ»´Î±ØÐëËÉ¿ª²ÅÄÜ°´ÏÂÒ»´Î);1,Ö§³ÖÁ¬Ðø´¥·¢(¿ÉÒÔÒ»Ö±°´ÏÂ)
+ 125:Src/bsp_tpad.c **** //·µ»ØÖµ:0,Ã»ÓÐ°´ÏÂ;1,ÓÐ°´ÏÂ;	
+ 126:Src/bsp_tpad.c **** uint8_t TPAD_Scan(uint8_t mode)
+ 127:Src/bsp_tpad.c **** {
+ 572              		.loc 1 127 0
+ 573              		.cfi_startproc
+ 574              		@ args = 0, pretend = 0, frame = 0
+ 575              		@ frame_needed = 0, uses_anonymous_args = 0
+ 576              	.LVL46:
+ 577 0000 10B5     		push	{r4, lr}
+ 578              	.LCFI15:
+ 579              		.cfi_def_cfa_offset 8
+ 580              		.cfi_offset 4, -8
+ 581              		.cfi_offset 14, -4
+ 582              	.LVL47:
+ 128:Src/bsp_tpad.c **** 
+ 129:Src/bsp_tpad.c **** 	static uint8_t keyen=0;	//0,¿ÉÒÔ¿ªÊ¼¼ì²â;>0,»¹²»ÄÜ¿ªÊ¼¼ì²â	 
+ 130:Src/bsp_tpad.c **** 	uint8_t res=0;
+ 131:Src/bsp_tpad.c **** 	uint8_t sample=3;	//Ä¬ÈÏ²ÉÑù´ÎÊýÎª3´Î	 
+ 132:Src/bsp_tpad.c **** 	uint16_t rval;
+ 133:Src/bsp_tpad.c **** 	if(mode)
+ 583              		.loc 1 133 0
+ 584 0002 F8B1     		cbz	r0, .L56
+ 585              	.LVL48:
+ 134:Src/bsp_tpad.c **** 	{
+ 135:Src/bsp_tpad.c **** 		sample=6;	//Ö§³ÖÁ¬°´µÄÊ±ºò£¬ÉèÖÃ²ÉÑù´ÎÊýÎª6´Î
+ 136:Src/bsp_tpad.c **** 		keyen=0;	//Ö§³ÖÁ¬°´	  
+ 586              		.loc 1 136 0
+ 587 0004 0022     		movs	r2, #0
+ 588 0006 174B     		ldr	r3, .L61
+ 589 0008 1A70     		strb	r2, [r3]
+ 135:Src/bsp_tpad.c **** 		keyen=0;	//Ö§³ÖÁ¬°´	  
+ 590              		.loc 1 135 0
+ 591 000a 0620     		movs	r0, #6
+ 592              	.LVL49:
+ 593              	.L52:
+ 137:Src/bsp_tpad.c **** 	}
+ 138:Src/bsp_tpad.c **** 	rval=TPAD_Get_MaxVal(sample); 
+ 594              		.loc 1 138 0
+ 595 000c FFF7FEFF 		bl	TPAD_Get_MaxVal
+ 596              	.LVL50:
+ 139:Src/bsp_tpad.c **** 	if( rval>(g_default_value*4/3) &&
+ 597              		.loc 1 139 0
+ 598 0010 154B     		ldr	r3, .L61+4
+ 599 0012 1B68     		ldr	r3, [r3]
+ 600 0014 9A00     		lsls	r2, r3, #2
+ 601 0016 1549     		ldr	r1, .L61+8
+ 602 0018 A1FB0212 		umull	r1, r2, r1, r2
+ 603 001c B0EB520F 		cmp	r0, r2, lsr #1
+ARM GAS  /tmp/ccd4Y3ha.s 			page 14
+
+
+ 604 0020 14D9     		bls	.L57
+ 140:Src/bsp_tpad.c **** 		  rval<(10*g_default_value))//´óÓÚtpad_default_val+(1/3)*tpad_default_val,ÇÒÐ¡ÓÚ10±¶tpad_default_
+ 605              		.loc 1 140 0 discriminator 1
+ 606 0022 03EB8303 		add	r3, r3, r3, lsl #2
+ 607 0026 5A00     		lsls	r2, r3, #1
+ 139:Src/bsp_tpad.c **** 	if( rval>(g_default_value*4/3) &&
+ 608              		.loc 1 139 0 discriminator 1
+ 609 0028 9042     		cmp	r0, r2
+ 610 002a 18D2     		bcs	.L58
+ 141:Src/bsp_tpad.c **** 	{							 
+ 142:Src/bsp_tpad.c **** 		if(keyen==0)
+ 611              		.loc 1 142 0
+ 612 002c 0D4B     		ldr	r3, .L61
+ 613 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 614 0030 53B1     		cbz	r3, .L59
+ 130:Src/bsp_tpad.c **** 	uint8_t sample=3;	//Ä¬ÈÏ²ÉÑù´ÎÊýÎª3´Î	 
+ 615              		.loc 1 130 0
+ 616 0032 0024     		movs	r4, #0
+ 617              	.L54:
+ 618              	.LVL51:
+ 143:Src/bsp_tpad.c **** 				res=1;	//keyen==0,ÓÐÐ§ 
+ 144:Src/bsp_tpad.c **** 		printf("r:%d\r\n",rval);		     	    					   
+ 619              		.loc 1 144 0
+ 620 0034 0146     		mov	r1, r0
+ 621 0036 0E48     		ldr	r0, .L61+12
+ 622              	.LVL52:
+ 623 0038 FFF7FEFF 		bl	printf
+ 624              	.LVL53:
+ 145:Src/bsp_tpad.c **** 				keyen=3;				//ÖÁÉÙÒªÔÙ¹ý3´ÎÖ®ºó²ÅÄÜ°´¼üÓÐÐ§   
+ 625              		.loc 1 145 0
+ 626 003c 0322     		movs	r2, #3
+ 627 003e 094B     		ldr	r3, .L61
+ 628 0040 1A70     		strb	r2, [r3]
+ 629 0042 04E0     		b	.L53
+ 630              	.LVL54:
+ 631              	.L56:
+ 131:Src/bsp_tpad.c **** 	uint16_t rval;
+ 632              		.loc 1 131 0
+ 633 0044 0320     		movs	r0, #3
+ 634              	.LVL55:
+ 635 0046 E1E7     		b	.L52
+ 636              	.LVL56:
+ 637              	.L59:
+ 143:Src/bsp_tpad.c **** 				res=1;	//keyen==0,ÓÐÐ§ 
+ 638              		.loc 1 143 0
+ 639 0048 0124     		movs	r4, #1
+ 640 004a F3E7     		b	.L54
+ 641              	.L57:
+ 130:Src/bsp_tpad.c **** 	uint8_t sample=3;	//Ä¬ÈÏ²ÉÑù´ÎÊýÎª3´Î	 
+ 642              		.loc 1 130 0
+ 643 004c 0024     		movs	r4, #0
+ 644              	.LVL57:
+ 645              	.L53:
+ 146:Src/bsp_tpad.c **** 	} 
+ 147:Src/bsp_tpad.c **** 	if(keyen)
+ 646              		.loc 1 147 0
+ 647 004e 054B     		ldr	r3, .L61
+ARM GAS  /tmp/ccd4Y3ha.s 			page 15
+
+
+ 648 0050 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 649 0052 13B1     		cbz	r3, .L55
+ 148:Src/bsp_tpad.c **** 			keyen--;		   							   		     	    					   
+ 650              		.loc 1 148 0
+ 651 0054 013B     		subs	r3, r3, #1
+ 652 0056 034A     		ldr	r2, .L61
+ 653 0058 1370     		strb	r3, [r2]
+ 654              	.L55:
+ 149:Src/bsp_tpad.c **** 	return res;
+ 150:Src/bsp_tpad.c **** }
+ 655              		.loc 1 150 0
+ 656 005a 2046     		mov	r0, r4
+ 657 005c 10BD     		pop	{r4, pc}
+ 658              	.LVL58:
+ 659              	.L58:
+ 130:Src/bsp_tpad.c **** 	uint8_t sample=3;	//Ä¬ÈÏ²ÉÑù´ÎÊýÎª3´Î	 
+ 660              		.loc 1 130 0
+ 661 005e 0024     		movs	r4, #0
+ 662 0060 F5E7     		b	.L53
+ 663              	.L62:
+ 664 0062 00BF     		.align	2
+ 665              	.L61:
+ 666 0064 00000000 		.word	.LANCHOR0
+ 667 0068 00000000 		.word	g_default_value
+ 668 006c ABAAAAAA 		.word	-1431655765
+ 669 0070 00000000 		.word	.LC1
+ 670              		.cfi_endproc
+ 671              	.LFE130:
+ 673              		.comm	tim2_handle_typedef,60,4
+ 674              		.comm	g_default_value,4,4
+ 675              		.section	.bss.keyen.9003,"aw",%nobits
+ 676              		.set	.LANCHOR0,. + 0
+ 679              	keyen.9003:
+ 680 0000 00       		.space	1
+ 681              		.section	.rodata.TPAD_Init.str1.4,"aMS",%progbits,1
+ 682              		.align	2
+ 683              	.LC0:
+ 684 0000 74706164 		.ascii	"tpad_default_val:%d\015\012\000"
+ 684      5F646566 
+ 684      61756C74 
+ 684      5F76616C 
+ 684      3A25640D 
+ 685              		.section	.rodata.TPAD_Scan.str1.4,"aMS",%progbits,1
+ 686              		.align	2
+ 687              	.LC1:
+ 688 0000 723A2564 		.ascii	"r:%d\015\012\000"
+ 688      0D0A00
+ 689              		.text
+ 690              	.Letext0:
+ 691              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 692              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 693              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 694              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 695              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ 696              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 697              		.file 8 "/usr/include/newlib/sys/_types.h"
+ 698              		.file 9 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ARM GAS  /tmp/ccd4Y3ha.s 			page 16
+
+
+ 699              		.file 10 "/usr/include/newlib/sys/reent.h"
+ 700              		.file 11 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 701              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 702              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 703              		.file 14 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 704              		.file 15 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 705              		.file 16 "/usr/include/newlib/stdio.h"
+ 706              		.file 17 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/ccd4Y3ha.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bsp_tpad.c
+     /tmp/ccd4Y3ha.s:18     .text.TIM2_Capture_CH1_Init:0000000000000000 $t
+     /tmp/ccd4Y3ha.s:25     .text.TIM2_Capture_CH1_Init:0000000000000000 TIM2_Capture_CH1_Init
+     /tmp/ccd4Y3ha.s:89     .text.TIM2_Capture_CH1_Init:0000000000000040 $d
+                            *COM*:000000000000003c tim2_handle_typedef
+     /tmp/ccd4Y3ha.s:94     .text.HAL_TIM_IC_MspInit:0000000000000000 $t
+     /tmp/ccd4Y3ha.s:101    .text.HAL_TIM_IC_MspInit:0000000000000000 HAL_TIM_IC_MspInit
+     /tmp/ccd4Y3ha.s:168    .text.HAL_TIM_IC_MspInit:0000000000000050 $d
+     /tmp/ccd4Y3ha.s:174    .text.TPAD_Reset:0000000000000000 $t
+     /tmp/ccd4Y3ha.s:181    .text.TPAD_Reset:0000000000000000 TPAD_Reset
+     /tmp/ccd4Y3ha.s:254    .text.TPAD_Reset:0000000000000050 $d
+     /tmp/ccd4Y3ha.s:260    .text.TPAD_GetValue:0000000000000000 $t
+     /tmp/ccd4Y3ha.s:267    .text.TPAD_GetValue:0000000000000000 TPAD_GetValue
+     /tmp/ccd4Y3ha.s:308    .text.TPAD_GetValue:000000000000002c $d
+     /tmp/ccd4Y3ha.s:313    .text.TPAD_Get_MaxVal:0000000000000000 $t
+     /tmp/ccd4Y3ha.s:320    .text.TPAD_Get_MaxVal:0000000000000000 TPAD_Get_MaxVal
+     /tmp/ccd4Y3ha.s:397    .text.TPAD_Get_MaxVal:0000000000000044 $d
+                            *COM*:0000000000000004 g_default_value
+     /tmp/ccd4Y3ha.s:403    .text.TPAD_Init:0000000000000000 $t
+     /tmp/ccd4Y3ha.s:410    .text.TPAD_Init:0000000000000000 TPAD_Init
+     /tmp/ccd4Y3ha.s:556    .text.TPAD_Init:00000000000000b0 $d
+     /tmp/ccd4Y3ha.s:563    .text.TPAD_Scan:0000000000000000 $t
+     /tmp/ccd4Y3ha.s:570    .text.TPAD_Scan:0000000000000000 TPAD_Scan
+     /tmp/ccd4Y3ha.s:666    .text.TPAD_Scan:0000000000000064 $d
+     /tmp/ccd4Y3ha.s:679    .bss.keyen.9003:0000000000000000 keyen.9003
+     /tmp/ccd4Y3ha.s:680    .bss.keyen.9003:0000000000000000 $d
+     /tmp/ccd4Y3ha.s:682    .rodata.TPAD_Init.str1.4:0000000000000000 $d
+     /tmp/ccd4Y3ha.s:686    .rodata.TPAD_Scan.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+HAL_TIM_IC_Init
+HAL_TIM_IC_ConfigChannel
+HAL_TIM_IC_Start
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_Delay
+HAL_TIM_ReadCapturedValue
+printf
