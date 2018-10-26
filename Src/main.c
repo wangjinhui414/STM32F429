@@ -38,6 +38,7 @@
 #include "bsp_usart.h"
 #include "bsp_tim.h"
 #include "bsp_tpad.h"
+#include "bsp_tftlcd.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -66,6 +67,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 //	uint8_t dir = 0;
 //	uint32_t cout = 300;
+  uint8_t sbuf[20]={0};
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -83,12 +85,18 @@ int main(void)
   KEY_Init();
   //LED_Lignt1();
   USART2_Init();
+  printf("***********SYSTEM INIT***********\n");
   TPAD_Init();
-
+  LCD_Init();
   //TIM3_Init_Timer();
   //TIM3_Init_Pwm_CH4();
   //IWDG_Init();
-  printf("***********SYSCLK***********\n");
+  sprintf((char*)sbuf,"LCD ID:%04X",lcddev.id);//将LCD ID打印到lcd_id数组。
+  LCD_ShowString(10,40,240,32,32,"Apollo STM32F4/F7"); 	
+  LCD_ShowString(10,80,240,24,24,"TFTLCD TEST");
+  LCD_ShowString(10,110,240,16,16,"ATOM@ALIENTEK");
+  LCD_ShowString(10,130,240,16,16,sbuf);		//显示LCD ID	      					 
+  LCD_ShowString(10,150,240,12,12,"2018/10/6");
 
   /* USER CODE END 2 */
   /* Infinite loop */

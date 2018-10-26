@@ -6,16 +6,16 @@ TIM_HandleTypeDef tim2_handle_typedef;
 
 void TIM2_Capture_CH1_Init(void)
 {
-		TIM_IC_InitTypeDef tim2_ch1_config;  
+	TIM_IC_InitTypeDef tim2_ch1_config;  
+
+	tim2_handle_typedef.Instance = TIM2;
+	tim2_handle_typedef.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	tim2_handle_typedef.Init.CounterMode = TIM_COUNTERMODE_UP;
+	tim2_handle_typedef.Init.Prescaler = 1;
+	tim2_handle_typedef.Init.Period = 0xFFFFFFFF;
+	HAL_TIM_IC_Init(&tim2_handle_typedef);
 	
-		tim2_handle_typedef.Instance = TIM2;
-		tim2_handle_typedef.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-		tim2_handle_typedef.Init.CounterMode = TIM_COUNTERMODE_UP;
-		tim2_handle_typedef.Init.Prescaler = 1;
-		tim2_handle_typedef.Init.Period = 0xFFFFFFFF;
-		HAL_TIM_IC_Init(&tim2_handle_typedef);
-		
-		tim2_ch1_config.ICPolarity=TIM_ICPOLARITY_RISING;  
+	tim2_ch1_config.ICPolarity=TIM_ICPOLARITY_RISING;  
     tim2_ch1_config.ICSelection=TIM_ICSELECTION_DIRECTTI;
     tim2_ch1_config.ICPrescaler=TIM_ICPSC_DIV1;        
     tim2_ch1_config.ICFilter=0;                          

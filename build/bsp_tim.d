@@ -1,4 +1,4 @@
-build/bsp_tim.o: Src/bsp_tim.c Src/bsp_tim.h \
+build/bsp_tim.o: Src/bsp_tim.c Inc/bsp_tim.h \
  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h \
  Drivers/CMSIS/Include/core_cm4.h Drivers/CMSIS/Include/core_cmInstr.h \
@@ -19,6 +19,9 @@ build/bsp_tim.o: Src/bsp_tim.c Src/bsp_tim.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sram.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fmc.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sdram.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
@@ -26,7 +29,7 @@ build/bsp_tim.o: Src/bsp_tim.c Src/bsp_tim.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_usart.h
 
-Src/bsp_tim.h:
+Inc/bsp_tim.h:
 
 Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 
@@ -73,6 +76,12 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
+
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sram.h:
+
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fmc.h:
+
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sdram.h:
 
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 
