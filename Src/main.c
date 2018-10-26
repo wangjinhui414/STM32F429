@@ -39,6 +39,7 @@
 #include "bsp_tim.h"
 #include "bsp_tpad.h"
 #include "bsp_tftlcd.h"
+#include "bsp_sdram.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -67,7 +68,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 //	uint8_t dir = 0;
 //	uint32_t cout = 300;
-  uint8_t sbuf[20]={0};
+  char sbuf[20]={0};
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -88,6 +89,7 @@ int main(void)
   printf("***********SYSTEM INIT***********\n");
   TPAD_Init();
   LCD_Init();
+  SDRAM_Init();
   //TIM3_Init_Timer();
   //TIM3_Init_Pwm_CH4();
   //IWDG_Init();
@@ -121,6 +123,20 @@ int main(void)
             HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
             printf("LED_OFF\n");
         }			
+      }
+      else if( strncmp((char*)pcUsart2RX.pcRxbuf,"SDRAM_TEST",strlen("SDRAM_TEST"))==0)
+      {
+          fsmc_sdram_test(30,170);//测试SRAM容量
+      }
+      else if(strncmp((char*)pcUsart2RX.pcRxbuf,"SDRAM_PRINT",strlen("SDRAM_PRINT"))==0)
+      {
+           char buf[100]="SDRAM TEST STRING!!";
+           printf("Write:%s\n",buf);
+           FMC_SDRAM_WriteBuffer(buf,0,strlen(buf));
+           memset(buf,0,100);
+           FMC_SDRAM_ReadBuffer(buf,0,100);
+           printf("Read:%s\n",buf);
+
       }
       ResetUartrRx(&pcUsart2RX);
     }
