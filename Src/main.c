@@ -40,6 +40,7 @@
 #include "bsp_tpad.h"
 #include "bsp_tftlcd.h"
 #include "bsp_sdram.h"
+
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -90,6 +91,7 @@ int main(void)
   TPAD_Init();
   LCD_Init();
   SDRAM_Init();
+  RNG_Init();
   //TIM3_Init_Timer();
   //TIM3_Init_Pwm_CH4();
   //IWDG_Init();
@@ -132,27 +134,27 @@ int main(void)
       {
            char buf[100]="SDRAM TEST STRING!!";
            printf("Write:%s\n",buf);
-           FMC_SDRAM_WriteBuffer(buf,0,strlen(buf));
+           FMC_SDRAM_WriteBuffer((uint8_t*)buf,0,strlen(buf));
            memset(buf,0,100);
-           FMC_SDRAM_ReadBuffer(buf,0,100);
-           printf("Read:%s\n",buf);
-
+           FMC_SDRAM_ReadBuffer((uint8_t*)buf,0,100);
+           printf("Read:%s\n",buf);    
       }
       ResetUartrRx(&pcUsart2RX);
     }
 
     if(TPAD_Scan(0))
     {
+      char snumbuf[20];
+      sprintf(snumbuf,"rondom:%03d",RNG_Get_RandomRange(0,100));
+      LCD_ShowString(10,170,240,32,32,snumbuf);
       if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
       {
         HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
-        printf("LED_ON\n");
       }
       else
       {
-        HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
-        printf("LED_OFF\n");
-      }				
+          HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+      }		        	
     }
     HAL_Delay(10);
 //			if(!dir)	cout--;

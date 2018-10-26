@@ -22,5 +22,9 @@ uint8_t KEY_Scan(void);
 
 void IWDG_Init(void);
 
+
+void RNG_Init(void);
+uint32_t RNG_Get_RandomNum(void);
+int RNG_Get_RandomRange(int min,int max);
 #endif
 
