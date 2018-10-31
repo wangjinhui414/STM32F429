@@ -1657,3 +1657,33 @@ void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t
         p++;
     }  
 }
+
+//显示数字,高位为0,还是显示
+//x,y:起点坐标
+//num:数值(0~999999999);	 
+//len:长度(即要显示的位数)
+//size:字体大小
+//mode:
+//[7]:0,不填充;1,填充0.
+//[6:1]:保留
+//[0]:0,非叠加显示;1,叠加显示.
+void LCD_ShowxNum(uint16_t x,uint16_t y,uint32_t num,uint8_t len,uint8_t size,uint8_t mode)
+{  
+	uint8_t t,temp;
+	uint8_t enshow=0;						   
+	for(t=0;t<len;t++)
+	{
+		temp=(num/LCD_Pow(10,len-t-1))%10;
+		if(enshow==0&&t<(len-1))
+		{
+			if(temp==0)
+			{
+				if(mode&0X80)LCD_ShowChar(x+(size/2)*t,y,'0',size,mode&0X01);  
+				else LCD_ShowChar(x+(size/2)*t,y,' ',size,mode&0X01);  
+ 				continue;
+			}else enshow=1; 
+		 	 
+		}
+	 	LCD_ShowChar(x+(size/2)*t,y,temp+'0',size,mode&0X01); 
+	}
+} 
