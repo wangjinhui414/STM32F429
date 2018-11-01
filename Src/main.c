@@ -40,7 +40,7 @@
 #include "bsp_tpad.h"
 #include "bsp_tftlcd.h"
 #include "bsp_sdram.h"
-
+#include "bsp_adc.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -92,6 +92,7 @@ int main(void)
   LCD_Init();
   SDRAM_Init();
   RNG_Init();
+  ADC_Init();
   //TIM3_Init_Timer();
   //TIM3_Init_Pwm_CH4();
   //IWDG_Init();

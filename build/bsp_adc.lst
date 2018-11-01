@@ -1,0 +1,192 @@
+ARM GAS  /tmp/ccF2ERaR.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"bsp_adc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.ADC_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	ADC_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	ADC_Init:
+  26              	.LFB124:
+  27              		.file 1 "Src/bsp_adc.c"
+   1:Src/bsp_adc.c **** #include "bsp_adc.h"
+   2:Src/bsp_adc.c **** 
+   3:Src/bsp_adc.c **** ADC_HandleTypeDef adc_handle_typedef;
+   4:Src/bsp_adc.c **** 
+   5:Src/bsp_adc.c **** void ADC_Init(void)
+   6:Src/bsp_adc.c **** {
+  28              		.loc 1 6 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+   7:Src/bsp_adc.c ****     adc_handle_typedef.Instance=ADC1;
+  37              		.loc 1 7 0
+  38 0002 0C48     		ldr	r0, .L3
+  39 0004 0C4B     		ldr	r3, .L3+4
+  40 0006 0360     		str	r3, [r0]
+   8:Src/bsp_adc.c ****     adc_handle_typedef.Init.ClockPrescaler=ADC_CLOCK_SYNC_PCLK_DIV4;   //4分频，ADCCLK=PCLK2/4=9
+  41              		.loc 1 8 0
+  42 0008 4FF48033 		mov	r3, #65536
+  43 000c 4360     		str	r3, [r0, #4]
+   9:Src/bsp_adc.c ****     adc_handle_typedef.Init.Resolution=ADC_RESOLUTION_12B;             //12位模式
+  44              		.loc 1 9 0
+  45 000e 0023     		movs	r3, #0
+  46 0010 8360     		str	r3, [r0, #8]
+  10:Src/bsp_adc.c ****     adc_handle_typedef.Init.DataAlign=ADC_DATAALIGN_RIGHT;             //右对齐
+  47              		.loc 1 10 0
+  48 0012 C360     		str	r3, [r0, #12]
+ARM GAS  /tmp/ccF2ERaR.s 			page 2
+
+
+  11:Src/bsp_adc.c ****     adc_handle_typedef.Init.ScanConvMode=DISABLE;                      //非扫描模式
+  49              		.loc 1 11 0
+  50 0014 0361     		str	r3, [r0, #16]
+  12:Src/bsp_adc.c ****     adc_handle_typedef.Init.EOCSelection=DISABLE;                      //关闭EOC中断
+  51              		.loc 1 12 0
+  52 0016 4361     		str	r3, [r0, #20]
+  13:Src/bsp_adc.c ****     adc_handle_typedef.Init.ContinuousConvMode=DISABLE;                //关闭连续转换
+  53              		.loc 1 13 0
+  54 0018 8361     		str	r3, [r0, #24]
+  14:Src/bsp_adc.c ****     adc_handle_typedef.Init.NbrOfConversion=1;                         //1个转换在规则序列�
+  55              		.loc 1 14 0
+  56 001a 0122     		movs	r2, #1
+  57 001c C261     		str	r2, [r0, #28]
+  15:Src/bsp_adc.c ****     adc_handle_typedef.Init.DiscontinuousConvMode=DISABLE;             //禁止不连续采样模�
+  58              		.loc 1 15 0
+  59 001e 0362     		str	r3, [r0, #32]
+  16:Src/bsp_adc.c ****     adc_handle_typedef.Init.NbrOfDiscConversion=0;                     //不连续采样通道数�
+  60              		.loc 1 16 0
+  61 0020 4362     		str	r3, [r0, #36]
+  17:Src/bsp_adc.c ****     adc_handle_typedef.Init.ExternalTrigConv=ADC_SOFTWARE_START;       //软件触发
+  62              		.loc 1 17 0
+  63 0022 02F17062 		add	r2, r2, #251658240
+  64 0026 8262     		str	r2, [r0, #40]
+  18:Src/bsp_adc.c ****     adc_handle_typedef.Init.ExternalTrigConvEdge=ADC_EXTERNALTRIGCONVEDGE_NONE;//使用软件触发
+  65              		.loc 1 18 0
+  66 0028 C362     		str	r3, [r0, #44]
+  19:Src/bsp_adc.c ****     adc_handle_typedef.Init.DMAContinuousRequests=DISABLE;             //关闭DMA请求
+  67              		.loc 1 19 0
+  68 002a 0363     		str	r3, [r0, #48]
+  20:Src/bsp_adc.c ****     HAL_ADC_Init(&adc_handle_typedef);
+  69              		.loc 1 20 0
+  70 002c FFF7FEFF 		bl	HAL_ADC_Init
+  71              	.LVL0:
+  72 0030 08BD     		pop	{r3, pc}
+  73              	.L4:
+  74 0032 00BF     		.align	2
+  75              	.L3:
+  76 0034 00000000 		.word	adc_handle_typedef
+  77 0038 00200140 		.word	1073815552
+  78              		.cfi_endproc
+  79              	.LFE124:
+  81              		.section	.text.Get_ADC_Value,"ax",%progbits
+  82              		.align	1
+  83              		.global	Get_ADC_Value
+  84              		.syntax unified
+  85              		.thumb
+  86              		.thumb_func
+  87              		.fpu fpv4-sp-d16
+  89              	Get_ADC_Value:
+  90              	.LFB125:
+  21:Src/bsp_adc.c **** }
+  22:Src/bsp_adc.c **** 
+  23:Src/bsp_adc.c **** uint16_t Get_ADC_Value(uint8_t ch)
+  24:Src/bsp_adc.c **** {
+  91              		.loc 1 24 0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccF2ERaR.s 			page 3
+
+
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  96              	.LVL1:
+  25:Src/bsp_adc.c ****     return 0;
+  26:Src/bsp_adc.c **** }
+  97              		.loc 1 26 0
+  98 0000 0020     		movs	r0, #0
+  99              	.LVL2:
+ 100 0002 7047     		bx	lr
+ 101              		.cfi_endproc
+ 102              	.LFE125:
+ 104              		.section	.text.Get_ADC_AverageValue,"ax",%progbits
+ 105              		.align	1
+ 106              		.global	Get_ADC_AverageValue
+ 107              		.syntax unified
+ 108              		.thumb
+ 109              		.thumb_func
+ 110              		.fpu fpv4-sp-d16
+ 112              	Get_ADC_AverageValue:
+ 113              	.LFB126:
+  27:Src/bsp_adc.c **** uint16_t Get_ADC_AverageValue(uint8_t ch,uint16_t times)
+  28:Src/bsp_adc.c **** {
+ 114              		.loc 1 28 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119              	.LVL3:
+  29:Src/bsp_adc.c ****     return 0;
+  30:Src/bsp_adc.c **** }...
+ 120              		.loc 1 30 0
+ 121 0000 0020     		movs	r0, #0
+ 122              	.LVL4:
+ 123 0002 7047     		bx	lr
+ 124              		.cfi_endproc
+ 125              	.LFE126:
+ 127              		.comm	adc_handle_typedef,72,4
+ 128              		.text
+ 129              	.Letext0:
+ 130              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 131              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 132              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 133              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 134              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ 135              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 136              		.file 8 "/usr/include/newlib/sys/_types.h"
+ 137              		.file 9 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 138              		.file 10 "/usr/include/newlib/sys/reent.h"
+ 139              		.file 11 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 140              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 141              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 142              		.file 14 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h"
+ARM GAS  /tmp/ccF2ERaR.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bsp_adc.c
+     /tmp/ccF2ERaR.s:18     .text.ADC_Init:0000000000000000 $t
+     /tmp/ccF2ERaR.s:25     .text.ADC_Init:0000000000000000 ADC_Init
+     /tmp/ccF2ERaR.s:76     .text.ADC_Init:0000000000000034 $d
+                            *COM*:0000000000000048 adc_handle_typedef
+     /tmp/ccF2ERaR.s:82     .text.Get_ADC_Value:0000000000000000 $t
+     /tmp/ccF2ERaR.s:89     .text.Get_ADC_Value:0000000000000000 Get_ADC_Value
+     /tmp/ccF2ERaR.s:105    .text.Get_ADC_AverageValue:0000000000000000 $t
+     /tmp/ccF2ERaR.s:112    .text.Get_ADC_AverageValue:0000000000000000 Get_ADC_AverageValue
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+HAL_ADC_Init

@@ -15,6 +15,8 @@ build/main.o: Src/main.c Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
@@ -29,7 +31,8 @@ build/main.o: Src/main.c Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_usart.h Inc/bsp_gpio.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h Inc/bsp_usart.h \
- Inc/bsp_tim.h Inc/bsp_tpad.h Inc/bsp_tftlcd.h Inc/bsp_sdram.h
+ Inc/bsp_tim.h Inc/bsp_tpad.h Inc/bsp_tftlcd.h Inc/bsp_sdram.h \
+ Inc/bsp_adc.h
 
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -71,6 +74,10 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h:
 
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h:
 
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:
+
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:
+
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
@@ -110,3 +117,5 @@ Inc/bsp_tpad.h:
 Inc/bsp_tftlcd.h:
 
 Inc/bsp_sdram.h:
+
+Inc/bsp_adc.h:

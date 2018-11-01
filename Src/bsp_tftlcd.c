@@ -1,4 +1,5 @@
 #include "bsp_tftlcd.h"
+#include "math.h"
 #include "font.h"
 
 SRAM_HandleTypeDef SRAM_Handler;    //SRAM句柄(用于控制LCD)
@@ -1673,7 +1674,8 @@ void LCD_ShowxNum(uint16_t x,uint16_t y,uint32_t num,uint8_t len,uint8_t size,ui
 	uint8_t enshow=0;						   
 	for(t=0;t<len;t++)
 	{
-		temp=(num/LCD_Pow(10,len-t-1))%10;
+		//temp=(num/LCD_Pow(10,len-t-1))%10;
+		temp=(uint32_t)(num/pow(10,len-t-1))%10;
 		if(enshow==0&&t<(len-1))
 		{
 			if(temp==0)
