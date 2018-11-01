@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQJoExb.s 			page 1
+ARM GAS  /tmp/cc6prtYI.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
   29:Src/main.c    ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   30:Src/main.c    ****   *
   31:Src/main.c    ****   ******************************************************************************
-ARM GAS  /tmp/ccQJoExb.s 			page 2
+ARM GAS  /tmp/cc6prtYI.s 			page 2
 
 
   32:Src/main.c    ****   */
@@ -102,205 +102,211 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
   70:Src/main.c    **** //	uint8_t dir = 0;
   71:Src/main.c    **** //	uint32_t cout = 300;
   72:Src/main.c    ****   char sbuf[20]={0};
-  73:Src/main.c    ****   /* USER CODE END 1 */
-  74:Src/main.c    **** 
-  75:Src/main.c    ****   /* MCU Configuration----------------------------------------------------------*/
-  76:Src/main.c    **** 
-  77:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  78:Src/main.c    ****   HAL_Init();
-  79:Src/main.c    **** 
-  80:Src/main.c    ****   /* Configure the system clock */
-  81:Src/main.c    ****   SystemClock_Config();
-  82:Src/main.c    **** 
-  83:Src/main.c    ****   /* Initialize all configured peripherals */
-  84:Src/main.c    **** 
-  85:Src/main.c    ****   /* USER CODE BEGIN 2 */
-  86:Src/main.c    ****   LED_Init();
-  87:Src/main.c    ****   KEY_Init();
-  88:Src/main.c    ****   //LED_Lignt1();
-ARM GAS  /tmp/ccQJoExb.s 			page 3
+  73:Src/main.c    ****   int loopcout = 0;
+  74:Src/main.c    ****   /* USER CODE END 1 */
+  75:Src/main.c    **** 
+  76:Src/main.c    ****   /* MCU Configuration----------------------------------------------------------*/
+  77:Src/main.c    **** 
+  78:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  79:Src/main.c    ****   HAL_Init();
+  80:Src/main.c    **** 
+  81:Src/main.c    ****   /* Configure the system clock */
+  82:Src/main.c    ****   SystemClock_Config();
+  83:Src/main.c    **** 
+  84:Src/main.c    ****   /* Initialize all configured peripherals */
+  85:Src/main.c    **** 
+  86:Src/main.c    ****   /* USER CODE BEGIN 2 */
+  87:Src/main.c    ****   LED_Init();
+  88:Src/main.c    ****   KEY_Init();
+ARM GAS  /tmp/cc6prtYI.s 			page 3
 
 
-  89:Src/main.c    ****   USART2_Init();
-  90:Src/main.c    ****   printf("***********SYSTEM INIT***********\n");
-  91:Src/main.c    ****   TPAD_Init();
-  92:Src/main.c    ****   LCD_Init();
-  93:Src/main.c    ****   SDRAM_Init();
-  94:Src/main.c    ****   RNG_Init();
-  95:Src/main.c    ****   ADC_Init();
-  96:Src/main.c    ****   //TIM3_Init_Timer();
-  97:Src/main.c    ****   //TIM3_Init_Pwm_CH4();
-  98:Src/main.c    ****   //IWDG_Init();
-  99:Src/main.c    ****   sprintf((char*)sbuf,"LCD ID:%04X",lcddev.id);//将LCD ID打印到lcd_id数组。
- 100:Src/main.c    ****   LCD_ShowString(10,40,240,32,32,"Apollo STM32F4/F7"); 	
- 101:Src/main.c    ****   LCD_ShowString(10,80,240,24,24,"TFTLCD TEST");
- 102:Src/main.c    ****   LCD_ShowString(10,110,240,16,16,"ATOM@ALIENTEK");
- 103:Src/main.c    ****   LCD_ShowString(10,130,240,16,16,sbuf);		//显示LCD ID	      					 
- 104:Src/main.c    ****   LCD_ShowString(10,150,240,12,12,"2018/10/6");
- 105:Src/main.c    **** 
- 106:Src/main.c    ****   /* USER CODE END 2 */
- 107:Src/main.c    ****   /* Infinite loop */
- 108:Src/main.c    ****   /* USER CODE BEGIN WHILE */
- 109:Src/main.c    ****   while (1)
- 110:Src/main.c    ****   {
- 111:Src/main.c    **** 	/* USER CODE END WHILE */
- 112:Src/main.c    **** 			
- 113:Src/main.c    **** 	/* USER CODE BEGIN 3 */
- 114:Src/main.c    ****     if(pcUsart2RX.rflag == 1)
- 115:Src/main.c    ****     {
- 116:Src/main.c    ****       printf("%s (OK)\n",pcUsart2RX.pcRxbuf);
- 117:Src/main.c    ****       if( strncmp((char*)pcUsart2RX.pcRxbuf,"LED_CHANGE",strlen("LED_CHANGE"))==0)
- 118:Src/main.c    ****       {
- 119:Src/main.c    ****         if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
- 120:Src/main.c    ****         {
- 121:Src/main.c    ****           HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
- 122:Src/main.c    ****           printf("LED_ON\n");
- 123:Src/main.c    ****         }
- 124:Src/main.c    ****         else
- 125:Src/main.c    ****         {
- 126:Src/main.c    ****             HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
- 127:Src/main.c    ****             printf("LED_OFF\n");
- 128:Src/main.c    ****         }			
- 129:Src/main.c    ****       }
- 130:Src/main.c    ****       else if( strncmp((char*)pcUsart2RX.pcRxbuf,"SDRAM_TEST",strlen("SDRAM_TEST"))==0)
- 131:Src/main.c    ****       {
- 132:Src/main.c    ****           fsmc_sdram_test(30,170);//测试SRAM容量
- 133:Src/main.c    ****       }
- 134:Src/main.c    ****       else if(strncmp((char*)pcUsart2RX.pcRxbuf,"SDRAM_PRINT",strlen("SDRAM_PRINT"))==0)
- 135:Src/main.c    ****       {
- 136:Src/main.c    ****            char buf[100]="SDRAM TEST STRING!!";
- 137:Src/main.c    ****            printf("Write:%s\n",buf);
- 138:Src/main.c    ****            FMC_SDRAM_WriteBuffer((uint8_t*)buf,0,strlen(buf));
- 139:Src/main.c    ****            memset(buf,0,100);
- 140:Src/main.c    ****            FMC_SDRAM_ReadBuffer((uint8_t*)buf,0,100);
- 141:Src/main.c    ****            printf("Read:%s\n",buf);    
- 142:Src/main.c    ****       }
- 143:Src/main.c    ****       ResetUartrRx(&pcUsart2RX);
- 144:Src/main.c    ****     }
- 145:Src/main.c    **** 
-ARM GAS  /tmp/ccQJoExb.s 			page 4
+  89:Src/main.c    ****   //LED_Lignt1();
+  90:Src/main.c    ****   USART2_Init();
+  91:Src/main.c    ****   printf("***********SYSTEM INIT***********\n");
+  92:Src/main.c    ****   TPAD_Init();
+  93:Src/main.c    ****   LCD_Init();
+  94:Src/main.c    ****   SDRAM_Init();
+  95:Src/main.c    ****   RNG_Init();
+  96:Src/main.c    ****   ADC_Init();
+  97:Src/main.c    ****   //TIM3_Init_Timer();
+  98:Src/main.c    ****   //TIM3_Init_Pwm_CH4();
+  99:Src/main.c    ****   //IWDG_Init();
+ 100:Src/main.c    ****   sprintf((char*)sbuf,"LCD ID:%04X",lcddev.id);//将LCD ID打印到lcd_id数组。
+ 101:Src/main.c    ****   LCD_ShowString(10,40,240,32,32,"Apollo STM32F4/F7"); 	
+ 102:Src/main.c    ****   LCD_ShowString(10,80,240,24,24,"TFTLCD TEST");
+ 103:Src/main.c    ****   LCD_ShowString(10,110,240,16,16,"ATOM@ALIENTEK");
+ 104:Src/main.c    ****   LCD_ShowString(10,130,240,16,16,sbuf);		//显示LCD ID	      					 
+ 105:Src/main.c    ****   LCD_ShowString(10,150,240,12,12,"2018/10/6");
+ 106:Src/main.c    **** 
+ 107:Src/main.c    ****   /* USER CODE END 2 */
+ 108:Src/main.c    ****   /* Infinite loop */
+ 109:Src/main.c    ****   /* USER CODE BEGIN WHILE */
+ 110:Src/main.c    ****   while (1)
+ 111:Src/main.c    ****   {
+ 112:Src/main.c    **** 	/* USER CODE END WHILE */
+ 113:Src/main.c    **** 			
+ 114:Src/main.c    **** 	/* USER CODE BEGIN 3 */
+ 115:Src/main.c    ****      /***********************串口通讯实验和指令处理***********************/
+ 116:Src/main.c    ****     if(pcUsart2RX.rflag == 1)
+ 117:Src/main.c    ****     {
+ 118:Src/main.c    ****       printf("%s (OK)\n",pcUsart2RX.pcRxbuf);
+ 119:Src/main.c    ****       if( strncmp((char*)pcUsart2RX.pcRxbuf,"LED_CHANGE",strlen("LED_CHANGE"))==0)
+ 120:Src/main.c    ****       {
+ 121:Src/main.c    ****         if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
+ 122:Src/main.c    ****         {
+ 123:Src/main.c    ****           HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
+ 124:Src/main.c    ****           printf("LED_ON\n");
+ 125:Src/main.c    ****         }
+ 126:Src/main.c    ****         else
+ 127:Src/main.c    ****         {
+ 128:Src/main.c    ****             HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+ 129:Src/main.c    ****             printf("LED_OFF\n");
+ 130:Src/main.c    ****         }			
+ 131:Src/main.c    ****       }
+ 132:Src/main.c    ****       else if( strncmp((char*)pcUsart2RX.pcRxbuf,"SDRAM_TEST",strlen("SDRAM_TEST"))==0)
+ 133:Src/main.c    ****       {
+ 134:Src/main.c    ****           fsmc_sdram_test(30,170);//测试SRAM容量
+ 135:Src/main.c    ****       }
+ 136:Src/main.c    ****       else if(strncmp((char*)pcUsart2RX.pcRxbuf,"SDRAM_PRINT",strlen("SDRAM_PRINT"))==0)
+ 137:Src/main.c    ****       {
+ 138:Src/main.c    ****            char buf[100]="SDRAM TEST STRING!!";
+ 139:Src/main.c    ****            printf("Write:%s\n",buf);
+ 140:Src/main.c    ****            FMC_SDRAM_WriteBuffer((uint8_t*)buf,0,strlen(buf));
+ 141:Src/main.c    ****            memset(buf,0,100);
+ 142:Src/main.c    ****            FMC_SDRAM_ReadBuffer((uint8_t*)buf,0,100);
+ 143:Src/main.c    ****            printf("Read:%s\n",buf);    
+ 144:Src/main.c    ****       }
+ 145:Src/main.c    ****       ResetUartrRx(&pcUsart2RX);
+ARM GAS  /tmp/cc6prtYI.s 			page 4
 
 
- 146:Src/main.c    ****     if(TPAD_Scan(0))
- 147:Src/main.c    ****     {
- 148:Src/main.c    ****       char snumbuf[20];
- 149:Src/main.c    ****       sprintf(snumbuf,"rondom:%03d",RNG_Get_RandomRange(0,100));
- 150:Src/main.c    ****       LCD_ShowString(10,170,240,32,32,snumbuf);
- 151:Src/main.c    ****       if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
- 152:Src/main.c    ****       {
- 153:Src/main.c    ****         HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
- 154:Src/main.c    ****       }
- 155:Src/main.c    ****       else
- 156:Src/main.c    ****       {
- 157:Src/main.c    ****           HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
- 158:Src/main.c    ****       }		        	
- 159:Src/main.c    ****     }
- 160:Src/main.c    ****     if(KEY_Scan() == KEY_UP_ON)
- 161:Src/main.c    ****     {
+ 146:Src/main.c    ****     }
+ 147:Src/main.c    ****     /***********************触摸按键实验***********************/
+ 148:Src/main.c    ****     if(TPAD_Scan(0))
+ 149:Src/main.c    ****     {
+ 150:Src/main.c    ****       if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
+ 151:Src/main.c    ****       {
+ 152:Src/main.c    ****         HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
+ 153:Src/main.c    ****       }
+ 154:Src/main.c    ****       else
+ 155:Src/main.c    ****       {
+ 156:Src/main.c    ****           HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
+ 157:Src/main.c    ****       }		        	
+ 158:Src/main.c    ****     }
+ 159:Src/main.c    ****     if(loopcout>=30)
+ 160:Src/main.c    ****     {
+ 161:Src/main.c    ****       /***********************RNG 实验******************************/
  162:Src/main.c    ****       char snumbuf[20];
- 163:Src/main.c    ****       double temp = Get_Temprate();
- 164:Src/main.c    ****       sprintf(snumbuf,"adc:%d.%d C",(int)temp,(int)(temp*100)%100);
- 165:Src/main.c    ****       LCD_ShowString(10,200,240,32,32,snumbuf);
- 166:Src/main.c    ****     }
- 167:Src/main.c    ****     HAL_Delay(10);
- 168:Src/main.c    **** //			if(!dir)	cout--;
- 169:Src/main.c    **** //			else cout++;
- 170:Src/main.c    **** //			if(cout == 0)	dir =1;
- 171:Src/main.c    **** //			if(cout >= 300) dir = 0;
- 172:Src/main.c    **** //			TIM3_Set_Compare_CH4(cout);
- 173:Src/main.c    **** //			HAL_Delay(10);
- 174:Src/main.c    **** 			
- 175:Src/main.c    ****   }
- 176:Src/main.c    ****   /* USER CODE END 3 */
- 177:Src/main.c    **** 
- 178:Src/main.c    **** }
- 179:Src/main.c    **** 
- 180:Src/main.c    **** /** System Clock Configuration
- 181:Src/main.c    **** */
- 182:Src/main.c    **** void SystemClock_Config(void)
- 183:Src/main.c    **** {
- 184:Src/main.c    **** 
- 185:Src/main.c    **** 	RCC_OscInitTypeDef RCC_OscInitStruct;
- 186:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
- 187:Src/main.c    **** 
- 188:Src/main.c    ****     /**Configure the main internal regulator output voltage 
- 189:Src/main.c    ****     */
- 190:Src/main.c    ****   __HAL_RCC_PWR_CLK_ENABLE();
- 191:Src/main.c    **** 
- 192:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 163:Src/main.c    ****       sprintf(snumbuf,"rondom:%03d",RNG_Get_RandomRange(0,100));
+ 164:Src/main.c    ****       LCD_ShowString(10,170,240,32,32,snumbuf);
+ 165:Src/main.c    ****       memset(snumbuf,0,20);
+ 166:Src/main.c    ****       /***********************ADC 内部温度实验***********************/
+ 167:Src/main.c    ****       double temp = Get_Temprate();
+ 168:Src/main.c    ****       sprintf(snumbuf,"adc:%d.%d C",(int)temp,(int)(temp*100)%100);
+ 169:Src/main.c    ****       LCD_ShowString(10,200,240,32,32,snumbuf);
+ 170:Src/main.c    ****       loopcout = 0;
+ 171:Src/main.c    ****     }
+ 172:Src/main.c    ****     HAL_Delay(10);
+ 173:Src/main.c    ****     loopcout++;
+ 174:Src/main.c    **** //			if(!dir)	cout--;
+ 175:Src/main.c    **** //			else cout++;
+ 176:Src/main.c    **** //			if(cout == 0)	dir =1;
+ 177:Src/main.c    **** //			if(cout >= 300) dir = 0;
+ 178:Src/main.c    **** //			TIM3_Set_Compare_CH4(cout);
+ 179:Src/main.c    **** //			HAL_Delay(10);
+ 180:Src/main.c    **** 			
+ 181:Src/main.c    ****   }
+ 182:Src/main.c    ****   /* USER CODE END 3 */
+ 183:Src/main.c    **** 
+ 184:Src/main.c    **** }
+ 185:Src/main.c    **** 
+ 186:Src/main.c    **** /** System Clock Configuration
+ 187:Src/main.c    **** */
+ 188:Src/main.c    **** void SystemClock_Config(void)
+ 189:Src/main.c    **** {
+ 190:Src/main.c    **** 
+ 191:Src/main.c    **** 	RCC_OscInitTypeDef RCC_OscInitStruct;
+ 192:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
  193:Src/main.c    **** 
- 194:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks 
+ 194:Src/main.c    ****     /**Configure the main internal regulator output voltage 
  195:Src/main.c    ****     */
- 196:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
- 197:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
- 198:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 199:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
- 200:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 25;
- 201:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 360;
- 202:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-ARM GAS  /tmp/ccQJoExb.s 			page 5
+ 196:Src/main.c    ****   __HAL_RCC_PWR_CLK_ENABLE();
+ 197:Src/main.c    **** 
+ 198:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 199:Src/main.c    **** 
+ 200:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks 
+ 201:Src/main.c    ****     */
+ 202:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+ARM GAS  /tmp/cc6prtYI.s 			page 5
 
 
- 203:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 4;
- 204:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 205:Src/main.c    ****   {
- 206:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
- 207:Src/main.c    ****   }
- 208:Src/main.c    **** 
- 209:Src/main.c    ****     /**Activate the Over-Drive mode 
- 210:Src/main.c    ****     */
- 211:Src/main.c    ****   if (HAL_PWREx_EnableOverDrive() != HAL_OK)
- 212:Src/main.c    ****   {
- 213:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
- 214:Src/main.c    ****   }
- 215:Src/main.c    **** 
- 216:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks 
- 217:Src/main.c    ****     */
- 218:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
- 219:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 220:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 221:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 222:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
- 223:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
- 224:Src/main.c    **** 
- 225:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
- 226:Src/main.c    ****   {
- 227:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
- 228:Src/main.c    ****   }
- 229:Src/main.c    **** 
- 230:Src/main.c    ****     /**Configure the Systick interrupt time 
- 231:Src/main.c    ****     */
- 232:Src/main.c    ****   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
- 233:Src/main.c    **** 
- 234:Src/main.c    ****     /**Configure the Systick 
- 235:Src/main.c    ****     */
- 236:Src/main.c    ****   HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
- 237:Src/main.c    **** 
- 238:Src/main.c    ****   /* SysTick_IRQn interrupt configuration */
- 239:Src/main.c    ****   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
- 240:Src/main.c    **** }
- 241:Src/main.c    **** 
- 242:Src/main.c    **** /**
- 243:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
- 244:Src/main.c    ****   * @param  file: The file name as string.
- 245:Src/main.c    ****   * @param  line: The line in file as a number.
- 246:Src/main.c    ****   * @retval None
- 247:Src/main.c    ****   */
- 248:Src/main.c    **** void _Error_Handler(char *file, int line)
- 249:Src/main.c    **** {
-  28              		.loc 1 249 0
+ 203:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 204:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 205:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 206:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 25;
+ 207:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 360;
+ 208:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+ 209:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 4;
+ 210:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 211:Src/main.c    ****   {
+ 212:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
+ 213:Src/main.c    ****   }
+ 214:Src/main.c    **** 
+ 215:Src/main.c    ****     /**Activate the Over-Drive mode 
+ 216:Src/main.c    ****     */
+ 217:Src/main.c    ****   if (HAL_PWREx_EnableOverDrive() != HAL_OK)
+ 218:Src/main.c    ****   {
+ 219:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
+ 220:Src/main.c    ****   }
+ 221:Src/main.c    **** 
+ 222:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks 
+ 223:Src/main.c    ****     */
+ 224:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 225:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 226:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 227:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 228:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+ 229:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+ 230:Src/main.c    **** 
+ 231:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+ 232:Src/main.c    ****   {
+ 233:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
+ 234:Src/main.c    ****   }
+ 235:Src/main.c    **** 
+ 236:Src/main.c    ****     /**Configure the Systick interrupt time 
+ 237:Src/main.c    ****     */
+ 238:Src/main.c    ****   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+ 239:Src/main.c    **** 
+ 240:Src/main.c    ****     /**Configure the Systick 
+ 241:Src/main.c    ****     */
+ 242:Src/main.c    ****   HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+ 243:Src/main.c    **** 
+ 244:Src/main.c    ****   /* SysTick_IRQn interrupt configuration */
+ 245:Src/main.c    ****   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+ 246:Src/main.c    **** }
+ 247:Src/main.c    **** 
+ 248:Src/main.c    **** /**
+ 249:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 250:Src/main.c    ****   * @param  file: The file name as string.
+ 251:Src/main.c    ****   * @param  line: The line in file as a number.
+ 252:Src/main.c    ****   * @retval None
+ 253:Src/main.c    ****   */
+ 254:Src/main.c    **** void _Error_Handler(char *file, int line)
+ 255:Src/main.c    **** {
+  28              		.loc 1 255 0
   29              		.cfi_startproc
   30              		@ Volatile: function does not return.
   31              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/cc6prtYI.s 			page 6
+
+
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		@ link register save eliminated.
   34              	.LVL0:
   35              	.L2:
   36 0000 FEE7     		b	.L2
   37              		.cfi_endproc
-ARM GAS  /tmp/ccQJoExb.s 			page 6
-
-
   38              	.LFE126:
   40              		.section	.text.SystemClock_Config,"ax",%progbits
   41              		.align	1
@@ -311,13 +317,13 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
   46              		.fpu fpv4-sp-d16
   48              	SystemClock_Config:
   49              	.LFB125:
- 183:Src/main.c    **** 
-  50              		.loc 1 183 0
+ 189:Src/main.c    **** 
+  50              		.loc 1 189 0
   51              		.cfi_startproc
   52              		@ args = 0, pretend = 0, frame = 80
   53              		@ frame_needed = 0, uses_anonymous_args = 0
- 183:Src/main.c    **** 
-  54              		.loc 1 183 0
+ 189:Src/main.c    **** 
+  54              		.loc 1 189 0
   55 0000 00B5     		push	{lr}
   56              	.LCFI0:
   57              		.cfi_def_cfa_offset 4
@@ -326,8 +332,8 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
   60              	.LCFI1:
   61              		.cfi_def_cfa_offset 88
   62              	.LBB2:
- 190:Src/main.c    **** 
-  63              		.loc 1 190 0
+ 196:Src/main.c    **** 
+  63              		.loc 1 196 0
   64 0004 0021     		movs	r1, #0
   65 0006 0191     		str	r1, [sp, #4]
   66 0008 2F4B     		ldr	r3, .L11
@@ -340,8 +346,8 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
   73 001a 019B     		ldr	r3, [sp, #4]
   74              	.LBE2:
   75              	.LBB3:
- 192:Src/main.c    **** 
-  76              		.loc 1 192 0
+ 198:Src/main.c    **** 
+  76              		.loc 1 198 0
   77 001c 0291     		str	r1, [sp, #8]
   78 001e 2B4B     		ldr	r3, .L11+4
   79 0020 1A68     		ldr	r2, [r3]
@@ -352,83 +358,83 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
   84 002e 0293     		str	r3, [sp, #8]
   85 0030 029B     		ldr	r3, [sp, #8]
   86              	.LBE3:
- 196:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  87              		.loc 1 196 0
+ARM GAS  /tmp/cc6prtYI.s 			page 7
+
+
+ 202:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  87              		.loc 1 202 0
   88 0032 0123     		movs	r3, #1
   89 0034 0893     		str	r3, [sp, #32]
- 197:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  90              		.loc 1 197 0
-ARM GAS  /tmp/ccQJoExb.s 			page 7
-
-
+ 203:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  90              		.loc 1 203 0
   91 0036 4FF48033 		mov	r3, #65536
   92 003a 0993     		str	r3, [sp, #36]
- 198:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  93              		.loc 1 198 0
+ 204:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  93              		.loc 1 204 0
   94 003c 0223     		movs	r3, #2
   95 003e 0E93     		str	r3, [sp, #56]
- 199:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 25;
-  96              		.loc 1 199 0
+ 205:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 25;
+  96              		.loc 1 205 0
   97 0040 4FF48002 		mov	r2, #4194304
   98 0044 0F92     		str	r2, [sp, #60]
- 200:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 360;
-  99              		.loc 1 200 0
+ 206:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 360;
+  99              		.loc 1 206 0
  100 0046 1922     		movs	r2, #25
  101 0048 1092     		str	r2, [sp, #64]
- 201:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
- 102              		.loc 1 201 0
+ 207:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+ 102              		.loc 1 207 0
  103 004a 4FF4B472 		mov	r2, #360
  104 004e 1192     		str	r2, [sp, #68]
- 202:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 4;
- 105              		.loc 1 202 0
+ 208:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 4;
+ 105              		.loc 1 208 0
  106 0050 1293     		str	r3, [sp, #72]
- 203:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 107              		.loc 1 203 0
+ 209:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 107              		.loc 1 209 0
  108 0052 0423     		movs	r3, #4
  109 0054 1393     		str	r3, [sp, #76]
- 204:Src/main.c    ****   {
- 110              		.loc 1 204 0
+ 210:Src/main.c    ****   {
+ 110              		.loc 1 210 0
  111 0056 08A8     		add	r0, sp, #32
  112 0058 FFF7FEFF 		bl	HAL_RCC_OscConfig
  113              	.LVL1:
  114 005c 38BB     		cbnz	r0, .L8
- 211:Src/main.c    ****   {
- 115              		.loc 1 211 0
+ 217:Src/main.c    ****   {
+ 115              		.loc 1 217 0
  116 005e FFF7FEFF 		bl	HAL_PWREx_EnableOverDrive
  117              	.LVL2:
  118 0062 40BB     		cbnz	r0, .L9
- 218:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 119              		.loc 1 218 0
+ 224:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 119              		.loc 1 224 0
  120 0064 0F23     		movs	r3, #15
  121 0066 0393     		str	r3, [sp, #12]
- 220:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 122              		.loc 1 220 0
+ 226:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 122              		.loc 1 226 0
  123 0068 0223     		movs	r3, #2
  124 006a 0493     		str	r3, [sp, #16]
- 221:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
- 125              		.loc 1 221 0
+ 227:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+ 125              		.loc 1 227 0
  126 006c 0023     		movs	r3, #0
  127 006e 0593     		str	r3, [sp, #20]
- 222:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
- 128              		.loc 1 222 0
+ 228:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+ 128              		.loc 1 228 0
  129 0070 4FF4A053 		mov	r3, #5120
+ARM GAS  /tmp/cc6prtYI.s 			page 8
+
+
  130 0074 0693     		str	r3, [sp, #24]
- 223:Src/main.c    **** 
- 131              		.loc 1 223 0
+ 229:Src/main.c    **** 
+ 131              		.loc 1 229 0
  132 0076 4FF48053 		mov	r3, #4096
  133 007a 0793     		str	r3, [sp, #28]
- 225:Src/main.c    ****   {
-ARM GAS  /tmp/ccQJoExb.s 			page 8
-
-
- 134              		.loc 1 225 0
+ 231:Src/main.c    ****   {
+ 134              		.loc 1 231 0
  135 007c 0521     		movs	r1, #5
  136 007e 03A8     		add	r0, sp, #12
  137 0080 FFF7FEFF 		bl	HAL_RCC_ClockConfig
  138              	.LVL3:
  139 0084 D8B9     		cbnz	r0, .L10
- 232:Src/main.c    **** 
- 140              		.loc 1 232 0
+ 238:Src/main.c    **** 
+ 140              		.loc 1 238 0
  141 0086 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
  142              	.LVL4:
  143 008a 114B     		ldr	r3, .L11+8
@@ -436,20 +442,20 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
  145 0090 8009     		lsrs	r0, r0, #6
  146 0092 FFF7FEFF 		bl	HAL_SYSTICK_Config
  147              	.LVL5:
- 236:Src/main.c    **** 
- 148              		.loc 1 236 0
+ 242:Src/main.c    **** 
+ 148              		.loc 1 242 0
  149 0096 0420     		movs	r0, #4
  150 0098 FFF7FEFF 		bl	HAL_SYSTICK_CLKSourceConfig
  151              	.LVL6:
- 239:Src/main.c    **** }
- 152              		.loc 1 239 0
+ 245:Src/main.c    **** }
+ 152              		.loc 1 245 0
  153 009c 0022     		movs	r2, #0
  154 009e 1146     		mov	r1, r2
  155 00a0 4FF0FF30 		mov	r0, #-1
  156 00a4 FFF7FEFF 		bl	HAL_NVIC_SetPriority
  157              	.LVL7:
- 240:Src/main.c    **** 
- 158              		.loc 1 240 0
+ 246:Src/main.c    **** 
+ 158              		.loc 1 246 0
  159 00a8 15B0     		add	sp, sp, #84
  160              	.LCFI2:
  161              		.cfi_remember_state
@@ -459,28 +465,28 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
  165              	.L8:
  166              	.LCFI3:
  167              		.cfi_restore_state
- 206:Src/main.c    ****   }
- 168              		.loc 1 206 0
- 169 00ae CE21     		movs	r1, #206
+ 212:Src/main.c    ****   }
+ 168              		.loc 1 212 0
+ 169 00ae D421     		movs	r1, #212
  170 00b0 0848     		ldr	r0, .L11+12
  171 00b2 FFF7FEFF 		bl	_Error_Handler
  172              	.LVL8:
  173              	.L9:
- 213:Src/main.c    ****   }
- 174              		.loc 1 213 0
- 175 00b6 D521     		movs	r1, #213
+ 219:Src/main.c    ****   }
+ 174              		.loc 1 219 0
+ 175 00b6 DB21     		movs	r1, #219
  176 00b8 0648     		ldr	r0, .L11+12
  177 00ba FFF7FEFF 		bl	_Error_Handler
  178              	.LVL9:
+ARM GAS  /tmp/cc6prtYI.s 			page 9
+
+
  179              	.L10:
- 227:Src/main.c    ****   }
- 180              		.loc 1 227 0
- 181 00be E321     		movs	r1, #227
+ 233:Src/main.c    ****   }
+ 180              		.loc 1 233 0
+ 181 00be E921     		movs	r1, #233
  182 00c0 0448     		ldr	r0, .L11+12
  183 00c2 FFF7FEFF 		bl	_Error_Handler
-ARM GAS  /tmp/ccQJoExb.s 			page 9
-
-
  184              	.LVL10:
  185              	.L12:
  186 00c6 00BF     		.align	2
@@ -507,605 +513,618 @@ ARM GAS  /tmp/ccQJoExb.s 			page 1
  208              		.cfi_startproc
  209              		@ args = 0, pretend = 0, frame = 120
  210              		@ frame_needed = 0, uses_anonymous_args = 0
- 211 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 211 0000 2DE9704D 		push	{r4, r5, r6, r8, r10, fp, lr}
  212              	.LCFI4:
- 213              		.cfi_def_cfa_offset 20
- 214              		.cfi_offset 4, -20
- 215              		.cfi_offset 5, -16
- 216              		.cfi_offset 6, -12
- 217              		.cfi_offset 7, -8
- 218              		.cfi_offset 14, -4
- 219 0002 A1B0     		sub	sp, sp, #132
- 220              	.LCFI5:
- 221              		.cfi_def_cfa_offset 152
-  72:Src/main.c    ****   /* USER CODE END 1 */
- 222              		.loc 1 72 0
- 223 0004 1BAC     		add	r4, sp, #108
- 224 0006 0023     		movs	r3, #0
- 225 0008 1B93     		str	r3, [sp, #108]
- 226 000a 1C93     		str	r3, [sp, #112]
- 227 000c 1D93     		str	r3, [sp, #116]
- 228 000e 1E93     		str	r3, [sp, #120]
- 229 0010 1F93     		str	r3, [sp, #124]
-  78:Src/main.c    **** 
- 230              		.loc 1 78 0
- 231 0012 FFF7FEFF 		bl	HAL_Init
+ 213              		.cfi_def_cfa_offset 28
+ 214              		.cfi_offset 4, -28
+ 215              		.cfi_offset 5, -24
+ 216              		.cfi_offset 6, -20
+ 217              		.cfi_offset 8, -16
+ 218              		.cfi_offset 10, -12
+ 219              		.cfi_offset 11, -8
+ 220              		.cfi_offset 14, -4
+ 221 0004 A1B0     		sub	sp, sp, #132
+ 222              	.LCFI5:
+ 223              		.cfi_def_cfa_offset 160
+  72:Src/main.c    ****   int loopcout = 0;
+ 224              		.loc 1 72 0
+ 225 0006 1BAD     		add	r5, sp, #108
+ 226 0008 0024     		movs	r4, #0
+ 227 000a 1B94     		str	r4, [sp, #108]
+ 228 000c 1C94     		str	r4, [sp, #112]
+ 229 000e 1D94     		str	r4, [sp, #116]
+ 230 0010 1E94     		str	r4, [sp, #120]
+ 231 0012 1F94     		str	r4, [sp, #124]
  232              	.LVL11:
-  81:Src/main.c    **** 
- 233              		.loc 1 81 0
- 234 0016 FFF7FEFF 		bl	SystemClock_Config
+  79:Src/main.c    **** 
+ 233              		.loc 1 79 0
+ARM GAS  /tmp/cc6prtYI.s 			page 10
+
+
+ 234 0014 FFF7FEFF 		bl	HAL_Init
  235              	.LVL12:
-  86:Src/main.c    ****   KEY_Init();
- 236              		.loc 1 86 0
- 237 001a FFF7FEFF 		bl	LED_Init
-ARM GAS  /tmp/ccQJoExb.s 			page 10
-
-
+  82:Src/main.c    **** 
+ 236              		.loc 1 82 0
+ 237 0018 FFF7FEFF 		bl	SystemClock_Config
  238              	.LVL13:
-  87:Src/main.c    ****   //LED_Lignt1();
+  87:Src/main.c    ****   KEY_Init();
  239              		.loc 1 87 0
- 240 001e FFF7FEFF 		bl	KEY_Init
+ 240 001c FFF7FEFF 		bl	LED_Init
  241              	.LVL14:
-  89:Src/main.c    ****   printf("***********SYSTEM INIT***********\n");
- 242              		.loc 1 89 0
- 243 0022 FFF7FEFF 		bl	USART2_Init
+  88:Src/main.c    ****   //LED_Lignt1();
+ 242              		.loc 1 88 0
+ 243 0020 FFF7FEFF 		bl	KEY_Init
  244              	.LVL15:
-  90:Src/main.c    ****   TPAD_Init();
+  90:Src/main.c    ****   printf("***********SYSTEM INIT***********\n");
  245              		.loc 1 90 0
- 246 0026 8048     		ldr	r0, .L32
- 247 0028 FFF7FEFF 		bl	puts
- 248              	.LVL16:
-  91:Src/main.c    ****   LCD_Init();
- 249              		.loc 1 91 0
- 250 002c FFF7FEFF 		bl	TPAD_Init
+ 246 0024 FFF7FEFF 		bl	USART2_Init
+ 247              	.LVL16:
+  91:Src/main.c    ****   TPAD_Init();
+ 248              		.loc 1 91 0
+ 249 0028 8348     		ldr	r0, .L31
+ 250 002a FFF7FEFF 		bl	puts
  251              	.LVL17:
-  92:Src/main.c    ****   SDRAM_Init();
+  92:Src/main.c    ****   LCD_Init();
  252              		.loc 1 92 0
- 253 0030 FFF7FEFF 		bl	LCD_Init
+ 253 002e FFF7FEFF 		bl	TPAD_Init
  254              	.LVL18:
-  93:Src/main.c    ****   RNG_Init();
+  93:Src/main.c    ****   SDRAM_Init();
  255              		.loc 1 93 0
- 256 0034 FFF7FEFF 		bl	SDRAM_Init
+ 256 0032 FFF7FEFF 		bl	LCD_Init
  257              	.LVL19:
-  94:Src/main.c    ****   ADC_Init();
+  94:Src/main.c    ****   RNG_Init();
  258              		.loc 1 94 0
- 259 0038 FFF7FEFF 		bl	RNG_Init
+ 259 0036 FFF7FEFF 		bl	SDRAM_Init
  260              	.LVL20:
-  95:Src/main.c    ****   //TIM3_Init_Timer();
+  95:Src/main.c    ****   ADC_Init();
  261              		.loc 1 95 0
- 262 003c FFF7FEFF 		bl	ADC_Init
+ 262 003a FFF7FEFF 		bl	RNG_Init
  263              	.LVL21:
-  99:Src/main.c    ****   LCD_ShowString(10,40,240,32,32,"Apollo STM32F4/F7"); 	
- 264              		.loc 1 99 0
- 265 0040 7A4B     		ldr	r3, .L32+4
- 266 0042 9A88     		ldrh	r2, [r3, #4]
- 267 0044 7A49     		ldr	r1, .L32+8
- 268 0046 2046     		mov	r0, r4
- 269 0048 FFF7FEFF 		bl	sprintf
- 270              	.LVL22:
- 100:Src/main.c    ****   LCD_ShowString(10,80,240,24,24,"TFTLCD TEST");
- 271              		.loc 1 100 0
- 272 004c 794B     		ldr	r3, .L32+12
- 273 004e 0193     		str	r3, [sp, #4]
- 274 0050 2023     		movs	r3, #32
- 275 0052 0093     		str	r3, [sp]
- 276 0054 F022     		movs	r2, #240
- 277 0056 2821     		movs	r1, #40
- 278 0058 0A20     		movs	r0, #10
- 279 005a FFF7FEFF 		bl	LCD_ShowString
- 280              	.LVL23:
- 101:Src/main.c    ****   LCD_ShowString(10,110,240,16,16,"ATOM@ALIENTEK");
- 281              		.loc 1 101 0
- 282 005e 764B     		ldr	r3, .L32+16
- 283 0060 0193     		str	r3, [sp, #4]
-ARM GAS  /tmp/ccQJoExb.s 			page 11
+  96:Src/main.c    ****   //TIM3_Init_Timer();
+ 264              		.loc 1 96 0
+ 265 003e FFF7FEFF 		bl	ADC_Init
+ 266              	.LVL22:
+ 100:Src/main.c    ****   LCD_ShowString(10,40,240,32,32,"Apollo STM32F4/F7"); 	
+ 267              		.loc 1 100 0
+ 268 0042 7E4B     		ldr	r3, .L31+4
+ 269 0044 9A88     		ldrh	r2, [r3, #4]
+ 270 0046 7E49     		ldr	r1, .L31+8
+ 271 0048 2846     		mov	r0, r5
+ 272 004a FFF7FEFF 		bl	sprintf
+ 273              	.LVL23:
+ 101:Src/main.c    ****   LCD_ShowString(10,80,240,24,24,"TFTLCD TEST");
+ 274              		.loc 1 101 0
+ 275 004e 7D4B     		ldr	r3, .L31+12
+ 276 0050 0193     		str	r3, [sp, #4]
+ 277 0052 2023     		movs	r3, #32
+ 278 0054 0093     		str	r3, [sp]
+ARM GAS  /tmp/cc6prtYI.s 			page 11
 
 
- 284 0062 1823     		movs	r3, #24
- 285 0064 0093     		str	r3, [sp]
- 286 0066 F022     		movs	r2, #240
- 287 0068 5021     		movs	r1, #80
- 288 006a 0A20     		movs	r0, #10
- 289 006c FFF7FEFF 		bl	LCD_ShowString
- 290              	.LVL24:
- 102:Src/main.c    ****   LCD_ShowString(10,130,240,16,16,sbuf);		//显示LCD ID	      					 
- 291              		.loc 1 102 0
- 292 0070 724B     		ldr	r3, .L32+20
- 293 0072 0193     		str	r3, [sp, #4]
- 294 0074 1025     		movs	r5, #16
- 295 0076 0095     		str	r5, [sp]
- 296 0078 2B46     		mov	r3, r5
- 297 007a F022     		movs	r2, #240
- 298 007c 6E21     		movs	r1, #110
- 299 007e 0A20     		movs	r0, #10
- 300 0080 FFF7FEFF 		bl	LCD_ShowString
- 301              	.LVL25:
- 103:Src/main.c    ****   LCD_ShowString(10,150,240,12,12,"2018/10/6");
- 302              		.loc 1 103 0
- 303 0084 0194     		str	r4, [sp, #4]
- 304 0086 0095     		str	r5, [sp]
- 305 0088 2B46     		mov	r3, r5
- 306 008a F022     		movs	r2, #240
- 307 008c 8221     		movs	r1, #130
- 308 008e 0A20     		movs	r0, #10
- 309 0090 FFF7FEFF 		bl	LCD_ShowString
- 310              	.LVL26:
- 104:Src/main.c    **** 
- 311              		.loc 1 104 0
- 312 0094 6A4B     		ldr	r3, .L32+24
- 313 0096 0193     		str	r3, [sp, #4]
- 314 0098 0C23     		movs	r3, #12
- 315 009a 0093     		str	r3, [sp]
- 316 009c F022     		movs	r2, #240
- 317 009e 9621     		movs	r1, #150
- 318 00a0 0A20     		movs	r0, #10
- 319 00a2 FFF7FEFF 		bl	LCD_ShowString
- 320              	.LVL27:
- 321 00a6 6DE0     		b	.L23
- 322              	.L30:
- 116:Src/main.c    ****       if( strncmp((char*)pcUsart2RX.pcRxbuf,"LED_CHANGE",strlen("LED_CHANGE"))==0)
- 323              		.loc 1 116 0
- 324 00a8 664C     		ldr	r4, .L32+28
- 325 00aa 2146     		mov	r1, r4
- 326 00ac 6648     		ldr	r0, .L32+32
- 327 00ae FFF7FEFF 		bl	printf
- 328              	.LVL28:
- 117:Src/main.c    ****       {
- 329              		.loc 1 117 0
- 330 00b2 0A22     		movs	r2, #10
- 331 00b4 6549     		ldr	r1, .L32+36
- 332 00b6 2046     		mov	r0, r4
- 333 00b8 FFF7FEFF 		bl	strncmp
- 334              	.LVL29:
- 335 00bc 78B1     		cbz	r0, .L25
-ARM GAS  /tmp/ccQJoExb.s 			page 12
+ 279 0056 F022     		movs	r2, #240
+ 280 0058 2821     		movs	r1, #40
+ 281 005a 0A20     		movs	r0, #10
+ 282 005c FFF7FEFF 		bl	LCD_ShowString
+ 283              	.LVL24:
+ 102:Src/main.c    ****   LCD_ShowString(10,110,240,16,16,"ATOM@ALIENTEK");
+ 284              		.loc 1 102 0
+ 285 0060 794B     		ldr	r3, .L31+16
+ 286 0062 0193     		str	r3, [sp, #4]
+ 287 0064 1823     		movs	r3, #24
+ 288 0066 0093     		str	r3, [sp]
+ 289 0068 F022     		movs	r2, #240
+ 290 006a 5021     		movs	r1, #80
+ 291 006c 0A20     		movs	r0, #10
+ 292 006e FFF7FEFF 		bl	LCD_ShowString
+ 293              	.LVL25:
+ 103:Src/main.c    ****   LCD_ShowString(10,130,240,16,16,sbuf);		//显示LCD ID	      					 
+ 294              		.loc 1 103 0
+ 295 0072 764B     		ldr	r3, .L31+20
+ 296 0074 0193     		str	r3, [sp, #4]
+ 297 0076 1026     		movs	r6, #16
+ 298 0078 0096     		str	r6, [sp]
+ 299 007a 3346     		mov	r3, r6
+ 300 007c F022     		movs	r2, #240
+ 301 007e 6E21     		movs	r1, #110
+ 302 0080 0A20     		movs	r0, #10
+ 303 0082 FFF7FEFF 		bl	LCD_ShowString
+ 304              	.LVL26:
+ 104:Src/main.c    ****   LCD_ShowString(10,150,240,12,12,"2018/10/6");
+ 305              		.loc 1 104 0
+ 306 0086 0195     		str	r5, [sp, #4]
+ 307 0088 0096     		str	r6, [sp]
+ 308 008a 3346     		mov	r3, r6
+ 309 008c F022     		movs	r2, #240
+ 310 008e 8221     		movs	r1, #130
+ 311 0090 0A20     		movs	r0, #10
+ 312 0092 FFF7FEFF 		bl	LCD_ShowString
+ 313              	.LVL27:
+ 105:Src/main.c    **** 
+ 314              		.loc 1 105 0
+ 315 0096 6E4B     		ldr	r3, .L31+24
+ 316 0098 0193     		str	r3, [sp, #4]
+ 317 009a 0C23     		movs	r3, #12
+ 318 009c 0093     		str	r3, [sp]
+ 319 009e F022     		movs	r2, #240
+ 320 00a0 9621     		movs	r1, #150
+ 321 00a2 0A20     		movs	r0, #10
+ 322 00a4 FFF7FEFF 		bl	LCD_ShowString
+ 323              	.LVL28:
+ 324 00a8 77E0     		b	.L22
+ 325              	.LVL29:
+ 326              	.L29:
+ 118:Src/main.c    ****       if( strncmp((char*)pcUsart2RX.pcRxbuf,"LED_CHANGE",strlen("LED_CHANGE"))==0)
+ 327              		.loc 1 118 0
+ 328 00aa 6A4D     		ldr	r5, .L31+28
+ 329 00ac 2946     		mov	r1, r5
+ 330 00ae 6A48     		ldr	r0, .L31+32
+ARM GAS  /tmp/cc6prtYI.s 			page 12
 
 
- 130:Src/main.c    ****       {
- 336              		.loc 1 130 0
- 337 00be 0A22     		movs	r2, #10
- 338 00c0 6349     		ldr	r1, .L32+40
- 339 00c2 6048     		ldr	r0, .L32+28
- 340 00c4 FFF7FEFF 		bl	strncmp
- 341              	.LVL30:
- 342 00c8 20B3     		cbz	r0, .L26
- 134:Src/main.c    ****       {
- 343              		.loc 1 134 0
- 344 00ca 0B22     		movs	r2, #11
- 345 00cc 6149     		ldr	r1, .L32+44
- 346 00ce 5D48     		ldr	r0, .L32+28
- 347 00d0 FFF7FEFF 		bl	strncmp
- 348              	.LVL31:
- 349 00d4 18B3     		cbz	r0, .L27
- 350              	.L17:
- 143:Src/main.c    ****     }
- 351              		.loc 1 143 0
- 352 00d6 5B48     		ldr	r0, .L32+28
- 353 00d8 FFF7FEFF 		bl	ResetUartrRx
- 354              	.LVL32:
- 355 00dc 57E0     		b	.L14
- 356              	.L25:
- 119:Src/main.c    ****         {
- 357              		.loc 1 119 0
- 358 00de 0121     		movs	r1, #1
- 359 00e0 00F18040 		add	r0, r0, #1073741824
- 360 00e4 00F50130 		add	r0, r0, #132096
- 361 00e8 FFF7FEFF 		bl	HAL_GPIO_ReadPin
- 362              	.LVL33:
- 363 00ec 0128     		cmp	r0, #1
- 364 00ee 08D0     		beq	.L28
- 126:Src/main.c    ****             printf("LED_OFF\n");
- 365              		.loc 1 126 0
- 366 00f0 0122     		movs	r2, #1
- 367 00f2 1146     		mov	r1, r2
- 368 00f4 5848     		ldr	r0, .L32+48
- 369 00f6 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 370              	.LVL34:
- 127:Src/main.c    ****         }			
- 371              		.loc 1 127 0
- 372 00fa 5848     		ldr	r0, .L32+52
- 373 00fc FFF7FEFF 		bl	puts
- 374              	.LVL35:
- 375 0100 E9E7     		b	.L17
- 376              	.L28:
- 121:Src/main.c    ****           printf("LED_ON\n");
- 377              		.loc 1 121 0
- 378 0102 0022     		movs	r2, #0
- 379 0104 0121     		movs	r1, #1
- 380 0106 5448     		ldr	r0, .L32+48
- 381 0108 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 382              	.LVL36:
- 122:Src/main.c    ****         }
- 383              		.loc 1 122 0
- 384 010c 5448     		ldr	r0, .L32+56
-ARM GAS  /tmp/ccQJoExb.s 			page 13
+ 331 00b0 FFF7FEFF 		bl	printf
+ 332              	.LVL30:
+ 119:Src/main.c    ****       {
+ 333              		.loc 1 119 0
+ 334 00b4 0A22     		movs	r2, #10
+ 335 00b6 6949     		ldr	r1, .L31+36
+ 336 00b8 2846     		mov	r0, r5
+ 337 00ba FFF7FEFF 		bl	strncmp
+ 338              	.LVL31:
+ 339 00be 78B1     		cbz	r0, .L24
+ 132:Src/main.c    ****       {
+ 340              		.loc 1 132 0
+ 341 00c0 0A22     		movs	r2, #10
+ 342 00c2 6749     		ldr	r1, .L31+40
+ 343 00c4 6348     		ldr	r0, .L31+28
+ 344 00c6 FFF7FEFF 		bl	strncmp
+ 345              	.LVL32:
+ 346 00ca 20B3     		cbz	r0, .L25
+ 136:Src/main.c    ****       {
+ 347              		.loc 1 136 0
+ 348 00cc 0B22     		movs	r2, #11
+ 349 00ce 6549     		ldr	r1, .L31+44
+ 350 00d0 6048     		ldr	r0, .L31+28
+ 351 00d2 FFF7FEFF 		bl	strncmp
+ 352              	.LVL33:
+ 353 00d6 18B3     		cbz	r0, .L26
+ 354              	.L17:
+ 145:Src/main.c    ****     }
+ 355              		.loc 1 145 0
+ 356 00d8 5E48     		ldr	r0, .L31+28
+ 357 00da FFF7FEFF 		bl	ResetUartrRx
+ 358              	.LVL34:
+ 359 00de 61E0     		b	.L14
+ 360              	.L24:
+ 121:Src/main.c    ****         {
+ 361              		.loc 1 121 0
+ 362 00e0 0121     		movs	r1, #1
+ 363 00e2 00F18040 		add	r0, r0, #1073741824
+ 364 00e6 00F50130 		add	r0, r0, #132096
+ 365 00ea FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 366              	.LVL35:
+ 367 00ee 0128     		cmp	r0, #1
+ 368 00f0 08D0     		beq	.L27
+ 128:Src/main.c    ****             printf("LED_OFF\n");
+ 369              		.loc 1 128 0
+ 370 00f2 0122     		movs	r2, #1
+ 371 00f4 1146     		mov	r1, r2
+ 372 00f6 5C48     		ldr	r0, .L31+48
+ 373 00f8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 374              	.LVL36:
+ 129:Src/main.c    ****         }			
+ 375              		.loc 1 129 0
+ 376 00fc 5B48     		ldr	r0, .L31+52
+ 377 00fe FFF7FEFF 		bl	puts
+ 378              	.LVL37:
+ 379 0102 E9E7     		b	.L17
+ 380              	.L27:
+ARM GAS  /tmp/cc6prtYI.s 			page 13
 
 
- 385 010e FFF7FEFF 		bl	puts
- 386              	.LVL37:
- 387 0112 E0E7     		b	.L17
- 388              	.L26:
- 132:Src/main.c    ****       }
- 389              		.loc 1 132 0
- 390 0114 AA21     		movs	r1, #170
- 391 0116 1E20     		movs	r0, #30
- 392 0118 FFF7FEFF 		bl	fsmc_sdram_test
- 393              	.LVL38:
- 394 011c DBE7     		b	.L17
- 395              	.L27:
- 396              	.LBB4:
- 136:Src/main.c    ****            printf("Write:%s\n",buf);
- 397              		.loc 1 136 0
- 398 011e 02AC     		add	r4, sp, #8
- 399 0120 504D     		ldr	r5, .L32+60
- 400 0122 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
- 401 0124 0FC4     		stmia	r4!, {r0, r1, r2, r3}
- 402 0126 2B68     		ldr	r3, [r5]
- 403 0128 2360     		str	r3, [r4]
- 404 012a 5022     		movs	r2, #80
- 405 012c 0021     		movs	r1, #0
- 406 012e 07A8     		add	r0, sp, #28
- 407 0130 FFF7FEFF 		bl	memset
- 408              	.LVL39:
- 137:Src/main.c    ****            FMC_SDRAM_WriteBuffer((uint8_t*)buf,0,strlen(buf));
- 409              		.loc 1 137 0
- 410 0134 02A9     		add	r1, sp, #8
- 411 0136 4C48     		ldr	r0, .L32+64
- 412 0138 FFF7FEFF 		bl	printf
- 413              	.LVL40:
- 138:Src/main.c    ****            memset(buf,0,100);
- 414              		.loc 1 138 0
- 415 013c 02A8     		add	r0, sp, #8
- 416 013e FFF7FEFF 		bl	strlen
- 417              	.LVL41:
- 418 0142 0246     		mov	r2, r0
- 419 0144 0021     		movs	r1, #0
- 420 0146 02A8     		add	r0, sp, #8
- 421 0148 FFF7FEFF 		bl	FMC_SDRAM_WriteBuffer
- 422              	.LVL42:
- 139:Src/main.c    ****            FMC_SDRAM_ReadBuffer((uint8_t*)buf,0,100);
- 423              		.loc 1 139 0
- 424 014c 6424     		movs	r4, #100
- 425 014e 2246     		mov	r2, r4
- 426 0150 0021     		movs	r1, #0
- 427 0152 02A8     		add	r0, sp, #8
- 428 0154 FFF7FEFF 		bl	memset
- 429              	.LVL43:
- 140:Src/main.c    ****            printf("Read:%s\n",buf);    
- 430              		.loc 1 140 0
- 431 0158 2246     		mov	r2, r4
- 432 015a 0021     		movs	r1, #0
- 433 015c 02A8     		add	r0, sp, #8
- 434 015e FFF7FEFF 		bl	FMC_SDRAM_ReadBuffer
- 435              	.LVL44:
-ARM GAS  /tmp/ccQJoExb.s 			page 14
+ 123:Src/main.c    ****           printf("LED_ON\n");
+ 381              		.loc 1 123 0
+ 382 0104 0022     		movs	r2, #0
+ 383 0106 0121     		movs	r1, #1
+ 384 0108 5748     		ldr	r0, .L31+48
+ 385 010a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 386              	.LVL38:
+ 124:Src/main.c    ****         }
+ 387              		.loc 1 124 0
+ 388 010e 5848     		ldr	r0, .L31+56
+ 389 0110 FFF7FEFF 		bl	puts
+ 390              	.LVL39:
+ 391 0114 E0E7     		b	.L17
+ 392              	.L25:
+ 134:Src/main.c    ****       }
+ 393              		.loc 1 134 0
+ 394 0116 AA21     		movs	r1, #170
+ 395 0118 1E20     		movs	r0, #30
+ 396 011a FFF7FEFF 		bl	fsmc_sdram_test
+ 397              	.LVL40:
+ 398 011e DBE7     		b	.L17
+ 399              	.L26:
+ 400              	.LBB4:
+ 138:Src/main.c    ****            printf("Write:%s\n",buf);
+ 401              		.loc 1 138 0
+ 402 0120 02AD     		add	r5, sp, #8
+ 403 0122 544E     		ldr	r6, .L31+60
+ 404 0124 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 405 0126 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 406 0128 3368     		ldr	r3, [r6]
+ 407 012a 2B60     		str	r3, [r5]
+ 408 012c 5022     		movs	r2, #80
+ 409 012e 0021     		movs	r1, #0
+ 410 0130 07A8     		add	r0, sp, #28
+ 411 0132 FFF7FEFF 		bl	memset
+ 412              	.LVL41:
+ 139:Src/main.c    ****            FMC_SDRAM_WriteBuffer((uint8_t*)buf,0,strlen(buf));
+ 413              		.loc 1 139 0
+ 414 0136 02A9     		add	r1, sp, #8
+ 415 0138 4F48     		ldr	r0, .L31+64
+ 416 013a FFF7FEFF 		bl	printf
+ 417              	.LVL42:
+ 140:Src/main.c    ****            memset(buf,0,100);
+ 418              		.loc 1 140 0
+ 419 013e 02A8     		add	r0, sp, #8
+ 420 0140 FFF7FEFF 		bl	strlen
+ 421              	.LVL43:
+ 422 0144 0246     		mov	r2, r0
+ 423 0146 0021     		movs	r1, #0
+ 424 0148 02A8     		add	r0, sp, #8
+ 425 014a FFF7FEFF 		bl	FMC_SDRAM_WriteBuffer
+ 426              	.LVL44:
+ 141:Src/main.c    ****            FMC_SDRAM_ReadBuffer((uint8_t*)buf,0,100);
+ 427              		.loc 1 141 0
+ 428 014e 6425     		movs	r5, #100
+ 429 0150 2A46     		mov	r2, r5
+ 430 0152 0021     		movs	r1, #0
+ARM GAS  /tmp/cc6prtYI.s 			page 14
 
 
- 141:Src/main.c    ****       }
- 436              		.loc 1 141 0
- 437 0162 02A9     		add	r1, sp, #8
- 438 0164 4148     		ldr	r0, .L32+68
- 439 0166 FFF7FEFF 		bl	printf
- 440              	.LVL45:
- 441 016a B4E7     		b	.L17
- 442              	.L31:
- 443              	.LBE4:
- 444              	.LBB5:
- 153:Src/main.c    ****       }
- 445              		.loc 1 153 0
- 446 016c 0022     		movs	r2, #0
- 447 016e 0121     		movs	r1, #1
- 448 0170 3948     		ldr	r0, .L32+48
- 449 0172 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 450              	.LVL46:
- 451              	.L19:
- 452              	.LBE5:
- 160:Src/main.c    ****     {
- 453              		.loc 1 160 0
- 454 0176 FFF7FEFF 		bl	KEY_Scan
- 455              	.LVL47:
- 456 017a 0828     		cmp	r0, #8
- 457 017c 2AD0     		beq	.L29
- 458              	.L22:
- 167:Src/main.c    **** //			if(!dir)	cout--;
- 459              		.loc 1 167 0
- 460 017e 0A20     		movs	r0, #10
- 461 0180 FFF7FEFF 		bl	HAL_Delay
- 462              	.LVL48:
- 463              	.L23:
- 114:Src/main.c    ****     {
- 464              		.loc 1 114 0
- 465 0184 2F4B     		ldr	r3, .L32+28
- 466 0186 93F8D030 		ldrb	r3, [r3, #208]	@ zero_extendqisi2
- 467 018a 012B     		cmp	r3, #1
- 468 018c 8CD0     		beq	.L30
- 469              	.L14:
- 146:Src/main.c    ****     {
- 470              		.loc 1 146 0
- 471 018e 0020     		movs	r0, #0
- 472 0190 FFF7FEFF 		bl	TPAD_Scan
- 473              	.LVL49:
- 474 0194 0028     		cmp	r0, #0
- 475 0196 EED0     		beq	.L19
- 476              	.LBB6:
- 149:Src/main.c    ****       LCD_ShowString(10,170,240,32,32,snumbuf);
- 477              		.loc 1 149 0
- 478 0198 6421     		movs	r1, #100
- 479 019a 0020     		movs	r0, #0
- 480 019c FFF7FEFF 		bl	RNG_Get_RandomRange
- 481              	.LVL50:
- 482 01a0 02AC     		add	r4, sp, #8
- 483 01a2 0246     		mov	r2, r0
- 484 01a4 3249     		ldr	r1, .L32+72
- 485 01a6 2046     		mov	r0, r4
-ARM GAS  /tmp/ccQJoExb.s 			page 15
+ 431 0154 02A8     		add	r0, sp, #8
+ 432 0156 FFF7FEFF 		bl	memset
+ 433              	.LVL45:
+ 142:Src/main.c    ****            printf("Read:%s\n",buf);    
+ 434              		.loc 1 142 0
+ 435 015a 2A46     		mov	r2, r5
+ 436 015c 0021     		movs	r1, #0
+ 437 015e 02A8     		add	r0, sp, #8
+ 438 0160 FFF7FEFF 		bl	FMC_SDRAM_ReadBuffer
+ 439              	.LVL46:
+ 143:Src/main.c    ****       }
+ 440              		.loc 1 143 0
+ 441 0164 02A9     		add	r1, sp, #8
+ 442 0166 4548     		ldr	r0, .L31+68
+ 443 0168 FFF7FEFF 		bl	printf
+ 444              	.LVL47:
+ 445 016c B4E7     		b	.L17
+ 446              	.L30:
+ 447              	.LBE4:
+ 150:Src/main.c    ****       {
+ 448              		.loc 1 150 0
+ 449 016e 0121     		movs	r1, #1
+ 450 0170 3D48     		ldr	r0, .L31+48
+ 451 0172 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 452              	.LVL48:
+ 453 0176 0128     		cmp	r0, #1
+ 454 0178 05D0     		beq	.L28
+ 156:Src/main.c    ****       }		        	
+ 455              		.loc 1 156 0
+ 456 017a 0122     		movs	r2, #1
+ 457 017c 1146     		mov	r1, r2
+ 458 017e 3A48     		ldr	r0, .L31+48
+ 459 0180 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 460              	.LVL49:
+ 461 0184 13E0     		b	.L19
+ 462              	.L28:
+ 152:Src/main.c    ****       }
+ 463              		.loc 1 152 0
+ 464 0186 0022     		movs	r2, #0
+ 465 0188 0121     		movs	r1, #1
+ 466 018a 3748     		ldr	r0, .L31+48
+ 467 018c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 468              	.LVL50:
+ 469 0190 0DE0     		b	.L19
+ 470              	.LVL51:
+ 471              	.L21:
+ 172:Src/main.c    ****     loopcout++;
+ 472              		.loc 1 172 0
+ 473 0192 0A20     		movs	r0, #10
+ 474 0194 FFF7FEFF 		bl	HAL_Delay
+ 475              	.LVL52:
+ 173:Src/main.c    **** //			if(!dir)	cout--;
+ 476              		.loc 1 173 0
+ 477 0198 0134     		adds	r4, r4, #1
+ 478              	.LVL53:
+ 479              	.L22:
+ 116:Src/main.c    ****     {
+ARM GAS  /tmp/cc6prtYI.s 			page 15
 
 
- 486 01a8 FFF7FEFF 		bl	sprintf
- 487              	.LVL51:
- 150:Src/main.c    ****       if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
- 488              		.loc 1 150 0
- 489 01ac 0194     		str	r4, [sp, #4]
- 490 01ae 2023     		movs	r3, #32
- 491 01b0 0093     		str	r3, [sp]
- 492 01b2 F022     		movs	r2, #240
- 493 01b4 AA21     		movs	r1, #170
- 494 01b6 0A20     		movs	r0, #10
- 495 01b8 FFF7FEFF 		bl	LCD_ShowString
- 496              	.LVL52:
- 151:Src/main.c    ****       {
- 497              		.loc 1 151 0
- 498 01bc 0121     		movs	r1, #1
- 499 01be 2648     		ldr	r0, .L32+48
- 500 01c0 FFF7FEFF 		bl	HAL_GPIO_ReadPin
- 501              	.LVL53:
- 502 01c4 0128     		cmp	r0, #1
- 503 01c6 D1D0     		beq	.L31
- 157:Src/main.c    ****       }		        	
- 504              		.loc 1 157 0
- 505 01c8 0122     		movs	r2, #1
- 506 01ca 1146     		mov	r1, r2
- 507 01cc 2248     		ldr	r0, .L32+48
- 508 01ce FFF7FEFF 		bl	HAL_GPIO_WritePin
- 509              	.LVL54:
- 510 01d2 D0E7     		b	.L19
- 511              	.L29:
- 512              	.LBE6:
- 513              	.LBB7:
- 163:Src/main.c    ****       sprintf(snumbuf,"adc:%d.%d C",(int)temp,(int)(temp*100)%100);
- 514              		.loc 1 163 0
- 515 01d4 FFF7FEFF 		bl	Get_Temprate
- 516              	.LVL55:
- 517 01d8 57EC106B 		vmov	r6, r7, d0
- 518              	.LVL56:
- 164:Src/main.c    ****       LCD_ShowString(10,200,240,32,32,snumbuf);
- 519              		.loc 1 164 0
- 520 01dc 0022     		movs	r2, #0
- 521 01de 254B     		ldr	r3, .L32+76
- 522 01e0 10EE100A 		vmov	r0, s0	@ int
- 523 01e4 3946     		mov	r1, r7
- 524 01e6 FFF7FEFF 		bl	__aeabi_dmul
- 525              	.LVL57:
- 526 01ea FFF7FEFF 		bl	__aeabi_d2iz
- 527              	.LVL58:
- 528 01ee 224B     		ldr	r3, .L32+80
- 529 01f0 83FB0023 		smull	r2, r3, r3, r0
- 530 01f4 C417     		asrs	r4, r0, #31
- 531 01f6 C4EB6314 		rsb	r4, r4, r3, asr #5
- 532 01fa 6423     		movs	r3, #100
- 533 01fc 03FB1404 		mls	r4, r3, r4, r0
- 534 0200 3046     		mov	r0, r6
- 535 0202 3946     		mov	r1, r7
- 536 0204 FFF7FEFF 		bl	__aeabi_d2iz
- 537              	.LVL59:
-ARM GAS  /tmp/ccQJoExb.s 			page 16
+ 480              		.loc 1 116 0
+ 481 019a 2E4B     		ldr	r3, .L31+28
+ 482 019c 93F8D030 		ldrb	r3, [r3, #208]	@ zero_extendqisi2
+ 483 01a0 012B     		cmp	r3, #1
+ 484 01a2 82D0     		beq	.L29
+ 485              	.L14:
+ 148:Src/main.c    ****     {
+ 486              		.loc 1 148 0
+ 487 01a4 0020     		movs	r0, #0
+ 488 01a6 FFF7FEFF 		bl	TPAD_Scan
+ 489              	.LVL54:
+ 490 01aa 0028     		cmp	r0, #0
+ 491 01ac DFD1     		bne	.L30
+ 492              	.L19:
+ 159:Src/main.c    ****     {
+ 493              		.loc 1 159 0
+ 494 01ae 1D2C     		cmp	r4, #29
+ 495 01b0 EFDD     		ble	.L21
+ 496              	.LBB5:
+ 163:Src/main.c    ****       LCD_ShowString(10,170,240,32,32,snumbuf);
+ 497              		.loc 1 163 0
+ 498 01b2 6421     		movs	r1, #100
+ 499 01b4 0020     		movs	r0, #0
+ 500 01b6 FFF7FEFF 		bl	RNG_Get_RandomRange
+ 501              	.LVL55:
+ 502 01ba 02AD     		add	r5, sp, #8
+ 503 01bc 0246     		mov	r2, r0
+ 504 01be 3049     		ldr	r1, .L31+72
+ 505 01c0 2846     		mov	r0, r5
+ 506 01c2 FFF7FEFF 		bl	sprintf
+ 507              	.LVL56:
+ 164:Src/main.c    ****       memset(snumbuf,0,20);
+ 508              		.loc 1 164 0
+ 509 01c6 0195     		str	r5, [sp, #4]
+ 510 01c8 2026     		movs	r6, #32
+ 511 01ca 0096     		str	r6, [sp]
+ 512 01cc 3346     		mov	r3, r6
+ 513 01ce F022     		movs	r2, #240
+ 514 01d0 AA21     		movs	r1, #170
+ 515 01d2 0A20     		movs	r0, #10
+ 516 01d4 FFF7FEFF 		bl	LCD_ShowString
+ 517              	.LVL57:
+ 165:Src/main.c    ****       /***********************ADC 内部温度实验***********************/
+ 518              		.loc 1 165 0
+ 519 01d8 0024     		movs	r4, #0
+ 520              	.LVL58:
+ 521 01da 0294     		str	r4, [sp, #8]
+ 522 01dc 6C60     		str	r4, [r5, #4]
+ 523 01de AC60     		str	r4, [r5, #8]
+ 524 01e0 EC60     		str	r4, [r5, #12]
+ 525 01e2 2C61     		str	r4, [r5, #16]
+ 167:Src/main.c    ****       sprintf(snumbuf,"adc:%d.%d C",(int)temp,(int)(temp*100)%100);
+ 526              		.loc 1 167 0
+ 527 01e4 FFF7FEFF 		bl	Get_Temprate
+ 528              	.LVL59:
+ 529 01e8 5BEC10AB 		vmov	r10, fp, d0
+ 530              	.LVL60:
+ARM GAS  /tmp/cc6prtYI.s 			page 16
 
 
- 538 0208 02AD     		add	r5, sp, #8
- 539 020a 2346     		mov	r3, r4
- 540 020c 0246     		mov	r2, r0
- 541 020e 1B49     		ldr	r1, .L32+84
- 542 0210 2846     		mov	r0, r5
- 543 0212 FFF7FEFF 		bl	sprintf
- 544              	.LVL60:
- 165:Src/main.c    ****     }
- 545              		.loc 1 165 0
- 546 0216 0195     		str	r5, [sp, #4]
- 547 0218 2023     		movs	r3, #32
- 548 021a 0093     		str	r3, [sp]
- 549 021c F022     		movs	r2, #240
- 550 021e C821     		movs	r1, #200
- 551 0220 0A20     		movs	r0, #10
- 552 0222 FFF7FEFF 		bl	LCD_ShowString
- 553              	.LVL61:
- 554 0226 AAE7     		b	.L22
- 555              	.L33:
- 556              		.align	2
- 557              	.L32:
- 558 0228 00000000 		.word	.LC1
- 559 022c 00000000 		.word	lcddev
- 560 0230 24000000 		.word	.LC2
- 561 0234 30000000 		.word	.LC3
- 562 0238 44000000 		.word	.LC4
- 563 023c 50000000 		.word	.LC5
- 564 0240 60000000 		.word	.LC6
- 565 0244 00000000 		.word	pcUsart2RX
- 566 0248 6C000000 		.word	.LC7
- 567 024c 78000000 		.word	.LC8
- 568 0250 94000000 		.word	.LC11
- 569 0254 A0000000 		.word	.LC12
- 570 0258 00040240 		.word	1073873920
- 571 025c 8C000000 		.word	.LC10
- 572 0260 84000000 		.word	.LC9
- 573 0264 00000000 		.word	.LANCHOR0
- 574 0268 AC000000 		.word	.LC14
- 575 026c B8000000 		.word	.LC15
- 576 0270 C4000000 		.word	.LC16
- 577 0274 00005940 		.word	1079574528
- 578 0278 1F85EB51 		.word	1374389535
- 579 027c D0000000 		.word	.LC17
- 580              	.LBE7:
- 581              		.cfi_endproc
- 582              	.LFE124:
- 584              		.section	.rodata
- 585              		.align	2
- 586              		.set	.LANCHOR0,. + 0
- 587              	.LC13:
- 588 0000 53445241 		.ascii	"SDRAM TEST STRING!!\000"
- 588      4D205445 
- 588      53542053 
- 588      5452494E 
- 588      47212100 
- 589 0014 00000000 		.space	80
- 589      00000000 
-ARM GAS  /tmp/ccQJoExb.s 			page 17
+ 168:Src/main.c    ****       LCD_ShowString(10,200,240,32,32,snumbuf);
+ 531              		.loc 1 168 0
+ 532 01ec 0022     		movs	r2, #0
+ 533 01ee 254B     		ldr	r3, .L31+76
+ 534 01f0 10EE100A 		vmov	r0, s0	@ int
+ 535 01f4 5946     		mov	r1, fp
+ 536 01f6 FFF7FEFF 		bl	__aeabi_dmul
+ 537              	.LVL61:
+ 538 01fa FFF7FEFF 		bl	__aeabi_d2iz
+ 539              	.LVL62:
+ 540 01fe 224B     		ldr	r3, .L31+80
+ 541 0200 83FB0023 		smull	r2, r3, r3, r0
+ 542 0204 4FEAE078 		asr	r8, r0, #31
+ 543 0208 C8EB6318 		rsb	r8, r8, r3, asr #5
+ 544 020c 6423     		movs	r3, #100
+ 545 020e 03FB1808 		mls	r8, r3, r8, r0
+ 546 0212 5046     		mov	r0, r10
+ 547 0214 5946     		mov	r1, fp
+ 548 0216 FFF7FEFF 		bl	__aeabi_d2iz
+ 549              	.LVL63:
+ 550 021a 4346     		mov	r3, r8
+ 551 021c 0246     		mov	r2, r0
+ 552 021e 1B49     		ldr	r1, .L31+84
+ 553 0220 2846     		mov	r0, r5
+ 554 0222 FFF7FEFF 		bl	sprintf
+ 555              	.LVL64:
+ 169:Src/main.c    ****       loopcout = 0;
+ 556              		.loc 1 169 0
+ 557 0226 0195     		str	r5, [sp, #4]
+ 558 0228 0096     		str	r6, [sp]
+ 559 022a 3346     		mov	r3, r6
+ 560 022c F022     		movs	r2, #240
+ 561 022e C821     		movs	r1, #200
+ 562 0230 0A20     		movs	r0, #10
+ 563 0232 FFF7FEFF 		bl	LCD_ShowString
+ 564              	.LVL65:
+ 565 0236 ACE7     		b	.L21
+ 566              	.L32:
+ 567              		.align	2
+ 568              	.L31:
+ 569 0238 00000000 		.word	.LC1
+ 570 023c 00000000 		.word	lcddev
+ 571 0240 24000000 		.word	.LC2
+ 572 0244 30000000 		.word	.LC3
+ 573 0248 44000000 		.word	.LC4
+ 574 024c 50000000 		.word	.LC5
+ 575 0250 60000000 		.word	.LC6
+ 576 0254 00000000 		.word	pcUsart2RX
+ 577 0258 6C000000 		.word	.LC7
+ 578 025c 78000000 		.word	.LC8
+ 579 0260 94000000 		.word	.LC11
+ 580 0264 A0000000 		.word	.LC12
+ 581 0268 00040240 		.word	1073873920
+ 582 026c 8C000000 		.word	.LC10
+ 583 0270 84000000 		.word	.LC9
+ 584 0274 00000000 		.word	.LANCHOR0
+ 585 0278 AC000000 		.word	.LC14
+ARM GAS  /tmp/cc6prtYI.s 			page 17
 
 
- 589      00000000 
- 589      00000000 
- 589      00000000 
- 590              		.section	.rodata.SystemClock_Config.str1.4,"aMS",%progbits,1
- 591              		.align	2
- 592              	.LC0:
- 593 0000 5372632F 		.ascii	"Src/main.c\000"
- 593      6D61696E 
- 593      2E6300
- 594              		.section	.rodata.main.str1.4,"aMS",%progbits,1
- 595              		.align	2
- 596              	.LC1:
- 597 0000 2A2A2A2A 		.ascii	"***********SYSTEM INIT***********\000"
- 597      2A2A2A2A 
- 597      2A2A2A53 
- 597      59535445 
- 597      4D20494E 
- 598 0022 0000     		.space	2
- 599              	.LC2:
- 600 0024 4C434420 		.ascii	"LCD ID:%04X\000"
- 600      49443A25 
- 600      30345800 
- 601              	.LC3:
- 602 0030 41706F6C 		.ascii	"Apollo STM32F4/F7\000"
- 602      6C6F2053 
- 602      544D3332 
- 602      46342F46 
- 602      3700
- 603 0042 0000     		.space	2
- 604              	.LC4:
- 605 0044 5446544C 		.ascii	"TFTLCD TEST\000"
- 605      43442054 
- 605      45535400 
- 606              	.LC5:
- 607 0050 41544F4D 		.ascii	"ATOM@ALIENTEK\000"
- 607      40414C49 
- 607      454E5445 
- 607      4B00
- 608 005e 0000     		.space	2
- 609              	.LC6:
- 610 0060 32303138 		.ascii	"2018/10/6\000"
- 610      2F31302F 
- 610      3600
- 611 006a 0000     		.space	2
- 612              	.LC7:
- 613 006c 25732028 		.ascii	"%s (OK)\012\000"
- 613      4F4B290A 
- 613      00
- 614 0075 000000   		.space	3
- 615              	.LC8:
- 616 0078 4C45445F 		.ascii	"LED_CHANGE\000"
- 616      4348414E 
- 616      474500
- 617 0083 00       		.space	1
- 618              	.LC9:
- 619 0084 4C45445F 		.ascii	"LED_ON\000"
- 619      4F4E00
-ARM GAS  /tmp/ccQJoExb.s 			page 18
+ 586 027c B8000000 		.word	.LC15
+ 587 0280 C4000000 		.word	.LC16
+ 588 0284 00005940 		.word	1079574528
+ 589 0288 1F85EB51 		.word	1374389535
+ 590 028c D0000000 		.word	.LC17
+ 591              	.LBE5:
+ 592              		.cfi_endproc
+ 593              	.LFE124:
+ 595              		.section	.rodata
+ 596              		.align	2
+ 597              		.set	.LANCHOR0,. + 0
+ 598              	.LC13:
+ 599 0000 53445241 		.ascii	"SDRAM TEST STRING!!\000"
+ 599      4D205445 
+ 599      53542053 
+ 599      5452494E 
+ 599      47212100 
+ 600 0014 00000000 		.space	80
+ 600      00000000 
+ 600      00000000 
+ 600      00000000 
+ 600      00000000 
+ 601              		.section	.rodata.SystemClock_Config.str1.4,"aMS",%progbits,1
+ 602              		.align	2
+ 603              	.LC0:
+ 604 0000 5372632F 		.ascii	"Src/main.c\000"
+ 604      6D61696E 
+ 604      2E6300
+ 605              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 606              		.align	2
+ 607              	.LC1:
+ 608 0000 2A2A2A2A 		.ascii	"***********SYSTEM INIT***********\000"
+ 608      2A2A2A2A 
+ 608      2A2A2A53 
+ 608      59535445 
+ 608      4D20494E 
+ 609 0022 0000     		.space	2
+ 610              	.LC2:
+ 611 0024 4C434420 		.ascii	"LCD ID:%04X\000"
+ 611      49443A25 
+ 611      30345800 
+ 612              	.LC3:
+ 613 0030 41706F6C 		.ascii	"Apollo STM32F4/F7\000"
+ 613      6C6F2053 
+ 613      544D3332 
+ 613      46342F46 
+ 613      3700
+ 614 0042 0000     		.space	2
+ 615              	.LC4:
+ 616 0044 5446544C 		.ascii	"TFTLCD TEST\000"
+ 616      43442054 
+ 616      45535400 
+ 617              	.LC5:
+ 618 0050 41544F4D 		.ascii	"ATOM@ALIENTEK\000"
+ 618      40414C49 
+ 618      454E5445 
+ 618      4B00
+ARM GAS  /tmp/cc6prtYI.s 			page 18
 
 
- 620 008b 00       		.space	1
- 621              	.LC10:
- 622 008c 4C45445F 		.ascii	"LED_OFF\000"
- 622      4F464600 
- 623              	.LC11:
- 624 0094 53445241 		.ascii	"SDRAM_TEST\000"
- 624      4D5F5445 
- 624      535400
- 625 009f 00       		.space	1
- 626              	.LC12:
- 627 00a0 53445241 		.ascii	"SDRAM_PRINT\000"
- 627      4D5F5052 
- 627      494E5400 
- 628              	.LC14:
- 629 00ac 57726974 		.ascii	"Write:%s\012\000"
- 629      653A2573 
- 629      0A00
- 630 00b6 0000     		.space	2
- 631              	.LC15:
- 632 00b8 52656164 		.ascii	"Read:%s\012\000"
- 632      3A25730A 
- 632      00
- 633 00c1 000000   		.space	3
- 634              	.LC16:
- 635 00c4 726F6E64 		.ascii	"rondom:%03d\000"
- 635      6F6D3A25 
- 635      30336400 
- 636              	.LC17:
- 637 00d0 6164633A 		.ascii	"adc:%d.%d C\000"
- 637      25642E25 
- 637      64204300 
- 638              		.text
- 639              	.Letext0:
- 640              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 641              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 642              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
- 643              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
- 644              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
- 645              		.file 7 "/usr/include/newlib/sys/lock.h"
- 646              		.file 8 "/usr/include/newlib/sys/_types.h"
- 647              		.file 9 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
- 648              		.file 10 "/usr/include/newlib/sys/reent.h"
- 649              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 650              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h"
- 651              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h"
- 652              		.file 14 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
- 653              		.file 15 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 654              		.file 16 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fmc.h"
- 655              		.file 17 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sram.h"
- 656              		.file 18 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sdram.h"
- 657              		.file 19 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
- 658              		.file 20 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 659              		.file 21 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h"
- 660              		.file 22 "Inc/bsp_gpio.h"
- 661              		.file 23 "Inc/bsp_usart.h"
- 662              		.file 24 "Inc/bsp_tim.h"
- 663              		.file 25 "Inc/bsp_tftlcd.h"
-ARM GAS  /tmp/ccQJoExb.s 			page 19
+ 619 005e 0000     		.space	2
+ 620              	.LC6:
+ 621 0060 32303138 		.ascii	"2018/10/6\000"
+ 621      2F31302F 
+ 621      3600
+ 622 006a 0000     		.space	2
+ 623              	.LC7:
+ 624 006c 25732028 		.ascii	"%s (OK)\012\000"
+ 624      4F4B290A 
+ 624      00
+ 625 0075 000000   		.space	3
+ 626              	.LC8:
+ 627 0078 4C45445F 		.ascii	"LED_CHANGE\000"
+ 627      4348414E 
+ 627      474500
+ 628 0083 00       		.space	1
+ 629              	.LC9:
+ 630 0084 4C45445F 		.ascii	"LED_ON\000"
+ 630      4F4E00
+ 631 008b 00       		.space	1
+ 632              	.LC10:
+ 633 008c 4C45445F 		.ascii	"LED_OFF\000"
+ 633      4F464600 
+ 634              	.LC11:
+ 635 0094 53445241 		.ascii	"SDRAM_TEST\000"
+ 635      4D5F5445 
+ 635      535400
+ 636 009f 00       		.space	1
+ 637              	.LC12:
+ 638 00a0 53445241 		.ascii	"SDRAM_PRINT\000"
+ 638      4D5F5052 
+ 638      494E5400 
+ 639              	.LC14:
+ 640 00ac 57726974 		.ascii	"Write:%s\012\000"
+ 640      653A2573 
+ 640      0A00
+ 641 00b6 0000     		.space	2
+ 642              	.LC15:
+ 643 00b8 52656164 		.ascii	"Read:%s\012\000"
+ 643      3A25730A 
+ 643      00
+ 644 00c1 000000   		.space	3
+ 645              	.LC16:
+ 646 00c4 726F6E64 		.ascii	"rondom:%03d\000"
+ 646      6F6D3A25 
+ 646      30336400 
+ 647              	.LC17:
+ 648 00d0 6164633A 		.ascii	"adc:%d.%d C\000"
+ 648      25642E25 
+ 648      64204300 
+ 649              		.text
+ 650              	.Letext0:
+ 651              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 652              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 653              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 654              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 655              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ARM GAS  /tmp/cc6prtYI.s 			page 19
 
 
- 664              		.file 26 "Inc/bsp_sdram.h"
- 665              		.file 27 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h"
- 666              		.file 28 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
- 667              		.file 29 "/usr/include/newlib/stdio.h"
- 668              		.file 30 "/usr/include/newlib/string.h"
- 669              		.file 31 "Inc/bsp_adc.h"
- 670              		.file 32 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
- 671              		.file 33 "Inc/bsp_tpad.h"
- 672              		.file 34 "<built-in>"
-ARM GAS  /tmp/ccQJoExb.s 			page 20
+ 656              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 657              		.file 8 "/usr/include/newlib/sys/_types.h"
+ 658              		.file 9 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 659              		.file 10 "/usr/include/newlib/sys/reent.h"
+ 660              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 661              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h"
+ 662              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h"
+ 663              		.file 14 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 664              		.file 15 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 665              		.file 16 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fmc.h"
+ 666              		.file 17 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sram.h"
+ 667              		.file 18 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sdram.h"
+ 668              		.file 19 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 669              		.file 20 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 670              		.file 21 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h"
+ 671              		.file 22 "Inc/bsp_gpio.h"
+ 672              		.file 23 "Inc/bsp_usart.h"
+ 673              		.file 24 "Inc/bsp_tim.h"
+ 674              		.file 25 "Inc/bsp_tftlcd.h"
+ 675              		.file 26 "Inc/bsp_sdram.h"
+ 676              		.file 27 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h"
+ 677              		.file 28 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
+ 678              		.file 29 "/usr/include/newlib/stdio.h"
+ 679              		.file 30 "/usr/include/newlib/string.h"
+ 680              		.file 31 "Inc/bsp_adc.h"
+ 681              		.file 32 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 682              		.file 33 "Inc/bsp_tpad.h"
+ 683              		.file 34 "<built-in>"
+ARM GAS  /tmp/cc6prtYI.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccQJoExb.s:18     .text._Error_Handler:0000000000000000 $t
-     /tmp/ccQJoExb.s:25     .text._Error_Handler:0000000000000000 _Error_Handler
-     /tmp/ccQJoExb.s:41     .text.SystemClock_Config:0000000000000000 $t
-     /tmp/ccQJoExb.s:48     .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/ccQJoExb.s:188    .text.SystemClock_Config:00000000000000c8 $d
-     /tmp/ccQJoExb.s:198    .text.main:0000000000000000 $t
-     /tmp/ccQJoExb.s:205    .text.main:0000000000000000 main
-     /tmp/ccQJoExb.s:558    .text.main:0000000000000228 $d
-     /tmp/ccQJoExb.s:585    .rodata:0000000000000000 $d
-     /tmp/ccQJoExb.s:591    .rodata.SystemClock_Config.str1.4:0000000000000000 $d
-     /tmp/ccQJoExb.s:595    .rodata.main.str1.4:0000000000000000 $d
+     /tmp/cc6prtYI.s:18     .text._Error_Handler:0000000000000000 $t
+     /tmp/cc6prtYI.s:25     .text._Error_Handler:0000000000000000 _Error_Handler
+     /tmp/cc6prtYI.s:41     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/cc6prtYI.s:48     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/cc6prtYI.s:188    .text.SystemClock_Config:00000000000000c8 $d
+     /tmp/cc6prtYI.s:198    .text.main:0000000000000000 $t
+     /tmp/cc6prtYI.s:205    .text.main:0000000000000000 main
+     /tmp/cc6prtYI.s:569    .text.main:0000000000000238 $d
+     /tmp/cc6prtYI.s:596    .rodata:0000000000000000 $d
+     /tmp/cc6prtYI.s:602    .rodata.SystemClock_Config.str1.4:0000000000000000 $d
+     /tmp/cc6prtYI.s:606    .rodata.main.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -1140,7 +1159,6 @@ memset
 strlen
 FMC_SDRAM_WriteBuffer
 FMC_SDRAM_ReadBuffer
-KEY_Scan
 HAL_Delay
 TPAD_Scan
 RNG_Get_RandomRange

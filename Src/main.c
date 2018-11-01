@@ -70,6 +70,7 @@ int main(void)
 //	uint8_t dir = 0;
 //	uint32_t cout = 300;
   char sbuf[20]={0};
+  int loopcout = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -111,6 +112,7 @@ int main(void)
 	/* USER CODE END WHILE */
 			
 	/* USER CODE BEGIN 3 */
+     /***********************串口通讯实验和指令处理***********************/
     if(pcUsart2RX.rflag == 1)
     {
       printf("%s (OK)\n",pcUsart2RX.pcRxbuf);
@@ -142,12 +144,9 @@ int main(void)
       }
       ResetUartrRx(&pcUsart2RX);
     }
-
+    /***********************触摸按键实验***********************/
     if(TPAD_Scan(0))
     {
-      char snumbuf[20];
-      sprintf(snumbuf,"rondom:%03d",RNG_Get_RandomRange(0,100));
-      LCD_ShowString(10,170,240,32,32,snumbuf);
       if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB ,GPIO_PIN_0))
       {
         HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_RESET);
@@ -157,14 +156,21 @@ int main(void)
           HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
       }		        	
     }
-    if(KEY_Scan() == KEY_UP_ON)
+    if(loopcout>=30)
     {
+      /***********************RNG 实验******************************/
       char snumbuf[20];
+      sprintf(snumbuf,"rondom:%03d",RNG_Get_RandomRange(0,100));
+      LCD_ShowString(10,170,240,32,32,snumbuf);
+      memset(snumbuf,0,20);
+      /***********************ADC 内部温度实验***********************/
       double temp = Get_Temprate();
       sprintf(snumbuf,"adc:%d.%d C",(int)temp,(int)(temp*100)%100);
       LCD_ShowString(10,200,240,32,32,snumbuf);
+      loopcout = 0;
     }
     HAL_Delay(10);
+    loopcout++;
 //			if(!dir)	cout--;
 //			else cout++;
 //			if(cout == 0)	dir =1;
