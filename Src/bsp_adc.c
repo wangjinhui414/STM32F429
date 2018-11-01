@@ -32,7 +32,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     HAL_GPIO_Init(GPIOA,&GPIO_Initure);
 }
 
-uint32_t Get_ADC_Value(uint8_t ch)
+uint32_t Get_ADC_Value(uint32_t ch)
 {
     ADC_ChannelConfTypeDef adc1_chanconf;
     adc1_chanconf.Channel = ch;
@@ -44,11 +44,24 @@ uint32_t Get_ADC_Value(uint8_t ch)
     HAL_ADC_PollForConversion(&adc_handle_typedef,10);
     return HAL_ADC_GetValue(&adc_handle_typedef);
 }
-uint32_t Get_ADC_AverageValue(uint8_t ch,uint16_t times)
+uint32_t Get_ADC_AverageValue(uint32_t ch,uint16_t times)
 {
-    uint32_t sum;
+    uint32_t sum = 0;
     uint8_t i=times;
     while(i--)
+    {
         sum+=Get_ADC_Value(ch);
+        HAL_Delay(5);
+    }
     return sum/times;
+}
+double Get_Temprate(void)
+{
+    uint32_t adcx;
+    double temperate;
+    adcx = Get_ADC_AverageValue(ADC_CHANNEL_TEMPSENSOR ,10);
+    //读取内部温度传感器通道,10 次取平均
+    temperate = (float)adcx * (3.3/4096); //电压值
+    temperate = (temperate-0.76)/0.0025 + 25; //转换为温度值
+    return temperate;
 }

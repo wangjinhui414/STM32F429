@@ -157,6 +157,13 @@ int main(void)
           HAL_GPIO_WritePin(GPIOB ,GPIO_PIN_0 , GPIO_PIN_SET);
       }		        	
     }
+    if(KEY_Scan() == KEY_UP_ON)
+    {
+      char snumbuf[20];
+      double temp = Get_Temprate();
+      sprintf(snumbuf,"adc:%d.%d C",(int)temp,(int)(temp*100)%100);
+      LCD_ShowString(10,200,240,32,32,snumbuf);
+    }
     HAL_Delay(10);
 //			if(!dir)	cout--;
 //			else cout++;

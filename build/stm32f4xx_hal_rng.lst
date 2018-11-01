@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccOwoC0J.s 			page 1
+ARM GAS  /tmp/ccHOvpCM.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
   29:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   *
   30:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   31:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   *
-ARM GAS  /tmp/ccOwoC0J.s 			page 2
+ARM GAS  /tmp/ccHOvpCM.s 			page 2
 
 
   32:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   * Redistribution and use in source and binary forms, with or without modification,
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
   86:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   * @}
   87:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   */ 
   88:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c **** /* Private macros ------------------------------------------------------------*/
-ARM GAS  /tmp/ccOwoC0J.s 			page 3
+ARM GAS  /tmp/ccHOvpCM.s 			page 3
 
 
   89:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c **** /* Private functions prototypes ----------------------------------------------*/
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  143:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   /* Initialize the RNG state */
  144:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   hrng->State = HAL_RNG_STATE_READY;
  145:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c **** 
-ARM GAS  /tmp/ccOwoC0J.s 			page 4
+ARM GAS  /tmp/ccHOvpCM.s 			page 4
 
 
  146:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   /* Return function status */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
   39              		.align	1
   40              		.global	HAL_RNG_Init
   41              		.syntax unified
-ARM GAS  /tmp/ccOwoC0J.s 			page 5
+ARM GAS  /tmp/ccHOvpCM.s 			page 5
 
 
   42              		.thumb
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
   87              	.LVL4:
   88 0026 F0E7     		b	.L4
   89              	.LVL5:
-ARM GAS  /tmp/ccOwoC0J.s 			page 6
+ARM GAS  /tmp/ccHOvpCM.s 			page 6
 
 
   90              	.L5:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  157:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   /* Check the RNG handle allocation */
  132              		.loc 1 157 0
  133              		.cfi_startproc
-ARM GAS  /tmp/ccOwoC0J.s 			page 7
+ARM GAS  /tmp/ccHOvpCM.s 			page 7
 
 
  134              		@ args = 0, pretend = 0, frame = 0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  180              		.align	1
  181              		.global	HAL_RNG_GenerateRandomNumber
  182              		.syntax unified
-ARM GAS  /tmp/ccOwoC0J.s 			page 8
+ARM GAS  /tmp/ccHOvpCM.s 			page 8
 
 
  183              		.thumb
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  194              		.loc 1 248 0
  195 0000 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
  196 0002 012B     		cmp	r3, #1
-ARM GAS  /tmp/ccOwoC0J.s 			page 9
+ARM GAS  /tmp/ccHOvpCM.s 			page 9
 
 
  197 0004 28D0     		beq	.L24
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  217 0018 0120     		movs	r0, #1
  218              	.LVL13:
  219              	.L21:
-ARM GAS  /tmp/ccOwoC0J.s 			page 10
+ARM GAS  /tmp/ccHOvpCM.s 			page 10
 
 
  282:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   }
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  260 004c A360     		str	r3, [r4, #8]
  275:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   
  261              		.loc 1 275 0
-ARM GAS  /tmp/ccOwoC0J.s 			page 11
+ARM GAS  /tmp/ccHOvpCM.s 			page 11
 
 
  262 004e 2B60     		str	r3, [r5]
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  301 0000 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
  302 0002 012B     		cmp	r3, #1
  303 0004 14D0     		beq	.L35
-ARM GAS  /tmp/ccOwoC0J.s 			page 12
+ARM GAS  /tmp/ccHOvpCM.s 			page 12
 
 
  304              		.loc 1 301 0 is_stmt 0 discriminator 2
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  335              	.LVL25:
  336 002e 7047     		bx	lr
  337              	.LVL26:
-ARM GAS  /tmp/ccOwoC0J.s 			page 13
+ARM GAS  /tmp/ccHOvpCM.s 			page 13
 
 
  338              	.L35:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  357:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****     /* Clear the clock error flag */
  358:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****     __HAL_RNG_CLEAR_IT(hrng, RNG_IT_CEI|RNG_IT_SEI);
  359:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****     
-ARM GAS  /tmp/ccOwoC0J.s 			page 14
+ARM GAS  /tmp/ccHOvpCM.s 			page 14
 
 
  360:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   }
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  377              	.L39:
  394:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   }
  395:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   else
-ARM GAS  /tmp/ccOwoC0J.s 			page 15
+ARM GAS  /tmp/ccHOvpCM.s 			page 15
 
 
  396:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   {
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  419:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   random32bit = hrng->Instance->DR;
  411              		.loc 1 419 0 discriminator 2
  412 000e 0368     		ldr	r3, [r0]
-ARM GAS  /tmp/ccOwoC0J.s 			page 16
+ARM GAS  /tmp/ccHOvpCM.s 			page 16
 
 
  413 0010 9868     		ldr	r0, [r3, #8]
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  450 0002 7047     		bx	lr
  451              		.cfi_endproc
  452              	.LFE133:
-ARM GAS  /tmp/ccOwoC0J.s 			page 17
+ARM GAS  /tmp/ccHOvpCM.s 			page 17
 
 
  454              		.section	.text.HAL_RNG_ReadyDataCallback,"ax",%progbits
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  485              		.cfi_startproc
  486              		@ args = 0, pretend = 0, frame = 0
  487              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccOwoC0J.s 			page 18
+ARM GAS  /tmp/ccHOvpCM.s 			page 18
 
 
  488              		@ link register save eliminated.
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  537 0026 5A60     		str	r2, [r3, #4]
  538              	.L49:
  363:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****   {
-ARM GAS  /tmp/ccOwoC0J.s 			page 19
+ARM GAS  /tmp/ccHOvpCM.s 			page 19
 
 
  539              		.loc 1 363 0
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  475:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c **** /** @addtogroup RNG_Exported_Functions_Group3
  476:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****  *  @brief   Peripheral State functions 
  477:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c ****  *
-ARM GAS  /tmp/ccOwoC0J.s 			page 20
+ARM GAS  /tmp/ccHOvpCM.s 			page 20
 
 
  478:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c **** @verbatim   
@@ -1191,37 +1191,37 @@ ARM GAS  /tmp/ccOwoC0J.s 			page 1
  605              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  606              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h"
  607              		.file 14 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/ccOwoC0J.s 			page 21
+ARM GAS  /tmp/ccHOvpCM.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal_rng.c
-     /tmp/ccOwoC0J.s:18     .text.HAL_RNG_MspInit:0000000000000000 $t
-     /tmp/ccOwoC0J.s:25     .text.HAL_RNG_MspInit:0000000000000000 HAL_RNG_MspInit
-     /tmp/ccOwoC0J.s:39     .text.HAL_RNG_Init:0000000000000000 $t
-     /tmp/ccOwoC0J.s:46     .text.HAL_RNG_Init:0000000000000000 HAL_RNG_Init
-     /tmp/ccOwoC0J.s:103    .text.HAL_RNG_MspDeInit:0000000000000000 $t
-     /tmp/ccOwoC0J.s:110    .text.HAL_RNG_MspDeInit:0000000000000000 HAL_RNG_MspDeInit
-     /tmp/ccOwoC0J.s:123    .text.HAL_RNG_DeInit:0000000000000000 $t
-     /tmp/ccOwoC0J.s:130    .text.HAL_RNG_DeInit:0000000000000000 HAL_RNG_DeInit
-     /tmp/ccOwoC0J.s:180    .text.HAL_RNG_GenerateRandomNumber:0000000000000000 $t
-     /tmp/ccOwoC0J.s:187    .text.HAL_RNG_GenerateRandomNumber:0000000000000000 HAL_RNG_GenerateRandomNumber
-     /tmp/ccOwoC0J.s:285    .text.HAL_RNG_GenerateRandomNumber_IT:0000000000000000 $t
-     /tmp/ccOwoC0J.s:292    .text.HAL_RNG_GenerateRandomNumber_IT:0000000000000000 HAL_RNG_GenerateRandomNumber_IT
-     /tmp/ccOwoC0J.s:348    .text.HAL_RNG_GetRandomNumber:0000000000000000 $t
-     /tmp/ccOwoC0J.s:355    .text.HAL_RNG_GetRandomNumber:0000000000000000 HAL_RNG_GetRandomNumber
-     /tmp/ccOwoC0J.s:386    .text.HAL_RNG_GetRandomNumber_IT:0000000000000000 $t
-     /tmp/ccOwoC0J.s:393    .text.HAL_RNG_GetRandomNumber_IT:0000000000000000 HAL_RNG_GetRandomNumber_IT
-     /tmp/ccOwoC0J.s:432    .text.HAL_RNG_ReadLastRandomNumber:0000000000000000 $t
-     /tmp/ccOwoC0J.s:439    .text.HAL_RNG_ReadLastRandomNumber:0000000000000000 HAL_RNG_ReadLastRandomNumber
-     /tmp/ccOwoC0J.s:455    .text.HAL_RNG_ReadyDataCallback:0000000000000000 $t
-     /tmp/ccOwoC0J.s:462    .text.HAL_RNG_ReadyDataCallback:0000000000000000 HAL_RNG_ReadyDataCallback
-     /tmp/ccOwoC0J.s:475    .text.HAL_RNG_ErrorCallback:0000000000000000 $t
-     /tmp/ccOwoC0J.s:482    .text.HAL_RNG_ErrorCallback:0000000000000000 HAL_RNG_ErrorCallback
-     /tmp/ccOwoC0J.s:495    .text.HAL_RNG_IRQHandler:0000000000000000 $t
-     /tmp/ccOwoC0J.s:502    .text.HAL_RNG_IRQHandler:0000000000000000 HAL_RNG_IRQHandler
-     /tmp/ccOwoC0J.s:570    .text.HAL_RNG_GetState:0000000000000000 $t
-     /tmp/ccOwoC0J.s:577    .text.HAL_RNG_GetState:0000000000000000 HAL_RNG_GetState
+     /tmp/ccHOvpCM.s:18     .text.HAL_RNG_MspInit:0000000000000000 $t
+     /tmp/ccHOvpCM.s:25     .text.HAL_RNG_MspInit:0000000000000000 HAL_RNG_MspInit
+     /tmp/ccHOvpCM.s:39     .text.HAL_RNG_Init:0000000000000000 $t
+     /tmp/ccHOvpCM.s:46     .text.HAL_RNG_Init:0000000000000000 HAL_RNG_Init
+     /tmp/ccHOvpCM.s:103    .text.HAL_RNG_MspDeInit:0000000000000000 $t
+     /tmp/ccHOvpCM.s:110    .text.HAL_RNG_MspDeInit:0000000000000000 HAL_RNG_MspDeInit
+     /tmp/ccHOvpCM.s:123    .text.HAL_RNG_DeInit:0000000000000000 $t
+     /tmp/ccHOvpCM.s:130    .text.HAL_RNG_DeInit:0000000000000000 HAL_RNG_DeInit
+     /tmp/ccHOvpCM.s:180    .text.HAL_RNG_GenerateRandomNumber:0000000000000000 $t
+     /tmp/ccHOvpCM.s:187    .text.HAL_RNG_GenerateRandomNumber:0000000000000000 HAL_RNG_GenerateRandomNumber
+     /tmp/ccHOvpCM.s:285    .text.HAL_RNG_GenerateRandomNumber_IT:0000000000000000 $t
+     /tmp/ccHOvpCM.s:292    .text.HAL_RNG_GenerateRandomNumber_IT:0000000000000000 HAL_RNG_GenerateRandomNumber_IT
+     /tmp/ccHOvpCM.s:348    .text.HAL_RNG_GetRandomNumber:0000000000000000 $t
+     /tmp/ccHOvpCM.s:355    .text.HAL_RNG_GetRandomNumber:0000000000000000 HAL_RNG_GetRandomNumber
+     /tmp/ccHOvpCM.s:386    .text.HAL_RNG_GetRandomNumber_IT:0000000000000000 $t
+     /tmp/ccHOvpCM.s:393    .text.HAL_RNG_GetRandomNumber_IT:0000000000000000 HAL_RNG_GetRandomNumber_IT
+     /tmp/ccHOvpCM.s:432    .text.HAL_RNG_ReadLastRandomNumber:0000000000000000 $t
+     /tmp/ccHOvpCM.s:439    .text.HAL_RNG_ReadLastRandomNumber:0000000000000000 HAL_RNG_ReadLastRandomNumber
+     /tmp/ccHOvpCM.s:455    .text.HAL_RNG_ReadyDataCallback:0000000000000000 $t
+     /tmp/ccHOvpCM.s:462    .text.HAL_RNG_ReadyDataCallback:0000000000000000 HAL_RNG_ReadyDataCallback
+     /tmp/ccHOvpCM.s:475    .text.HAL_RNG_ErrorCallback:0000000000000000 $t
+     /tmp/ccHOvpCM.s:482    .text.HAL_RNG_ErrorCallback:0000000000000000 HAL_RNG_ErrorCallback
+     /tmp/ccHOvpCM.s:495    .text.HAL_RNG_IRQHandler:0000000000000000 $t
+     /tmp/ccHOvpCM.s:502    .text.HAL_RNG_IRQHandler:0000000000000000 HAL_RNG_IRQHandler
+     /tmp/ccHOvpCM.s:570    .text.HAL_RNG_GetState:0000000000000000 $t
+     /tmp/ccHOvpCM.s:577    .text.HAL_RNG_GetState:0000000000000000 HAL_RNG_GetState
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
